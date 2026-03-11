@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Casa Miramar Salobreña | Old Town Stay in Andalusia</title>
+  <style>
+    :root {
+      --bg: #f8f6f2;
+      --text: #21313c;
+      --muted: #5f6f78;
+      --accent: #b8743c;
+      --accent-dark: #8e5628;
+      --card: #ffffff;
+      --shadow: 0 12px 30px rgba(0,0,0,0.08);
+      --radius: 22px;
+      --max: 1150px;
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      font-family: Inter, Arial, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+    }
+
+    a { color: inherit; text-decoration: none; }
+
+    .container {
+      width: min(calc(100% - 32px), var(--max));
+      margin: 0 auto;
+    }
+
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      background: rgba(248, 246, 242, 0.9);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid rgba(33, 49, 60, 0.08);
+    }
+
+    .nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 14px 0;
+      gap: 20px;
+    }
+
+    .brand {
+      font-weight: 700;
+      letter-spacing: 0.2px;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 20px;
+      flex-wrap: wrap;
+      font-size: 0.95rem;
+      color: var(--muted);
+    }
+
+    .hero {
+      padding: 34px 0 28px;
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1.15fr 0.85fr;
+      gap: 26px;
+      align-items: stretch;
+    }
+
+    .hero-main {
+      min-height: 520px;
+      border-radius: 30px;
+      overflow: hidden;
+      position: relative;
+      box-shadow: var(--shadow);
+      background:
+        linear-gradient(to top, rgba(16, 25, 31, 0.62), rgba(16, 25, 31, 0.12)),
+        url('images/hero.jpg') center/cover no-repeat;
+      display: flex;
+      align-items: flex-end;
+    }
+
+    .hero-content {
+      padding: 34px;
+      color: white;
+      max-width: 680px;
+    }
+
+    .eyebrow {
+      display: inline-block;
+      background: rgba(255,255,255,0.16);
+      border: 1px solid rgba(255,255,255,0.22);
+      border-radius: 999px;
+      padding: 6px 12px;
+      font-size: 0.9rem;
+      margin-bottom: 14px;
+    }
+
+    h1, h2, h3 { line-height: 1.15; margin: 0 0 14px; }
+    h1 { font-size: clamp(2.1rem, 4vw, 4.3rem); }
+    h2 { font-size: clamp(1.7rem, 2.6vw, 2.5rem); }
+    p { margin: 0 0 14px; }
+
+    .hero-side {
+      display: grid;
+      grid-template-rows: 1fr 1fr;
+      gap: 24px;
+    }
+
+    .side-card,
+    .info-card,
+    .feature,
+    .gallery-item,
+    .contact-card {
+      background: var(--card);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      overflow: hidden;
+    }
+
+    .photo-card {
+      min-height: 248px;
+      background-size: cover;
+      background-position: center;
+    }
+
+    .photo-1 { background-image: url('images/view.jpg'); }
+    .photo-2 { background-image: url('images/interior.jpg'); }
+
+    .section {
+      padding: 34px 0;
+    }
+
+    .intro {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
+      align-items: start;
+    }
+
+    .info-card {
+      padding: 28px;
+    }
+
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0,1fr));
+      gap: 14px;
+      margin-top: 18px;
+    }
+
+    .stat {
+      padding: 16px;
+      border-radius: 18px;
+      background: #f4efe8;
+    }
+
+    .stat strong {
+      display: block;
+      font-size: 1.15rem;
+      margin-bottom: 3px;
+    }
+
+    .features {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0,1fr));
+      gap: 18px;
+      margin-top: 18px;
+    }
+
+    .feature {
+      padding: 22px;
+    }
+
+    .feature h3 {
+      font-size: 1.1rem;
+      margin-bottom: 10px;
+    }
+
+    .gallery {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0,1fr));
+      gap: 18px;
+      margin-top: 18px;
+    }
+
+    .gallery-item {
+      min-height: 260px;
+      background-size: cover;
+      background-position: center;
+    }
+
+    .g1 { background-image: url('images/gallery-1.jpg'); }
+    .g2 { background-image: url('images/gallery-2.jpg'); }
+    .g3 { background-image: url('images/gallery-3.jpg'); }
+    .g4 { background-image: url('images/gallery-4.jpg'); }
+    .g5 { background-image: url('images/gallery-5.jpg'); }
+    .g6 { background-image: url('images/gallery-6.jpg'); }
+
+    .location {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
+      align-items: stretch;
+    }
+
+    .map-placeholder {
+      min-height: 340px;
+      border-radius: var(--radius);
+      background:
+        linear-gradient(rgba(33, 49, 60, 0.15), rgba(33, 49, 60, 0.15)),
+        url('images/location.jpg') center/cover no-repeat;
+      box-shadow: var(--shadow);
+    }
+
+    .contact-card {
+      padding: 28px;
+    }
+
+    .button-row {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin-top: 18px;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 12px 18px;
+      border-radius: 999px;
+      font-weight: 600;
+      transition: 0.2s ease;
+    }
+
+    .btn-primary {
+      background: var(--accent);
+      color: white;
+    }
+
+    .btn-primary:hover { background: var(--accent-dark); }
+
+    .btn-secondary {
+      border: 1px solid rgba(33,49,60,0.14);
+      background: white;
+    }
+
+    footer {
+      padding: 24px 0 40px;
+      color: var(--muted);
+      font-size: 0.95rem;
+    }
+
+    @media (max-width: 920px) {
+      .hero-grid,
+      .intro,
+      .location,
+      .features,
+      .gallery {
+        grid-template-columns: 1fr;
+      }
+
+      .hero-side {
+        grid-template-columns: 1fr 1fr;
+        grid-template-rows: auto;
+      }
+    }
+
+    @media (max-width: 640px) {
+      .nav { align-items: flex-start; flex-direction: column; }
+      .hero-content { padding: 24px; }
+      .hero-main { min-height: 430px; }
+      .hero-side { grid-template-columns: 1fr; }
+      .stats { grid-template-columns: 1fr; }
+      .features { grid-template-columns: 1fr; }
+      .gallery { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="container nav">
+      <a href="#top" class="brand">Casa Miramar</a>
+      <nav class="nav-links">
+        <a href="#about">About</a>
+        <a href="#features">Features</a>
+        <a href="#gallery">Gallery</a>
+        <a href="#location">Location</a>
+        <a href="#contact">Contact</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="top">
+    <section class="hero">
+      <div class="container hero-grid">
+        <div class="hero-main">
+          <div class="hero-content">
+            <div class="eyebrow">Casa Miramar · Salobreña, Andalusia</div>
+            <h1>Charming 3-bedroom home in Salobreña’s old town</h1>
+            <p>Enjoy a bright and comfortable stay on a quiet pedestrian street near Salobreña Castle, with beautiful sea and mountain views, modern amenities, and easy access to the beach, restaurants, and local viewpoints.</p>
+            <div class="button-row">
+              <a href="#contact" class="btn btn-primary">Ask about availability</a>
+              <a href="#gallery" class="btn btn-secondary">View photos</a>
+            </div>
+          </div>
+        </div>
+        <div class="hero-side">
+          <div class="side-card photo-card photo-1"></div>
+          <div class="side-card photo-card photo-2"></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="about">
+      <div class="container intro">
+        <div class="info-card">
+          <h2>Comfortable accommodations for families and small groups</h2>
+          <p>Casa Miramar Salobreña offers three bedrooms, two bathrooms, and a bright open-concept living room with a sofa bed and dining area. It is a welcoming base for up to 8 guests looking to enjoy the charm of Salobreña’s old town and the Costa Tropical.</p>
+          <p>The home combines traditional character with practical comfort, making it ideal for families, couples traveling together, or small groups who want space, convenience, and a lovely terrace to relax in.</p>
+        </div>
+        <div class="info-card">
+          <h3>Quick highlights</h3>
+          <div class="stats">
+            <div class="stat"><strong>Up to 8 guests</strong><span>3 bedrooms and 1 sofa bed</span></div>
+            <div class="stat"><strong>2 bathrooms</strong><span>Comfortable for groups and families</span></div>
+            <div class="stat"><strong>10 min to beach</strong><span>Playa de Salobreña nearby</span></div>
+            <div class="stat"><strong>Sea-view terrace</strong><span>Closed terrace with mountain views</span></div>
+          </div>
+        </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="features">
+      <div class="container">
+        <h2>What guests will love</h2>
+        <div class="features">
+          <div class="feature">
+            <h3>Spacious and bright</h3>
+            <p>Three comfortable bedrooms, two bathrooms, a dining area, and an open living space make the house easy to enjoy for longer stays or group trips.</p>
+          </div>
+          <div class="feature">
+            <h3>Modern amenities</h3>
+            <p>Guests enjoy free Wi-Fi, air conditioning, and a fully equipped kitchen with modern appliances including a dishwasher and microwave.</p>
+          </div>
+          <div class="feature">
+            <h3>Excellent old-town location</h3>
+            <p>Just 2 minutes to the Mirador, 5 minutes to restaurants, 10 minutes to the beach, and 15 minutes to the bus station, all from a quiet pedestrian street near the Castle.</p>
+          </div>
+        </div>
+      </div>
+      </div>
+    </section>
+
+    <section class="section" id="gallery">
+      <div class="container">
+        <h2>Photo gallery</h2>
+        <p>Show guests the house, terrace, views, bedrooms, kitchen, and the charm of Salobreña.</p>
+        <div class="gallery">
+          <div class="gallery-item g1"></div>
+          <div class="gallery-item g2"></div>
+          <div class="gallery-item g3"></div>
+          <div class="gallery-item g4"></div>
+          <div class="gallery-item g5"></div>
+          <div class="gallery-item g6"></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="location">
+      <div class="container location">
+        <div class="map-placeholder"></div>
+        <div class="contact-card">
+          <h2>Stay in the heart of Salobreña</h2>
+          <p>Casa Miramar is located in Salobreña’s picturesque old town on a peaceful pedestrian street near the Castle. Guests can easily explore the Mirador, restaurants, beaches, and the relaxed coastal atmosphere of the Costa Tropical.</p>
+          <p>Playa de Salobreña is less than 0.6 miles away, the Balcón de Europa is 22 miles away, and Federico García Lorca Granada-Jaén Airport is about 47 miles from the property.</p>
+          <div class="button-row">
+            <a href="#contact" class="btn btn-primary">Contact for booking</a>
+            <a href="mailto:your@email.com" class="btn btn-secondary">Email Casa Miramar</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="contact">
+      <div class="container">
+        <div class="contact-card">
+          <h2>Plan your stay at Casa Miramar</h2>
+          <p><strong>Check-in:</strong> 3:00 PM to 6:00 PM<br>
+          <strong>Check-out:</strong> 8:00 AM to 11:00 AM</p>
+          <p><strong>House rules:</strong> Smoking is not allowed, parties and events are not allowed, and pets are not allowed. This property does not accommodate bachelor or bachelorette parties.</p>
+          <p><strong>Languages spoken:</strong> English, Spanish, and Hungarian.</p>
+          <p><strong>License number:</strong> VUT/GR/14136</p>
+          <div class="button-row">
+            <a href="mailto:your@email.com" class="btn btn-primary">Contact Casa Miramar</a>
+            <a href="#top" class="btn btn-secondary">Back to top</a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container">
+      © 2026 Casa Miramar Salobreña · Static website for direct inquiries and bookings.
+    </div>
+  </footer>
+</body>
+</html>
