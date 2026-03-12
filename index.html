@@ -379,7 +379,23 @@ footer {
 <body>
   <header>
     <div class="container nav">
-      <a href="#top" class="brand">Casa Miramar</a>
+      <div class="brand-weather">
+  <a href="#top" class="brand">Casa Miramar</a>
+
+  <a class="weatherwidget-io"
+     href="https://forecast7.com/en/36d75n3d59/salobrena/"
+     data-label_1="SALOBREÑA"
+     data-label_2=""
+     data-theme="pure"
+     data-mode="Current"
+     style="font-size:12px;">
+  </a>
+        .brand-weather{
+display:flex;
+align-items:center;
+gap:18px;
+}
+</div>
       <nav class="nav-links">
         <a href="#about">About</a>
         <a href="#features">Features</a>
@@ -606,6 +622,17 @@ footer {
     <div class="container">
       © 2026 Casa Miramar Salobreña · Static website for direct inquiries and bookings.
     </div>
+    <script>
+!function(d,s,id){
+var js,fjs=d.getElementsByTagName(s)[0];
+if(!d.getElementById(id)){
+js=d.createElement(s);
+js.id=id;
+js.src='https://weatherwidget.io/js/widget.min.js';
+fjs.parentNode.insertBefore(js,fjs);
+}
+}(document,'script','weatherwidget-io-js');
+</script>
   </footer>
 </body>
 </html>
