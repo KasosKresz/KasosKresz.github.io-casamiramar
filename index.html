@@ -1,0 +1,714 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Casa Miramar Salobreña | Old Town Stay in Andalusia</title>
+  <style>
+    :root {
+      --bg: #f7f4ef;
+      --card: #ffffff;
+      --text: #24343d;
+      --muted: #667780;
+      --accent: #b77743;
+      --accent-dark: #955b2d;
+      --line: rgba(36, 52, 61, 0.08);
+      --shadow: 0 14px 35px rgba(0, 0, 0, 0.08);
+      --radius: 24px;
+      --max: 1180px;
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      margin: 0;
+      font-family: Arial, Helvetica, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    img {
+      max-width: 100%;
+      display: block;
+    }
+
+    .container {
+      width: min(calc(100% - 32px), var(--max));
+      margin: 0 auto;
+    }
+
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      background: rgba(247, 244, 239, 0.92);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid var(--line);
+    }
+
+    .nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+      padding: 14px 0;
+    }
+
+    .brand {
+      font-size: 1.1rem;
+      font-weight: 700;
+      letter-spacing: 0.2px;
+      white-space: nowrap;
+    }
+
+    .brand-wrap {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      min-width: 0;
+    }
+
+    .weather-badge {
+      min-height: 22px;
+      display: flex;
+      align-items: center;
+      font-size: 0.88rem;
+    }
+
+    .weather-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 7px 12px;
+      border-radius: 999px;
+      background: #ffffff;
+      border: 1px solid var(--line);
+      box-shadow: 0 8px 18px rgba(0,0,0,0.06);
+      color: var(--text);
+      white-space: nowrap;
+    }
+
+    .weather-pill small {
+      color: var(--muted);
+      font-size: 0.82rem;
+    }
+
+    .nav-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 18px;
+      color: var(--muted);
+      font-size: 0.96rem;
+      justify-content: flex-end;
+    }
+
+    .hero {
+      padding: 28px 0 34px;
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1.2fr 0.8fr;
+      gap: 24px;
+    }
+
+    .hero-main {
+      min-height: 560px;
+      border-radius: 32px;
+      overflow: hidden;
+      position: relative;
+      box-shadow: var(--shadow);
+      background:
+        linear-gradient(to top, rgba(15, 23, 29, 0.7), rgba(15, 23, 29, 0.12)),
+        url('hero_view.jpg') center/cover no-repeat;
+      display: flex;
+      align-items: flex-end;
+    }
+
+    .hero-content {
+      padding: 34px;
+      color: white;
+      max-width: 720px;
+    }
+
+    .eyebrow {
+      display: inline-block;
+      margin-bottom: 14px;
+      padding: 7px 12px;
+      border-radius: 999px;
+      background: rgba(255,255,255,0.16);
+      border: 1px solid rgba(255,255,255,0.22);
+      font-size: 0.9rem;
+    }
+
+    h1, h2, h3 {
+      line-height: 1.15;
+      margin: 0 0 14px;
+    }
+
+    h1 {
+      font-size: clamp(2.2rem, 4vw, 4.4rem);
+    }
+
+    h2 {
+      font-size: clamp(1.7rem, 2.6vw, 2.5rem);
+    }
+
+    p {
+      margin: 0 0 14px;
+    }
+
+    .button-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 18px;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 12px 18px;
+      border-radius: 999px;
+      font-weight: 700;
+      transition: 0.2s ease;
+      border: none;
+      cursor: pointer;
+    }
+
+    .btn-primary {
+      background: var(--accent);
+      color: white;
+    }
+
+    .btn-primary:hover {
+      background: var(--accent-dark);
+    }
+
+    .btn-secondary {
+      background: rgba(255,255,255,0.96);
+      color: var(--text);
+      border: 1px solid rgba(255,255,255,0.25);
+    }
+
+    .hero-side {
+      display: grid;
+      grid-template-rows: 1fr 1fr;
+      gap: 24px;
+    }
+
+    .side-card,
+    .info-card,
+    .feature,
+    .contact-card,
+    .gallery-card,
+    .rules-card,
+    .platform-card {
+      background: var(--card);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      overflow: hidden;
+    }
+
+    .side-photo {
+      min-height: 268px;
+      background-size: cover;
+      background-position: center;
+    }
+
+    .photo-1 { background-image: url('view_window1.jpg'); }
+    .photo-2 { background-image: url('living_room.jpg'); }
+
+    .section {
+      padding: 34px 0;
+    }
+
+    .intro,
+    .location-grid,
+    .contact-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
+    }
+
+    .info-card,
+    .contact-card,
+    .rules-card,
+    .platform-card {
+      padding: 28px;
+    }
+
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 14px;
+      margin-top: 18px;
+    }
+
+    .stat {
+      background: #f3eee6;
+      padding: 16px;
+      border-radius: 18px;
+    }
+
+    .stat strong {
+      display: block;
+      margin-bottom: 4px;
+      font-size: 1.08rem;
+    }
+
+    .features {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 18px;
+      margin-top: 18px;
+    }
+
+    .feature {
+      padding: 22px;
+    }
+
+    .feature h3 {
+      font-size: 1.08rem;
+      margin-bottom: 10px;
+    }
+
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 18px;
+      margin-top: 18px;
+    }
+
+    .gallery-card img {
+      width: 100%;
+      height: 260px;
+      object-fit: cover;
+    }
+
+    .gallery-caption {
+      padding: 14px 16px 16px;
+      color: var(--muted);
+      font-size: 0.95rem;
+    }
+
+    .platform-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 18px;
+      margin-top: 18px;
+    }
+
+    .platform-card h3 {
+      margin-bottom: 10px;
+      font-size: 1.08rem;
+    }
+
+    .platform-card p {
+      color: var(--muted);
+    }
+
+    .calendar-note {
+      margin-top: 16px;
+      color: var(--muted);
+      font-size: 0.95rem;
+    }
+
+    .location-photo {
+      min-height: 380px;
+      border-radius: var(--radius);
+      overflow: hidden;
+      box-shadow: var(--shadow);
+      background: #e9e3da;
+    }
+
+    .map-frame {
+      width: 100%;
+      height: 100%;
+      min-height: 380px;
+      border: 0;
+    }
+
+    .floating-whatsapp {
+      position: fixed;
+      right: 18px;
+      bottom: 18px;
+      z-index: 40;
+      background: #25D366;
+      color: white;
+      padding: 14px 18px;
+      border-radius: 999px;
+      box-shadow: 0 12px 24px rgba(0,0,0,0.18);
+      font-weight: 700;
+    }
+
+    ul.clean {
+      padding-left: 18px;
+      margin: 0;
+    }
+
+    ul.clean li {
+      margin-bottom: 8px;
+    }
+
+    footer {
+      padding: 24px 0 40px;
+      color: var(--muted);
+      font-size: 0.95rem;
+    }
+
+    @media (max-width: 950px) {
+      .hero-grid,
+      .intro,
+      .location-grid,
+      .contact-grid,
+      .features,
+      .gallery-grid,
+      .platform-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .hero-side {
+        grid-template-columns: 1fr 1fr;
+        grid-template-rows: auto;
+      }
+
+      .nav {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .nav-links {
+        justify-content: flex-start;
+      }
+    }
+
+    @media (max-width: 640px) {
+      .hero-main {
+        min-height: 450px;
+      }
+
+      .hero-content {
+        padding: 24px;
+      }
+
+      .hero-side {
+        grid-template-columns: 1fr;
+      }
+
+      .stats {
+        grid-template-columns: 1fr;
+      }
+
+      .gallery-card img {
+        height: 220px;
+      }
+
+      .brand-wrap {
+        flex-wrap: wrap;
+        gap: 8px 12px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="container nav">
+      <div class="brand-wrap">
+        <a href="#top" class="brand">Casa Miramar</a>
+        <div class="weather-badge" id="weather-badge" aria-live="polite">
+          <span class="weather-pill">Loading weather…</span>
+        </div>
+      </div>
+
+      <nav class="nav-links">
+        <a href="#about">About</a>
+        <a href="#features">Features</a>
+        <a href="#gallery">Gallery</a>
+        <a href="#availability">Availability</a>
+        <a href="#location">Location</a>
+        <a href="activities.html">Activities</a>
+        <a href="#contact">Contact</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="top">
+    <section class="hero">
+      <div class="container hero-grid">
+        <div class="hero-main">
+          <div class="hero-content">
+            <div class="eyebrow">Casa Miramar · Salobreña, Andalusia</div>
+            <h1>Charming 3-bedroom home in Salobreña’s old town</h1>
+            <p>Enjoy a bright and comfortable stay on a quiet pedestrian street near Salobreña Castle, with beautiful sea and mountain views, modern amenities, and easy access to the beach, restaurants, and local viewpoints.</p>
+            <div class="button-row">
+              <a href="#contact" class="btn btn-primary">Ask about availability</a>
+              <a href="#gallery" class="btn btn-secondary">View photos</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="hero-side">
+          <div class="side-card side-photo photo-1"></div>
+          <div class="side-card side-photo photo-2"></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="about">
+      <div class="container intro">
+        <div class="info-card">
+          <h2>Comfortable accommodations for families and small groups</h2>
+          <p>Casa Miramar Salobreña offers three bedrooms, two bathrooms, and a bright open-concept living room with a sofa bed and dining area. It is a welcoming base for up to 8 guests looking to enjoy the charm of Salobreña’s old town and the Costa Tropical.</p>
+          <p>The home combines traditional character with practical comfort, making it ideal for families, couples traveling together, or small groups who want space, convenience, and a lovely terrace to relax in.</p>
+        </div>
+
+        <div class="info-card">
+          <h3>Quick highlights</h3>
+          <div class="stats">
+            <div class="stat"><strong>Up to 8 guests</strong><span>3 bedrooms and 1 sofa bed</span></div>
+            <div class="stat"><strong>2 bathrooms</strong><span>Comfortable for families and groups</span></div>
+            <div class="stat"><strong>10 min to beach</strong><span>Playa de Salobreña nearby</span></div>
+            <div class="stat"><strong>Sea-view terrace</strong><span>Beautiful sea and mountain views</span></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="features">
+      <div class="container">
+        <h2>What guests will love</h2>
+        <div class="features">
+          <div class="feature">
+            <h3>Spacious and bright</h3>
+            <p>Three comfortable bedrooms, two bathrooms, a dining area, and an open living space make the house easy to enjoy for longer stays or group trips.</p>
+          </div>
+          <div class="feature">
+            <h3>Modern amenities</h3>
+            <p>Guests enjoy free WiFi, air conditioning, and a fully equipped kitchen with modern appliances including a dishwasher and microwave.</p>
+          </div>
+          <div class="feature">
+            <h3>Excellent location</h3>
+            <p>Just 2 minutes to the Mirador, 5 minutes to restaurants, 10 minutes to the beach, and 15 minutes to the bus station from a quiet pedestrian street near the Castle.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="gallery">
+      <div class="container">
+        <h2>Photo gallery</h2>
+        <p>Bright interiors, lovely views, and the charm of old-town Salobreña.</p>
+        <div class="gallery-grid">
+          <div class="gallery-card">
+            <img src="view_bar.jpg" alt="Sea and mountain view from Casa Miramar" />
+            <div class="gallery-caption">Relaxing view from the terrace area</div>
+          </div>
+          <div class="gallery-card">
+            <img src="living_dining.jpg" alt="Living and dining area at Casa Miramar" />
+            <div class="gallery-caption">Open-concept living and dining space</div>
+          </div>
+          <div class="gallery-card">
+            <img src="dining_room.jpg" alt="Dining room at Casa Miramar Salobreña" />
+            <div class="gallery-caption">Dining area for shared meals</div>
+          </div>
+          <div class="gallery-card">
+            <img src="kitchen1.jpg" alt="Kitchen at Casa Miramar" />
+            <div class="gallery-caption">Fully equipped kitchen</div>
+          </div>
+          <div class="gallery-card">
+            <img src="bedroom1.jpg" alt="Bedroom at Casa Miramar Salobreña" />
+            <div class="gallery-caption">Comfortable bedroom</div>
+          </div>
+          <div class="gallery-card">
+            <img src="bathroom1.jpg" alt="Bathroom at Casa Miramar" />
+            <div class="gallery-caption">One of two bathrooms</div>
+          </div>
+          <div class="gallery-card">
+            <img src="view_window2.jpg" alt="Window view in Salobreña" />
+            <div class="gallery-caption">Beautiful sea and mountain scenery</div>
+          </div>
+          <div class="gallery-card">
+            <img src="kitchen_counter.jpg" alt="Kitchen counter at Casa Miramar" />
+            <div class="gallery-caption">Modern appliances and practical space</div>
+          </div>
+          <div class="gallery-card">
+            <img src="entrance_flowers.jpg" alt="Flowers near Casa Miramar in Salobreña" />
+            <div class="gallery-caption">Andalusian atmosphere in the old town</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="availability">
+      <div class="container">
+        <h2>Availability and booking</h2>
+        <p>Casa Miramar is already listed on Airbnb and Booking.com. For the most up-to-date availability and instant booking, please use one of the platforms below or contact us directly on WhatsApp.</p>
+
+        <div class="platform-grid">
+          <div class="platform-card">
+            <h3>Book on Airbnb</h3>
+            <p>Check live availability, pricing, and complete your reservation securely on Airbnb.</p>
+            <div class="button-row">
+              <a href="https://www.airbnb.com/rooms/1548799735197050171" target="_blank" rel="noopener noreferrer" class="btn btn-primary">Open Airbnb</a>
+            </div>
+          </div>
+
+          <div class="platform-card">
+            <h3>Book on Booking.com</h3>
+            <p>Use Booking.com to view current dates and complete your stay through your preferred platform.</p>
+            <div class="button-row">
+              <a href="https://www.booking.com/hotel/es/casa-miramar-salobrena-salobrena.en-gb.html" target="_blank" rel="noopener noreferrer" class="btn btn-primary">Open Booking.com</a>
+            </div>
+          </div>
+
+          <div class="platform-card">
+            <h3>Direct questions</h3>
+            <p>Prefer to ask first? Message us directly on WhatsApp for stay details, check-in questions, or local information.</p>
+            <div class="button-row">
+              <a href="https://wa.me/36317881744" target="_blank" rel="noopener noreferrer" class="btn btn-primary">WhatsApp us</a>
+            </div>
+          </div>
+        </div>
+
+        <p class="calendar-note">A live two-way synced calendar can be added later, but platform calendars are the most reliable option for real-time availability on a simple static website.</p>
+      </div>
+    </section>
+
+    <section class="section" id="location">
+      <div class="container location-grid">
+        <div class="location-photo">
+          <iframe
+            class="map-frame"
+            loading="lazy"
+            allowfullscreen
+            referrerpolicy="no-referrer-when-downgrade"
+            src="https://www.google.com/maps?q=Calle%20Juan%20XXIII%20E%2013%2C%20Salobre%C3%B1a%2C%20Spain&output=embed">
+          </iframe>
+        </div>
+
+        <div class="contact-card">
+          <h2>Stay in the heart of Salobreña</h2>
+          <p>Casa Miramar is located in Salobreña’s picturesque old town on a peaceful pedestrian street near the Castle. Guests can easily explore the Mirador, restaurants, beaches, and the relaxed coastal atmosphere of the Costa Tropical.</p>
+          <p>Playa de Salobreña is less than 0.6 miles away, the Balcón de Europa is 22 miles away, and Federico García Lorca Granada-Jaén Airport is about 47 miles from the property.</p>
+          <p><strong>Address:</strong> Calle Juan XXIII E 13, Salobreña, Granada, Spain</p>
+          <div class="button-row">
+            <a href="https://www.google.com/maps/search/?api=1&query=Calle+Juan+XXIII+E+13+Salobre%C3%B1a+Granada+Spain" target="_blank" rel="noopener noreferrer" class="btn btn-primary">Open in Google Maps</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="contact">
+      <div class="container contact-grid">
+        <div class="contact-card">
+          <h2>Plan your stay at Casa Miramar</h2>
+          <p><strong>Check-in:</strong> From 3:00 PM to 6:00 PM</p>
+          <p><strong>Check-out:</strong> From 8:00 AM to 11:00 AM</p>
+          <p><strong>Languages spoken:</strong> English, Spanish, and Hungarian</p>
+          <p><strong>License number:</strong> VUT/GR/14136</p>
+          <p><strong>WhatsApp:</strong> +36 31 788 1744</p>
+          <div class="button-row">
+            <a href="https://wa.me/36317881744" target="_blank" rel="noopener noreferrer" class="btn btn-primary">Message on WhatsApp</a>
+            <a href="#top" class="btn btn-secondary">Back to top</a>
+          </div>
+        </div>
+
+        <div class="rules-card">
+          <h2>House rules</h2>
+          <ul class="clean">
+            <li>Children of all ages are welcome.</li>
+            <li>Smoking is not allowed.</li>
+            <li>Parties and events are not allowed.</li>
+            <li>Pets are not allowed.</li>
+            <li>This property does not accommodate bachelor or bachelorette parties.</li>
+            <li>Please let the property know your arrival time in advance.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <a class="floating-whatsapp" href="https://wa.me/36317881744" target="_blank" rel="noopener noreferrer">WhatsApp</a>
+
+  <footer>
+    <div class="container">
+      © 2026 Casa Miramar Salobreña
+    </div>
+  </footer>
+
+  <script>
+    (function () {
+      const badge = document.getElementById('weather-badge');
+      if (!badge) return;
+
+      const weatherMap = {
+        0: { icon: '☀️', text: 'Clear' },
+        1: { icon: '🌤️', text: 'Mostly clear' },
+        2: { icon: '⛅', text: 'Partly cloudy' },
+        3: { icon: '☁️', text: 'Cloudy' },
+        45: { icon: '🌫️', text: 'Fog' },
+        48: { icon: '🌫️', text: 'Fog' },
+        51: { icon: '🌦️', text: 'Light drizzle' },
+        53: { icon: '🌦️', text: 'Drizzle' },
+        55: { icon: '🌧️', text: 'Heavy drizzle' },
+        56: { icon: '🌧️', text: 'Freezing drizzle' },
+        57: { icon: '🌧️', text: 'Freezing drizzle' },
+        61: { icon: '🌦️', text: 'Light rain' },
+        63: { icon: '🌧️', text: 'Rain' },
+        65: { icon: '🌧️', text: 'Heavy rain' },
+        66: { icon: '🌧️', text: 'Freezing rain' },
+        67: { icon: '🌧️', text: 'Freezing rain' },
+        71: { icon: '🌨️', text: 'Light snow' },
+        73: { icon: '🌨️', text: 'Snow' },
+        75: { icon: '❄️', text: 'Heavy snow' },
+        77: { icon: '❄️', text: 'Snow grains' },
+        80: { icon: '🌦️', text: 'Rain showers' },
+        81: { icon: '🌧️', text: 'Rain showers' },
+        82: { icon: '⛈️', text: 'Heavy showers' },
+        85: { icon: '🌨️', text: 'Snow showers' },
+        86: { icon: '❄️', text: 'Heavy snow showers' },
+        95: { icon: '⛈️', text: 'Thunderstorm' },
+        96: { icon: '⛈️', text: 'Storm with hail' },
+        99: { icon: '⛈️', text: 'Storm with hail' }
+      };
+
+      const fallback = '<span class="weather-pill">🌤️ Weather unavailable</span>';
+      const url = 'https://api.open-meteo.com/v1/forecast?latitude=36.7437&longitude=-3.5866&current=temperature_2m,apparent_temperature,weather_code&timezone=auto&forecast_days=1';
+
+      fetch(url)
+        .then((response) => {
+          if (!response.ok) throw new Error('Weather request failed');
+          return response.json();
+        })
+        .then((data) => {
+          const current = data && data.current;
+          if (!current) throw new Error('Missing weather data');
+
+          const code = Number(current.weather_code);
+          const details = weatherMap[code] || { icon: '🌤️', text: 'Current weather' };
+          const temp = Math.round(current.temperature_2m);
+          const feels = Math.round(current.apparent_temperature);
+
+          badge.innerHTML = `
+            <span class="weather-pill" title="Current weather in Salobreña">
+              <span>${details.icon}</span>
+              <strong>${temp}°C</strong>
+              <small>${details.text} · Feels like ${feels}°C</small>
+            </span>`;
+        })
+        .catch(() => {
+          badge.innerHTML = fallback;
+        });
+    })();
+  </script>
+</body>
+</html>
