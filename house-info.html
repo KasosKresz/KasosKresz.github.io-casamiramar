@@ -1,436 +1,180 @@
+
 <!DOCTYPE html>
-<html lang="en">
+<html lang="hu">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>House Information | Casa Miramar Salobrena</title>
-  <meta name="description" content="Guest information for Casa Miramar, including house basics, device instructions, and practical stay details." />
-  <meta name="robots" content="noindex,nofollow,noarchive" />
-  <link rel="canonical" href="https://salobrena.eu/house-info.html" />
-  <meta name="theme-color" content="#f7f4ef" />
-  <style>
-    :root{
-      --bg:#f7f4ef;
-      --card:#ffffff;
-      --text:#24343d;
-      --muted:#667780;
-      --accent:#b77743;
-      --accent-dark:#955b2d;
-      --line:rgba(36,52,61,0.08);
-      --shadow:0 14px 35px rgba(0,0,0,0.08);
-      --radius:24px;
-      --max:1120px;
-    }
-
-    *{box-sizing:border-box}
-    body{
-      margin:0;
-      font-family:Arial, Helvetica, sans-serif;
-      background:var(--bg);
-      color:var(--text);
-      line-height:1.6;
-    }
-
-    a{
-      color:inherit;
-      text-decoration:none;
-    }
-
-    header{
-      position:sticky;
-      top:0;
-      z-index:20;
-      background:rgba(247,244,239,0.92);
-      backdrop-filter:blur(10px);
-      border-bottom:1px solid var(--line);
-    }
-
-    .container{
-      width:min(calc(100% - 32px), var(--max));
-      margin:0 auto;
-    }
-
-    .nav{
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-      gap:20px;
-      padding:14px 0;
-    }
-
-    .brand{
-      font-size:1.1rem;
-      font-weight:700;
-      letter-spacing:0.2px;
-    }
-
-    .nav-links{
-      display:flex;
-      flex-wrap:wrap;
-      gap:18px;
-      color:var(--muted);
-      font-size:0.96rem;
-    }
-
-    .hero{
-      padding:34px 0 20px;
-    }
-
-    .hero-card{
-      background:linear-gradient(135deg, rgba(183,119,67,0.12), rgba(255,255,255,0.8));
-      border:1px solid rgba(183,119,67,0.14);
-      border-radius:32px;
-      box-shadow:var(--shadow);
-      padding:34px;
-    }
-
-    .eyebrow{
-      display:inline-block;
-      margin-bottom:12px;
-      padding:7px 12px;
-      border-radius:999px;
-      background:#fff;
-      border:1px solid var(--line);
-      color:var(--muted);
-      font-size:0.9rem;
-    }
-
-    h1,h2,h3{
-      line-height:1.15;
-      margin:0 0 14px;
-    }
-
-    h1{
-      font-size:clamp(2.2rem, 4vw, 4rem);
-    }
-
-    h2{
-      font-size:clamp(1.45rem, 2.5vw, 2rem);
-    }
-
-    p{
-      margin:0 0 14px;
-    }
-
-    .section{
-      padding:18px 0;
-    }
-
-    .grid{
-      display:grid;
-      grid-template-columns:repeat(2, minmax(0, 1fr));
-      gap:22px;
-    }
-
-    .card{
-      background:var(--card);
-      border-radius:var(--radius);
-      box-shadow:var(--shadow);
-      padding:26px;
-    }
-
-    .card ul{
-      margin:0;
-      padding-left:18px;
-    }
-
-    .card li{
-      margin-bottom:8px;
-    }
-
-    .badge{
-      display:inline-block;
-      margin:0 6px 8px 0;
-      padding:8px 12px;
-      border-radius:999px;
-      background:#f3eee6;
-      color:#5c4a35;
-      font-size:0.92rem;
-    }
-
-    .highlight{
-      background:#fcf7ef;
-      border:1px solid rgba(183,119,67,0.18);
-    }
-
-    .steps{
-      counter-reset:step;
-      list-style:none;
-      padding:0;
-      margin:0;
-    }
-
-    .steps li{
-      counter-increment:step;
-      position:relative;
-      padding-left:44px;
-      margin-bottom:12px;
-    }
-
-    .steps li::before{
-      content:counter(step);
-      position:absolute;
-      left:0;
-      top:0;
-      width:28px;
-      height:28px;
-      border-radius:50%;
-      background:var(--accent);
-      color:#fff;
-      display:grid;
-      place-items:center;
-      font-weight:700;
-      font-size:0.9rem;
-    }
-
-    .muted{
-      color:var(--muted);
-    }
-
-    .warning{
-      padding:14px 16px;
-      border-radius:18px;
-      background:#fff7ea;
-      border:1px solid rgba(183,119,67,0.2);
-      color:#6a4b2f;
-    }
-
-    .button-row{
-      display:flex;
-      flex-wrap:wrap;
-      gap:12px;
-      margin-top:18px;
-    }
-
-    .btn{
-      display:inline-flex;
-      align-items:center;
-      justify-content:center;
-      padding:12px 18px;
-      border-radius:999px;
-      font-weight:700;
-      border:none;
-      cursor:pointer;
-    }
-
-    .btn-primary{
-      background:var(--accent);
-      color:#fff;
-    }
-
-    .btn-secondary{
-      background:#fff;
-      color:var(--text);
-      border:1px solid var(--line);
-    }
-
-    footer{
-      padding:24px 0 40px;
-      color:var(--muted);
-      font-size:0.95rem;
-    }
-
-    @media (max-width:850px){
-      .grid{
-        grid-template-columns:1fr;
-      }
-
-      .nav{
-        flex-direction:column;
-        align-items:flex-start;
-      }
-    }
-
-    @media (max-width:640px){
-      .hero-card,
-      .card{
-        padding:22px;
-      }
-    }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Házinformációk | Casa Miramar Salobreña</title>
+<meta name="description" content="Vendéginformációk a Casa Miramarhoz: Wi‑Fi, eszközhasználati útmutatók és hasznos tudnivalók az ott‑tartózkodáshoz." />
+<style>
+body{font-family:Arial,Helvetica,sans-serif;background:#f7f4ef;color:#24343d;margin:0;line-height:1.6}
+.container{max-width:900px;margin:auto;padding:24px}
+h1,h2{color:#24343d}
+.card{background:#fff;border-radius:14px;padding:22px;margin-bottom:20px;box-shadow:0 10px 25px rgba(0,0,0,.08)}
+ul{padding-left:20px}
+ol{padding-left:20px}
+.badge{display:inline-block;background:#f3eee6;padding:6px 10px;margin:4px;border-radius:999px}
+footer{margin-top:40px;color:#667780;font-size:.9rem;text-align:center}
+</style>
 </head>
+
 <body>
-  <header>
-    <div class="container nav">
-      <a href="index.html" class="brand">Casa Miramar</a>
-      <nav class="nav-links">
-        <a href="index.html">Home</a>
-        <a href="activities.html">Activities</a>
-        <a href="house-info.html">House info</a>
-      </nav>
-    </div>
-  </header>
 
-  <main>
-    <section class="hero">
-      <div class="container">
-        <div class="hero-card">
-          <div class="eyebrow">Guest guide</div>
-          <h1>Useful Information For Your Stay</h1>
-          <p>Everything guests usually need in one place: Wi-Fi, music and projector instructions, house basics, check-in reminders, and practical tips for an easy stay at Casa Miramar.</p>
-          <div class="button-row">
-            <a href="#wifi" class="btn btn-primary">Wi-Fi</a>
-            <a href="#devices" class="btn btn-secondary">Devices</a>
-            <a href="#house-rules" class="btn btn-secondary">House notes</a>
-          </div>
-        </div>
-      </div>
-    </section>
+<div class="container">
 
-    <section class="section" id="quick-info">
-      <div class="container grid">
-        <div class="card highlight">
-          <h2>Quick Essentials</h2>
-          <div class="badge">Check-in: 3:00 PM to 6:00 PM</div>
-          <div class="badge">Check-out: 8:00 AM to 11:00 AM</div>
-          <div class="badge">Up to 8 guests</div>
-          <div class="badge">3 bedrooms</div>
-          <div class="badge">2 bathrooms</div>
-          <div class="badge">Air conditioning</div>
-          <div class="badge">Free Wi-Fi</div>
-          <div class="badge">Fully equipped kitchen</div>
-        </div>
+<h1>Hasznos információk az itt‑tartózkodáshoz</h1>
 
-        <div class="card">
-          <h2>Good To Know</h2>
-          <div class="warning">
-            Please do not touch the hot water tank settings. It is already set to an economical and comfortable temperature.
-          </div>
-          <p>Keys are kept in the lock box. Guests will receive the code before arrival.</p>
-          <p>Guests who want to use the projector should bring a laptop. The cable at the house is there to connect a laptop to the projector.</p>
-          <p class="muted">If anything is unclear, the easiest option is to message directly on WhatsApp.</p>
-        </div>
-      </div>
-    </section>
+<p>Itt talál minden fontos információt egy helyen: Wi‑Fi adatok, zenelejátszás, a projektor használata, házszabályok és praktikus tippek a kényelmes tartózkodáshoz a Casa Miramarban.</p>
 
-    <section class="section" id="wifi">
-      <div class="container grid">
-        <div class="card">
-          <h2>Wi-Fi</h2>
-          <p><strong>Network:</strong> DIGIFIBRA-PLUS-9fP6 or DIGIFIBRA-9fP6</p>
-          <p><strong>Password:</strong> 6STFAEs4uyAu</p>
-          <p class="muted">Both Wi-Fi names use the same password.</p>
-        </div>
 
-        <div class="card">
-          <h2>House Contact</h2>
-          <p><strong>WhatsApp:</strong> +36 31 788 1744</p>
-          <p><strong>Property license:</strong> VUT/GR/14136</p>
-          <p>If anything is unclear, the easiest option is to message directly on WhatsApp.</p>
-          <div class="button-row">
-            <a href="https://wa.me/36317881744" target="_blank" rel="noopener noreferrer" class="btn btn-primary">Message on WhatsApp</a>
-          </div>
-        </div>
-      </div>
-    </section>
+<div class="card">
+<h2>Gyors tudnivalók</h2>
+<span class="badge">Bejelentkezés: 15:00–18:00</span>
+<span class="badge">Kijelentkezés: 8:00–11:00</span>
+<span class="badge">Legfeljebb 8 vendég</span>
+<span class="badge">3 hálószoba</span>
+<span class="badge">2 fürdőszoba</span>
+<span class="badge">Légkondicionáló</span>
+<span class="badge">Ingyenes Wi‑Fi</span>
+<span class="badge">Felszerelt konyha</span>
+</div>
 
-    <section class="section" id="devices">
-      <div class="container grid">
-        <div class="card">
-          <h2>How To Play Music Through The House Speakers</h2>
-          <ol class="steps">
-            <li>Turn on the Logitech Bluetooth device.</li>
-            <li>Open Bluetooth settings on your phone, tablet, or laptop.</li>
-            <li>Connect to the Logitech device.</li>
-            <li>Once connected, your music will play through the house speakers.</li>
-            <li>Use the volume controls on your device and on the speakers if needed.</li>
-          </ol>
-          <p class="muted">If the connection does not start right away, turn Bluetooth off and on again and try reconnecting.</p>
-        </div>
 
-        <div class="card">
-          <h2>How To Use The BenQ Projector</h2>
-          <ol class="steps">
-            <li>Turn on the projector with the remote or the power button.</li>
-            <li>Wait for the projector to fully start.</li>
-            <li>Use the cable provided at the house to connect a laptop to the projector.</li>
-            <li>Guests should bring their own laptop if they want to use the projector.</li>
-            <li>Select the input source that matches the connected laptop cable, then adjust focus and volume if needed.</li>
-          </ol>
-          <p><strong>Important:</strong> The cable available in the house is for connecting a laptop to the projector.</p>
-          <p class="muted">Please leave the cable and remote near the projector after use.</p>
-        </div>
+<div class="card">
+<h2>Jó tudni</h2>
 
-        <div class="card">
-          <h2>How To Use The Air Conditioning</h2>
-          <ol class="steps">
-            <li>Use the air-conditioning remote fixed on the wall.</li>
-            <li>Press the power button to turn the unit on or off.</li>
-            <li>Select cooling or heating mode, then use the temperature buttons to adjust.</li>
-            <li>A comfortable setting is usually around 22 to 24&deg;C.</li>
-            <li>Please turn it off when you leave the house and keep doors and windows closed while it is running.</li>
-          </ol>
-          <p class="muted">If the unit does not respond right away, point the remote at the indoor unit and try again.</p>
-        </div>
+<p>Kérjük, ne állítsa el a melegvíztartály beállításait. Már gazdaságos és kényelmes hőmérsékletre van beállítva.</p>
 
-        <div class="card">
-          <h2>Simple Oven, Microwave, And Fridge Instructions</h2>
-          <ul>
-            <li><strong>Microwave:</strong> put food in a microwave-safe container, close the door, choose the time, and press start.</li>
-            <li><strong>Do not use metal</strong> inside the microwave.</li>
-            <li><strong>Oven:</strong> choose the cooking function, set the temperature, and allow a few minutes to preheat before cooking.</li>
-            <li><strong>LG side-by-side fridge:</strong> one side is the fridge and the other is the freezer. Please make sure both doors are fully closed after use.</li>
-            <li><strong>Dispenser:</strong> the second button from the right changes the dispenser from water to ice.</li>
-            <li><strong>Drinking water:</strong> the fridge gives filtered water and it is recommended for drinking.</li>
-            <li>Please do not adjust the fridge or freezer temperature. It is already set for good performance.</li>
-            <li>When you finish, switch the oven and microwave off.</li>
-          </ul>
-          <p class="muted">If anything seems unusual, please stop and send a WhatsApp message for help.</p>
-        </div>
-      </div>
-    </section>
+<p>A kulcsok a zárdobozban találhatók. A kódot a vendégek érkezés előtt kapják meg.</p>
 
-    <section class="section" id="house-rules">
-      <div class="container">
-        <div class="card">
-          <h2>Important House Notes</h2>
-          <ul>
-            <li>Please do not change the hot water tank settings.</li>
-            <li>The hot water is already set to an economical and comfortable temperature.</li>
-            <li>The Logitech device connects your phone or laptop to the house speakers.</li>
-            <li>The projector is meant to be used with a laptop and the cable provided in the house.</li>
-            <li>The beer tap can be used, but it needs advance notice so beer can be arranged.</li>
-            <li>Beer for the tap must be paid directly to the vendor.</li>
-            <li>If the electricity cuts out, check the breaker panel beside the entrance door.</li>
-            <li>Please leave cables and remotes where you found them after use.</li>
-            <li>If something does not work, message on WhatsApp for help.</li>
-          </ul>
-        </div>
-      </div>
-    </section>
+<p>Ha a projektort szeretné használni, kérjük hozzon saját laptopot. A házban található kábel a laptop és a projektor csatlakoztatására szolgál.</p>
 
-    <section class="section" id="checkout">
-      <div class="container grid">
-        <div class="card">
-          <h2>Simple Check-Out Reminder</h2>
-          <ol class="steps">
-            <li>Please leave the keys in the lock box.</li>
-            <li>Turn off lights, air conditioning, and small appliances.</li>
-            <li>Close windows and lock the door.</li>
-            <li>Send a quick WhatsApp message when you leave if requested.</li>
-          </ol>
-        </div>
+<p>Ha valami nem egyértelmű, írjon nekünk WhatsAppon – ez a leggyorsabb módja a kapcsolatfelvételnek.</p>
+</div>
 
-        <div class="card">
-          <h2>Extra Helpful Reminders</h2>
-          <ul>
-            <li>If you use the projector, please bring your own laptop.</li>
-            <li>The laptop cable should stay with the projector after use.</li>
-            <li>The Logitech unit is for connecting your music to the house speakers.</li>
-            <li>If you want to use the beer tap, please give notice in advance so it can be prepared.</li>
-            <li>If the power cuts, check the electric panel beside the entrance door for a breaker that is down.</li>
-            <li>Please do not adjust the hot water tank.</li>
-            <li>If you need help, WhatsApp is the fastest option.</li>
-          </ul>
-        </div>
-      </div>
-    </section>
-  </main>
 
-  <footer>
-    <div class="container">
-      Casa Miramar Salobrena · Guest information
-    </div>
-  </footer>
+<div class="card">
+<h2>Wi‑Fi</h2>
+
+<p><strong>Hálózat:</strong><br>
+DIGIFIBRA‑PLUS‑9fP6<br>
+DIGIFIBRA‑9fP6</p>
+
+<p><strong>Jelszó:</strong> 6STFAEs4uyAu</p>
+
+<p>Mindkét hálózat ugyanazt a jelszót használja.</p>
+</div>
+
+
+<div class="card">
+<h2>Kapcsolat</h2>
+
+<p><strong>WhatsApp:</strong> +36 31 788 1744</p>
+<p><strong>Engedélyszám:</strong> VUT/GR/14136</p>
+
+<p>Ha valami nem világos, írjon közvetlenül WhatsAppon.</p>
+
+</div>
+
+
+<div class="card">
+<h2>Így lehet zenét lejátszani a hangszórókon</h2>
+
+<ol>
+<li>Kapcsolja be a Logitech Bluetooth eszközt.</li>
+<li>Nyissa meg a Bluetooth beállításokat telefonján, tabletjén vagy laptopján.</li>
+<li>Csatlakozzon a Logitech eszközhöz.</li>
+<li>Csatlakozás után a zene a ház hangszóróin fog megszólalni.</li>
+<li>A hangerőt a saját eszközén és a hangszórón is lehet állítani.</li>
+</ol>
+
+<p>Ha nem csatlakozik azonnal, kapcsolja ki majd be a Bluetooth‑t, és próbálja újra.</p>
+
+</div>
+
+
+<div class="card">
+<h2>Így használható a BenQ projektor</h2>
+
+<ol>
+<li>Kapcsolja be a projektort a távirányítóval vagy a bekapcsológombbal.</li>
+<li>Várja meg, amíg a projektor teljesen elindul.</li>
+<li>A házban található kábellel csatlakoztassa a laptopot a projektorhoz.</li>
+<li>A projektor használatához saját laptop szükséges.</li>
+<li>Válassza ki a megfelelő bemenetet, majd szükség esetén állítsa be a fókuszt.</li>
+</ol>
+
+<p><strong>Fontos:</strong> használat után hagyja a kábelt és a távirányítót a projektor mellett.</p>
+
+</div>
+
+
+<div class="card">
+<h2>Így használható a légkondicionáló</h2>
+
+<ol>
+<li>Használja a falra rögzített klímatávirányítót.</li>
+<li>A bekapcsológombbal lehet a készüléket be‑ vagy kikapcsolni.</li>
+<li>Válassza ki a hűtés vagy fűtés módot.</li>
+<li>Állítsa be a kívánt hőmérsékletet (általában 22–24 °C).</li>
+<li>Távozáskor kérjük kapcsolja ki.</li>
+</ol>
+
+<p>Működés közben kérjük tartsa csukva az ajtókat és ablakokat.</p>
+
+</div>
+
+
+<div class="card">
+<h2>Sütő, mikrohullámú sütő és hűtő – rövid útmutató</h2>
+
+<ul>
+<li><strong>Mikrohullámú sütő:</strong> használjon mikrohullámhoz alkalmas edényt.</li>
+<li><strong>Fontos:</strong> fémet ne tegyen a mikrohullámú sütőbe.</li>
+<li><strong>Sütő:</strong> állítsa be a kívánt funkciót és hőmérsékletet, majd hagyjon időt az előmelegítésre.</li>
+<li><strong>LG side‑by‑side hűtő:</strong> az egyik oldal hűtő, a másik fagyasztó.</li>
+<li>Ivóvíz a hűtő szűrt vízadagolójából fogyasztható.</li>
+<li>Kérjük, ne állítsa el a hűtő vagy fagyasztó hőmérsékletét.</li>
+</ul>
+
+</div>
+
+
+<div class="card">
+<h2>Fontos házi tudnivalók</h2>
+
+<ul>
+<li>Kérjük, ne állítsa el a melegvíztartályt.</li>
+<li>A Logitech eszközzel telefonról vagy laptopról lehet zenét lejátszani.</li>
+<li>A projektor laptop használatához készült.</li>
+<li>A sörcsap használható, de kérjük jelezze előre.</li>
+<li>Áramszünet esetén ellenőrizze a biztosítékokat a bejáratnál.</li>
+<li>A szemetesek az utca végén találhatók.</li>
+<li>Extra pipereholmik az emeleti fürdőszobában vannak.</li>
+<li>Extra ágynemű az alsó szobák szekrényeiben található.</li>
+<li>Ha valami nem működik, kérjük írjon WhatsAppon.</li>
+</ul>
+
+</div>
+
+
+<div class="card">
+<h2>Kijelentkezési emlékeztető</h2>
+
+<ol>
+<li>Hagyja a kulcsokat a zárdobozban.</li>
+<li>Kapcsolja le a villanyokat és a klímát.</li>
+<li>Csukja be az ablakokat és zárja be az ajtót.</li>
+<li>Távozáskor küldjön egy rövid WhatsApp üzenetet.</li>
+</ol>
+
+</div>
+
+
+<footer>
+Casa Miramar Salobreña · Vendéginformációk
+</footer>
+
+</div>
 </body>
 </html>
