@@ -14,18 +14,18 @@
   gtag('config', 'G-DMTB56PDW2');
 </script>
   <title>Availability Calendar | SierraMar Salobrena</title>
-  <meta name="description" content="Check availability for SierraMar in one place, with direct links to Airbnb, Booking.com, and WhatsApp support." />
+  <meta name="description" content="View the SierraMar availability calendar, highlight your stay dates, and continue to a booking request with the selected dates already filled in." />
   <meta name="robots" content="index,follow" />
   <link rel="canonical" href="https://salobrena.eu/availability.html" />
   <meta property="og:type" content="website" />
   <meta property="og:title" content="Availability Calendar | SierraMar Salobrena" />
-  <meta property="og:description" content="One availability page for SierraMar with booking platform links and live calendar support." />
+  <meta property="og:description" content="Browse the full SierraMar calendar and continue with a booking request using your selected dates." />
   <meta property="og:url" content="https://salobrena.eu/availability.html" />
   <meta property="og:image" content="https://salobrena.eu/hero_view-1600.jpg" />
   <meta property="og:image:alt" content="SierraMar in Salobrena with sea and mountain views" />
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="Availability Calendar | SierraMar Salobrena" />
-  <meta name="twitter:description" content="Check current availability for SierraMar and choose Airbnb, Booking.com, or direct contact." />
+  <meta name="twitter:description" content="Highlight your dates on the SierraMar calendar and continue with a booking request." />
   <meta name="twitter:image" content="https://salobrena.eu/hero_view-1600.jpg" />
   <meta name="theme-color" content="#f7f4ef" />
   <style>
@@ -39,7 +39,16 @@
       --line:rgba(36,52,61,0.08);
       --shadow:0 14px 35px rgba(0,0,0,0.08);
       --radius:24px;
-      --max:1180px;
+      --max:1280px;
+      --available:#eef6ef;
+      --available-border:#d7e7d8;
+      --blocked:#f2d9d5;
+      --blocked-text:#7d2d1f;
+      --past:#f2efe9;
+      --past-text:#a19382;
+      --selected:#d8e8f2;
+      --selected-strong:#6f94b0;
+      --selected-text:#1d435d;
     }
 
     *{box-sizing:border-box}
@@ -80,10 +89,9 @@
       justify-content:flex-end;
       align-items:center;
     }
-    .hero{padding:30px 0 24px}
+    .hero{padding:30px 0 18px}
     .hero-card,
-    .card,
-    .platform-card{
+    .card{
       background:var(--card);
       border-radius:32px;
       box-shadow:var(--shadow);
@@ -104,10 +112,179 @@
       margin:0 0 14px;
     }
     h1{font-size:clamp(2rem,4vw,4rem)}
-    h2{font-size:clamp(1.5rem,2.4vw,2.3rem)}
+    h2{font-size:clamp(1.45rem,2.4vw,2.2rem)}
+    h3{font-size:1.08rem}
     p{margin:0 0 14px}
-    ul{margin:0;padding-left:18px}
-    li{margin-bottom:8px}
+    .muted{color:var(--muted)}
+    .section{padding:18px 0 36px}
+    .layout{
+      display:grid;
+      grid-template-columns:minmax(0,1.7fr) minmax(320px,0.8fr);
+      gap:24px;
+      align-items:start;
+    }
+    .calendar-meta{
+      margin:0 0 16px;
+      color:var(--muted);
+      font-size:0.95rem;
+    }
+    .calendar-shell{
+      border-radius:24px;
+      border:1px solid var(--line);
+      background:#f9f6f1;
+      overflow:hidden;
+      min-height:620px;
+    }
+    .calendar-state{
+      min-height:620px;
+      padding:28px;
+      display:flex;
+      flex-direction:column;
+      justify-content:center;
+    }
+    .legend{
+      display:flex;
+      flex-wrap:wrap;
+      gap:12px;
+      padding:24px 24px 0;
+    }
+    .legend-item{
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      color:var(--muted);
+      font-size:0.92rem;
+    }
+    .legend-swatch{
+      width:16px;
+      height:16px;
+      border-radius:6px;
+      border:1px solid var(--line);
+      background:#fff;
+    }
+    .legend-swatch.available{background:var(--available)}
+    .legend-swatch.blocked{background:var(--blocked)}
+    .legend-swatch.selected{background:var(--selected)}
+    .legend-swatch.past{background:var(--past)}
+    .month-grid{
+      display:grid;
+      grid-template-columns:repeat(3,minmax(0,1fr));
+      gap:18px;
+      padding:24px;
+    }
+    .month-card{
+      background:#fff;
+      border:1px solid var(--line);
+      border-radius:20px;
+      padding:18px;
+    }
+    .month-title{
+      margin:0 0 14px;
+      font-size:1.08rem;
+    }
+    .weekday-row,
+    .day-grid{
+      display:grid;
+      grid-template-columns:repeat(7,minmax(0,1fr));
+      gap:6px;
+    }
+    .weekday{
+      text-align:center;
+      color:var(--muted);
+      font-size:0.74rem;
+      font-weight:700;
+      padding-bottom:6px;
+      text-transform:uppercase;
+      letter-spacing:0.03em;
+    }
+    .day-cell{
+      min-height:40px;
+      border-radius:12px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      font-size:0.92rem;
+      border:1px solid var(--line);
+      background:#fff;
+    }
+    .day-cell.is-empty{
+      border-color:transparent;
+      background:transparent;
+    }
+    .day-button{
+      width:100%;
+      min-height:40px;
+      border-radius:12px;
+      border:1px solid var(--line);
+      background:#fff;
+      color:var(--text);
+      font:inherit;
+      cursor:pointer;
+      transition:0.16s ease;
+    }
+    .day-button:hover{
+      border-color:var(--accent);
+      transform:translateY(-1px);
+    }
+    .day-button.available{
+      background:var(--available);
+      border-color:var(--available-border);
+    }
+    .day-button.selected,
+    .day-button.in-range{
+      background:var(--selected);
+      border-color:var(--selected-strong);
+      color:var(--selected-text);
+    }
+    .day-button.range-start,
+    .day-button.range-end{
+      background:var(--selected-strong);
+      border-color:var(--selected-strong);
+      color:#fff;
+      font-weight:700;
+    }
+    .day-cell.blocked{
+      background:var(--blocked);
+      color:var(--blocked-text);
+      font-weight:700;
+    }
+    .day-cell.past{
+      background:var(--past);
+      color:var(--past-text);
+    }
+    .day-button.today,
+    .day-cell.today{
+      outline:2px solid var(--accent);
+      outline-offset:1px;
+    }
+    .side-panel{
+      position:sticky;
+      top:88px;
+      display:grid;
+      gap:18px;
+    }
+    .selection-card{
+      padding:28px;
+    }
+    .selection-summary{
+      padding:16px 18px;
+      border-radius:18px;
+      background:#f3eee6;
+      color:var(--text);
+      border:1px solid var(--line);
+      margin:16px 0 0;
+    }
+    .selection-note{
+      min-height:24px;
+      color:var(--muted);
+      margin-top:12px;
+      font-size:0.95rem;
+    }
+    .selection-list{
+      margin:16px 0 0;
+      padding-left:18px;
+    }
+    .selection-list li{margin-bottom:8px}
     .button-row{
       display:flex;
       flex-wrap:wrap;
@@ -132,160 +309,35 @@
       color:var(--text);
       border:1px solid rgba(36,52,61,0.08);
     }
-    .badge-row{
-      display:flex;
-      flex-wrap:wrap;
-      gap:10px;
-      margin-top:12px;
+    .btn-link-disabled{
+      opacity:0.5;
+      pointer-events:none;
     }
-    .badge{
-      display:inline-flex;
-      align-items:center;
-      padding:8px 12px;
-      border-radius:999px;
-      background:#f3eee6;
-      color:var(--muted);
-      font-size:0.9rem;
-      font-weight:700;
-    }
-    .section{padding:22px 0 34px}
-    .grid{
+    .platform-links{
       display:grid;
-      grid-template-columns:1.3fr 0.9fr;
-      gap:24px;
-    }
-    .stack{
-      display:grid;
-      gap:24px;
-    }
-    .calendar-meta{
-      margin:0 0 16px;
-      color:var(--muted);
-      font-size:0.95rem;
-    }
-    .calendar-shell{
-      border-radius:24px;
-      border:1px solid var(--line);
-      background:#f9f6f1;
-      overflow:hidden;
-      min-height:620px;
-    }
-    .calendar-state{
-      min-height:620px;
-      padding:28px;
-      display:flex;
-      flex-direction:column;
-      justify-content:center;
-    }
-    .notice{
-      padding:16px 18px;
-      border-radius:18px;
-      background:#f3eee6;
-      color:var(--text);
-      border:1px solid var(--line);
-    }
-    .muted{color:var(--muted)}
-    .legend{
-      display:flex;
-      flex-wrap:wrap;
       gap:12px;
-      padding:24px 24px 0;
-    }
-    .legend-item{
-      display:inline-flex;
-      align-items:center;
-      gap:8px;
-      color:var(--muted);
-      font-size:0.92rem;
-    }
-    .legend-swatch{
-      width:16px;
-      height:16px;
-      border-radius:6px;
-      border:1px solid var(--line);
-      background:#fff;
-    }
-    .legend-swatch.available{background:#eef6ef}
-    .legend-swatch.blocked{background:#f2d9d5}
-    .legend-swatch.past{background:#f2efe9}
-    .month-grid{
-      display:grid;
-      grid-template-columns:repeat(2,minmax(0,1fr));
-      gap:18px;
-      padding:24px;
-    }
-    .month-card{
-      background:#fff;
-      border:1px solid var(--line);
-      border-radius:20px;
-      padding:18px;
-    }
-    .month-title{
-      margin:0 0 14px;
-      font-size:1.1rem;
-    }
-    .weekday-row,
-    .day-grid{
-      display:grid;
-      grid-template-columns:repeat(7,minmax(0,1fr));
-      gap:6px;
-    }
-    .weekday{
-      text-align:center;
-      color:var(--muted);
-      font-size:0.78rem;
-      font-weight:700;
-      padding-bottom:6px;
-      text-transform:uppercase;
-      letter-spacing:0.03em;
-    }
-    .day-cell{
-      min-height:40px;
-      border-radius:12px;
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      font-size:0.92rem;
-      border:1px solid var(--line);
-      background:#fff;
-    }
-    .day-cell.is-empty{
-      border-color:transparent;
-      background:transparent;
-    }
-    .day-cell.available{background:#eef6ef}
-    .day-cell.blocked{
-      background:#f2d9d5;
-      color:#7d2d1f;
-      font-weight:700;
-    }
-    .day-cell.past{
-      background:#f2efe9;
-      color:#a19382;
-    }
-    .day-cell.today{
-      outline:2px solid var(--accent);
-      outline-offset:1px;
-    }
-    .platform-grid{
-      display:grid;
-      grid-template-columns:repeat(3,minmax(0,1fr));
-      gap:18px;
       margin-top:18px;
     }
-    .platform-card{
+    .platform-link{
       display:flex;
-      flex-direction:column;
+      align-items:center;
+      justify-content:space-between;
+      gap:12px;
+      padding:14px 16px;
+      border-radius:18px;
+      border:1px solid var(--line);
+      background:#fff;
     }
-    .platform-card p{color:var(--muted);flex:1}
     footer{
       padding:20px 0 40px;
       color:var(--muted);
       font-size:0.95rem;
     }
+    @media (max-width:1220px){
+      .month-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+    }
     @media (max-width:980px){
-      .grid,
-      .platform-grid{
+      .layout{
         grid-template-columns:1fr;
       }
       .nav{
@@ -295,11 +347,13 @@
       .nav-links{
         justify-content:flex-start;
       }
+      .side-panel{
+        position:static;
+      }
     }
-    @media (max-width:640px){
+    @media (max-width:680px){
       .hero-card,
-      .card,
-      .platform-card{
+      .card{
         padding:22px;
       }
       .calendar-shell,
@@ -334,83 +388,63 @@
     <section class="hero">
       <div class="container">
         <div class="hero-card">
-          <div class="eyebrow">Shared availability page</div>
-          <h1>Check SierraMar availability in one place</h1>
-          <p>This page is the shared availability hub for every language version of the site. You can review the calendar here and then choose Airbnb, Booking.com, or direct contact.</p>
-          <div class="badge-row">
-            <span class="badge">Single booking page</span>
-            <span class="badge">Private feed sync</span>
-            <span class="badge">WhatsApp support</span>
-          </div>
-          <div class="button-row">
-            <a href="#calendar" class="btn btn-primary">Open calendar</a>
-            <a href="#platforms" class="btn btn-secondary">See booking options</a>
-          </div>
+          <div class="eyebrow">Availability calendar</div>
+          <h1>Select your dates and continue with a booking request</h1>
+          <p>Choose your stay on the calendar below. Available days can be highlighted, booked days are blocked, and your selected dates can be sent directly into the booking request page.</p>
         </div>
       </div>
     </section>
 
     <section class="section" id="calendar">
-      <div class="container grid">
+      <div class="container layout">
         <div class="card">
-          <h2>Availability calendar</h2>
-          <p class="muted">This calendar is built from the Airbnb and Booking.com feeds by GitHub Actions, without exposing the private feed links on the public site.</p>
-          <div class="calendar-meta" id="calendarMeta">Loading current availability...</div>
+          <h2>Full year calendar</h2>
+          <p class="calendar-meta" id="calendarMeta">Loading current availability...</p>
           <div class="calendar-shell" id="calendarShell">
             <div class="calendar-state">
               <h3>Calendar data is not ready yet</h3>
-              <p>The page is waiting for the generated availability data file. Once the workflow runs, this section will switch to a monthly calendar automatically.</p>
-              <div class="notice">
-                If you have just uploaded the files, the first scheduled update may take a few hours unless you run the workflow manually in GitHub.
-              </div>
+              <p>The page is waiting for the generated availability data file. Once the workflow runs, this section will switch to a full year calendar automatically.</p>
             </div>
           </div>
         </div>
 
-        <div class="stack">
-          <div class="card">
-            <h2>How this page works</h2>
-            <ul>
-              <li>All availability buttons on the homepage versions now point here.</li>
-              <li>The workflow reads both private feeds server-side and writes a public availability snapshot.</li>
-              <li>The official Airbnb and Booking.com pages remain the final booking checkout pages.</li>
+        <div class="side-panel">
+          <div class="card selection-card">
+            <h2>Your selected stay</h2>
+            <p class="muted">Click one available day for a one-night stay, or click a start day and then a later end day to extend the selection.</p>
+            <div class="selection-summary" id="selectionSummary">
+              Select your dates on the calendar to prepare a booking request.
+            </div>
+            <div class="selection-note" id="selectionNote"></div>
+            <div class="button-row">
+              <a href="book-direct.html" class="btn btn-primary btn-link-disabled" id="bookingRequestLink">Continue to booking request</a>
+              <a href="https://wa.me/36317881744" target="_blank" rel="noopener noreferrer" class="btn btn-secondary btn-link-disabled" id="quickWhatsAppLink">Quick WhatsApp request</a>
+            </div>
+            <div class="button-row">
+              <button type="button" class="btn btn-secondary" id="clearSelectionButton">Clear selection</button>
+            </div>
+            <ul class="selection-list">
+              <li>Green days are available.</li>
+              <li>Pink days are already booked.</li>
+              <li>Blue days are your selected stay.</li>
             </ul>
           </div>
-          <div class="card">
-            <h2>Need a quick answer?</h2>
-            <p class="muted">If you want to confirm dates manually, WhatsApp is still the fastest option.</p>
-            <div class="button-row">
-              <a href="https://wa.me/36317881744" target="_blank" rel="noopener noreferrer" class="btn btn-primary">Message on WhatsApp</a>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
 
-    <section class="section" id="platforms">
-      <div class="container">
-        <h2>Booking options</h2>
-        <p class="muted">Use the platform you prefer for exact live dates and reservation checkout.</p>
-        <div class="platform-grid">
-          <div class="platform-card">
-            <h3>Airbnb</h3>
-            <p>Check live dates and complete your stay securely on Airbnb.</p>
-            <div class="button-row">
-              <a href="https://www.airbnb.com/rooms/1548799735197050171" target="_blank" rel="noopener noreferrer" class="btn btn-primary">Open Airbnb</a>
-            </div>
-          </div>
-          <div class="platform-card">
-            <h3>Booking.com</h3>
-            <p>Use Booking.com to review current dates and reserve through that platform.</p>
-            <div class="button-row">
-              <a href="https://www.booking.com/hotel/es/casa-miramar-salobrena-salobrena.en-gb.html" target="_blank" rel="noopener noreferrer" class="btn btn-primary">Open Booking.com</a>
-            </div>
-          </div>
-          <div class="platform-card">
-            <h3>Direct support</h3>
-            <p>If you want to ask about dates before booking, send a message directly on WhatsApp.</p>
-            <div class="button-row">
-              <a href="https://wa.me/36317881744" target="_blank" rel="noopener noreferrer" class="btn btn-primary">Open WhatsApp</a>
+          <div class="card">
+            <h3>Other booking options</h3>
+            <div class="platform-links">
+              <a class="platform-link" href="https://www.airbnb.com/rooms/1548799735197050171" target="_blank" rel="noopener noreferrer">
+                <span>Airbnb</span>
+                <span>Open</span>
+              </a>
+              <a class="platform-link" href="https://www.booking.com/hotel/es/casa-miramar-salobrena-salobrena.en-gb.html" target="_blank" rel="noopener noreferrer">
+                <span>Booking.com</span>
+                <span>Open</span>
+              </a>
+              <a class="platform-link" href="https://wa.me/36317881744" target="_blank" rel="noopener noreferrer">
+                <span>WhatsApp</span>
+                <span>Message</span>
+              </a>
             </div>
           </div>
         </div>
@@ -419,31 +453,143 @@
   </main>
 
   <footer>
-    <div class="container">SierraMar Salobrena · Availability page</div>
+    <div class="container">SierraMar Salobrena - Availability page</div>
   </footer>
 
   <script>
     (function () {
       const calendarShell = document.getElementById('calendarShell');
       const calendarMeta = document.getElementById('calendarMeta');
+      const selectionSummary = document.getElementById('selectionSummary');
+      const selectionNote = document.getElementById('selectionNote');
+      const bookingRequestLink = document.getElementById('bookingRequestLink');
+      const quickWhatsAppLink = document.getElementById('quickWhatsAppLink');
+      const clearSelectionButton = document.getElementById('clearSelectionButton');
       const monthFormatter = new Intl.DateTimeFormat('en-US', { month: 'long', year: 'numeric' });
-      const dateFormatter = new Intl.DateTimeFormat('en-GB', { day: '2-digit', month: 'short', year: 'numeric' });
+      const prettyDateFormatter = new Intl.DateTimeFormat('en-GB', { day: '2-digit', month: 'short', year: 'numeric' });
+      const metaDateFormatter = new Intl.DateTimeFormat('en-GB', { day: '2-digit', month: 'short', year: 'numeric', hour: '2-digit', minute: '2-digit' });
       const weekDays = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
-      const monthsToShow = 6;
+      const monthsToShow = 12;
+      const state = {
+        blockedDates: new Set(),
+        selectionStart: null,
+        selectionEnd: null,
+        todayKey: null,
+        data: null
+      };
 
       function formatDateKey(date) {
         return date.toISOString().slice(0, 10);
+      }
+
+      function parseDateKey(value) {
+        return new Date(value + 'T00:00:00');
+      }
+
+      function addDays(dateKey, days) {
+        const date = parseDateKey(dateKey);
+        date.setDate(date.getDate() + days);
+        return formatDateKey(date);
+      }
+
+      function nightsBetween(startKey, endKeyExclusive) {
+        const start = parseDateKey(startKey);
+        const end = parseDateKey(endKeyExclusive);
+        return Math.round((end.getTime() - start.getTime()) / 86400000);
       }
 
       function firstDayOffset(date) {
         return (date.getDay() + 6) % 7;
       }
 
-      function createDayCell(text, className) {
-        return '<div class="day-cell ' + className + '">' + text + '</div>';
+      function isPast(dateKey) {
+        return dateKey < state.todayKey;
       }
 
-      function renderMonth(monthDate, blockedSet, todayKey) {
+      function isSelectable(dateKey) {
+        return !isPast(dateKey) && !state.blockedDates.has(dateKey);
+      }
+
+      function dateInSelection(dateKey) {
+        if (!state.selectionStart || !state.selectionEnd) return false;
+        return dateKey >= state.selectionStart && dateKey <= state.selectionEnd;
+      }
+
+      function selectionHasBlockedDates(startKey, endKey) {
+        for (let cursor = startKey; cursor <= endKey; cursor = addDays(cursor, 1)) {
+          if (state.blockedDates.has(cursor)) {
+            return true;
+          }
+        }
+        return false;
+      }
+
+      function updateActionLinks() {
+        if (!state.selectionStart || !state.selectionEnd) {
+          bookingRequestLink.href = 'book-direct.html';
+          quickWhatsAppLink.href = 'https://wa.me/36317881744';
+          bookingRequestLink.classList.add('btn-link-disabled');
+          quickWhatsAppLink.classList.add('btn-link-disabled');
+          return;
+        }
+
+        const checkIn = state.selectionStart;
+        const checkOut = addDays(state.selectionEnd, 1);
+        const nights = nightsBetween(checkIn, checkOut);
+        const requestUrl = 'book-direct.html?checkIn=' + encodeURIComponent(checkIn) + '&checkOut=' + encodeURIComponent(checkOut) + '#request-form';
+        const message = [
+          'Hello SierraMar, I would like to request these dates.',
+          '',
+          'Check-in: ' + checkIn,
+          'Check-out: ' + checkOut,
+          'Nights: ' + nights,
+          '',
+          'Please confirm availability.'
+        ].join('\n');
+
+        bookingRequestLink.href = requestUrl;
+        quickWhatsAppLink.href = 'https://wa.me/36317881744?text=' + encodeURIComponent(message);
+        bookingRequestLink.classList.remove('btn-link-disabled');
+        quickWhatsAppLink.classList.remove('btn-link-disabled');
+      }
+
+      function updateSelectionPanel(noteText) {
+        if (!state.selectionStart || !state.selectionEnd) {
+          selectionSummary.textContent = 'Select your dates on the calendar to prepare a booking request.';
+          selectionNote.textContent = noteText || '';
+          updateActionLinks();
+          return;
+        }
+
+        const checkIn = state.selectionStart;
+        const checkOut = addDays(state.selectionEnd, 1);
+        const nights = nightsBetween(checkIn, checkOut);
+
+        selectionSummary.textContent =
+          'Check-in: ' + prettyDateFormatter.format(parseDateKey(checkIn)) +
+          ' | Check-out: ' + prettyDateFormatter.format(parseDateKey(checkOut)) +
+          ' | Nights: ' + nights;
+        selectionNote.textContent = noteText || 'Selected dates are ready for a booking request.';
+        updateActionLinks();
+      }
+
+      function createEmptyCell() {
+        return '<div class="day-cell is-empty"></div>';
+      }
+
+      function createBlockedCell(day, isTodayClass) {
+        return '<div class="day-cell blocked' + isTodayClass + '">' + day + '</div>';
+      }
+
+      function createPastCell(day, isTodayClass) {
+        return '<div class="day-cell past' + isTodayClass + '">' + day + '</div>';
+      }
+
+      function createAvailableButton(day, dateKey, classes) {
+        return '<button type="button" class="day-button ' + classes + '" data-date="' + dateKey + '">' + day + '</button>';
+      }
+
+      function renderMonth(monthDate) {
         const year = monthDate.getFullYear();
         const month = monthDate.getMonth();
         const firstDate = new Date(year, month, 1);
@@ -458,22 +604,39 @@
 
         let dayMarkup = '';
         for (let index = 0; index < offset; index += 1) {
-          dayMarkup += createDayCell('', 'is-empty');
+          dayMarkup += createEmptyCell();
         }
 
         for (let day = 1; day <= totalDays; day += 1) {
           const currentDate = new Date(year, month, day);
           const key = formatDateKey(currentDate);
-          let state = 'available';
+          const isTodayClass = key === state.todayKey ? ' today' : '';
 
-          if (key < todayKey) {
-            state = 'past';
-          } else if (blockedSet.has(key)) {
-            state = 'blocked';
+          if (isPast(key)) {
+            dayMarkup += createPastCell(day, isTodayClass);
+            continue;
           }
 
-          const isToday = key === todayKey ? ' today' : '';
-          dayMarkup += createDayCell(day, state + isToday);
+          if (state.blockedDates.has(key)) {
+            dayMarkup += createBlockedCell(day, isTodayClass);
+            continue;
+          }
+
+          let classes = 'available' + isTodayClass;
+          if (dateInSelection(key)) {
+            classes += ' in-range';
+          }
+          if (key === state.selectionStart) {
+            classes += ' selected range-start';
+          }
+          if (key === state.selectionEnd) {
+            classes += ' selected range-end';
+          }
+          if (state.selectionStart === key && state.selectionEnd === key) {
+            classes += ' selected';
+          }
+
+          dayMarkup += createAvailableButton(day, key, classes);
         }
 
         return '' +
@@ -484,29 +647,63 @@
           '</div>';
       }
 
-      function renderCalendar(data) {
-        const blockedSet = new Set(Array.isArray(data.blockedDates) ? data.blockedDates : []);
+      function bindDayButtons() {
+        calendarShell.querySelectorAll('[data-date]').forEach(function (button) {
+          button.addEventListener('click', function () {
+            const selectedDate = button.getAttribute('data-date');
+
+            if (!state.selectionStart || !state.selectionEnd || state.selectionStart === state.selectionEnd) {
+              if (!state.selectionStart) {
+                state.selectionStart = selectedDate;
+                state.selectionEnd = selectedDate;
+                updateSelectionPanel('One-night stay selected. Click a later date if you want to extend it.');
+              } else if (selectedDate < state.selectionStart) {
+                state.selectionStart = selectedDate;
+                state.selectionEnd = selectedDate;
+                updateSelectionPanel('Selection restarted from the earlier date.');
+              } else if (selectionHasBlockedDates(state.selectionStart, selectedDate)) {
+                state.selectionStart = selectedDate;
+                state.selectionEnd = selectedDate;
+                updateSelectionPanel('That range crossed booked dates, so the selection was restarted.');
+              } else {
+                state.selectionEnd = selectedDate;
+                updateSelectionPanel('Selected dates are ready for a booking request.');
+              }
+            } else {
+              state.selectionStart = selectedDate;
+              state.selectionEnd = selectedDate;
+              updateSelectionPanel('Selection restarted. Click a later date if you want to extend it.');
+            }
+
+            renderCalendar();
+          });
+        });
+      }
+
+      function renderCalendar() {
         const today = new Date();
-        const todayKey = formatDateKey(new Date(today.getFullYear(), today.getMonth(), today.getDate()));
-        const startMonth = new Date(today.getFullYear(), today.getMonth(), 1);
+        state.todayKey = formatDateKey(new Date(today.getFullYear(), today.getMonth(), today.getDate()));
 
         let monthMarkup = '';
         for (let index = 0; index < monthsToShow; index += 1) {
-          const monthDate = new Date(startMonth.getFullYear(), startMonth.getMonth() + index, 1);
-          monthMarkup += renderMonth(monthDate, blockedSet, todayKey);
+          const monthDate = new Date(today.getFullYear(), today.getMonth() + index, 1);
+          monthMarkup += renderMonth(monthDate);
         }
 
         calendarShell.innerHTML =
           '<div class="legend">' +
             '<span class="legend-item"><span class="legend-swatch available"></span>Available</span>' +
             '<span class="legend-item"><span class="legend-swatch blocked"></span>Booked</span>' +
+            '<span class="legend-item"><span class="legend-swatch selected"></span>Selected</span>' +
             '<span class="legend-item"><span class="legend-swatch past"></span>Past</span>' +
           '</div>' +
           '<div class="month-grid">' + monthMarkup + '</div>';
 
-        if (data.generatedAt) {
-          const generatedAt = new Date(data.generatedAt);
-          calendarMeta.textContent = 'Last updated: ' + dateFormatter.format(generatedAt) + ' · Sources: Airbnb and Booking.com';
+        bindDayButtons();
+
+        if (state.data && state.data.generatedAt) {
+          const generatedAt = new Date(state.data.generatedAt);
+          calendarMeta.textContent = 'Last updated: ' + metaDateFormatter.format(generatedAt) + ' - Sources: Airbnb and Booking.com';
         } else {
           calendarMeta.textContent = 'Availability loaded.';
         }
@@ -518,7 +715,6 @@
           '<div class="calendar-state">' +
             '<h3>Availability could not be loaded</h3>' +
             '<p>' + message + '</p>' +
-            '<div class="notice">Use Airbnb or Booking.com below for the latest live dates until the data file is available.</div>' +
           '</div>';
       }
 
@@ -534,11 +730,22 @@
             throw new Error('The availability data file is invalid.');
           }
 
-          renderCalendar(data);
+          state.data = data;
+          state.blockedDates = new Set(data.blockedDates);
+          renderCalendar();
+          updateSelectionPanel('');
         } catch (error) {
           renderError(error.message || 'The availability calendar could not be loaded.');
+          updateSelectionPanel('Use Airbnb or Booking.com if the calendar data is not available yet.');
         }
       }
+
+      clearSelectionButton.addEventListener('click', function () {
+        state.selectionStart = null;
+        state.selectionEnd = null;
+        updateSelectionPanel('Selection cleared.');
+        renderCalendar();
+      });
 
       loadAvailability();
     })();

@@ -3,7 +3,17 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Book Direct | SierraMar Salobrena</title>
+  
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-DMTB56PDW2"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-DMTB56PDW2');
+</script>
+<title>Book Direct | SierraMar Salobrena</title>
   <meta name="description" content="Request a direct booking at SierraMar Salobrena. Send your dates and guest details, then receive manual confirmation and a Stripe payment link or invoice." />
   <meta name="robots" content="index,follow" />
   <link rel="canonical" href="https://salobrena.eu/book-direct.html" />
@@ -501,6 +511,25 @@
         checkIn.min = localToday;
       };
 
+      const applyDatesFromQuery = () => {
+        const params = new URLSearchParams(window.location.search);
+        const queryCheckIn = params.get('checkIn');
+        const queryCheckOut = params.get('checkOut');
+        const datePattern = /^\d{4}-\d{2}-\d{2}$/;
+
+        if (queryCheckIn && datePattern.test(queryCheckIn)) {
+          checkIn.value = queryCheckIn;
+        }
+
+        if (queryCheckOut && datePattern.test(queryCheckOut)) {
+          checkOut.value = queryCheckOut;
+        }
+
+        if (queryCheckIn || queryCheckOut) {
+          status.textContent = 'Selected dates were copied from the availability calendar.';
+        }
+      };
+
       const getNights = () => {
         if (!checkIn.value || !checkOut.value) return 0;
         const start = new Date(checkIn.value + 'T00:00:00');
@@ -607,6 +636,7 @@
       });
 
       setMinCheckIn();
+      applyDatesFromQuery();
       checkIn.addEventListener('change', updateSummary);
       checkOut.addEventListener('change', updateSummary);
       adults.addEventListener('change', updateSummary);
