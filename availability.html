@@ -1,0 +1,547 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-DMTB56PDW2"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-DMTB56PDW2');
+</script>
+  <title>Availability Calendar | SierraMar Salobrena</title>
+  <meta name="description" content="Check availability for SierraMar in one place, with direct links to Airbnb, Booking.com, and WhatsApp support." />
+  <meta name="robots" content="index,follow" />
+  <link rel="canonical" href="https://salobrena.eu/availability.html" />
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Availability Calendar | SierraMar Salobrena" />
+  <meta property="og:description" content="One availability page for SierraMar with booking platform links and live calendar support." />
+  <meta property="og:url" content="https://salobrena.eu/availability.html" />
+  <meta property="og:image" content="https://salobrena.eu/hero_view-1600.jpg" />
+  <meta property="og:image:alt" content="SierraMar in Salobrena with sea and mountain views" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Availability Calendar | SierraMar Salobrena" />
+  <meta name="twitter:description" content="Check current availability for SierraMar and choose Airbnb, Booking.com, or direct contact." />
+  <meta name="twitter:image" content="https://salobrena.eu/hero_view-1600.jpg" />
+  <meta name="theme-color" content="#f7f4ef" />
+  <style>
+    :root{
+      --bg:#f7f4ef;
+      --card:#ffffff;
+      --text:#24343d;
+      --muted:#667780;
+      --accent:#b77743;
+      --accent-dark:#955b2d;
+      --line:rgba(36,52,61,0.08);
+      --shadow:0 14px 35px rgba(0,0,0,0.08);
+      --radius:24px;
+      --max:1180px;
+    }
+
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{
+      margin:0;
+      font-family:Arial, Helvetica, sans-serif;
+      background:
+        linear-gradient(180deg, rgba(244,237,228,0.92), rgba(247,244,239,0.98) 260px),
+        var(--bg);
+      color:var(--text);
+      line-height:1.6;
+    }
+    a{color:inherit;text-decoration:none}
+    .container{width:min(calc(100% - 32px),var(--max));margin:0 auto}
+    header{
+      position:sticky;
+      top:0;
+      z-index:20;
+      background:rgba(247,244,239,0.92);
+      backdrop-filter:blur(10px);
+      border-bottom:1px solid var(--line);
+    }
+    .nav{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:20px;
+      padding:14px 0;
+    }
+    .brand{font-size:1.1rem;font-weight:700;white-space:nowrap}
+    .nav-links{
+      display:flex;
+      flex-wrap:wrap;
+      gap:18px;
+      color:var(--muted);
+      font-size:0.96rem;
+      justify-content:flex-end;
+      align-items:center;
+    }
+    .hero{padding:30px 0 24px}
+    .hero-card,
+    .card,
+    .platform-card{
+      background:var(--card);
+      border-radius:32px;
+      box-shadow:var(--shadow);
+      padding:32px;
+    }
+    .eyebrow{
+      display:inline-block;
+      margin-bottom:14px;
+      padding:7px 12px;
+      border-radius:999px;
+      background:#f1e7db;
+      color:#7a542f;
+      font-size:0.9rem;
+      font-weight:700;
+    }
+    h1,h2,h3{
+      line-height:1.15;
+      margin:0 0 14px;
+    }
+    h1{font-size:clamp(2rem,4vw,4rem)}
+    h2{font-size:clamp(1.5rem,2.4vw,2.3rem)}
+    p{margin:0 0 14px}
+    ul{margin:0;padding-left:18px}
+    li{margin-bottom:8px}
+    .button-row{
+      display:flex;
+      flex-wrap:wrap;
+      gap:12px;
+      margin-top:18px;
+    }
+    .btn{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      padding:12px 18px;
+      border-radius:999px;
+      font-weight:700;
+      transition:0.2s ease;
+      border:none;
+      cursor:pointer;
+    }
+    .btn-primary{background:var(--accent);color:#fff}
+    .btn-primary:hover{background:var(--accent-dark)}
+    .btn-secondary{
+      background:#f7f1e8;
+      color:var(--text);
+      border:1px solid rgba(36,52,61,0.08);
+    }
+    .badge-row{
+      display:flex;
+      flex-wrap:wrap;
+      gap:10px;
+      margin-top:12px;
+    }
+    .badge{
+      display:inline-flex;
+      align-items:center;
+      padding:8px 12px;
+      border-radius:999px;
+      background:#f3eee6;
+      color:var(--muted);
+      font-size:0.9rem;
+      font-weight:700;
+    }
+    .section{padding:22px 0 34px}
+    .grid{
+      display:grid;
+      grid-template-columns:1.3fr 0.9fr;
+      gap:24px;
+    }
+    .stack{
+      display:grid;
+      gap:24px;
+    }
+    .calendar-meta{
+      margin:0 0 16px;
+      color:var(--muted);
+      font-size:0.95rem;
+    }
+    .calendar-shell{
+      border-radius:24px;
+      border:1px solid var(--line);
+      background:#f9f6f1;
+      overflow:hidden;
+      min-height:620px;
+    }
+    .calendar-state{
+      min-height:620px;
+      padding:28px;
+      display:flex;
+      flex-direction:column;
+      justify-content:center;
+    }
+    .notice{
+      padding:16px 18px;
+      border-radius:18px;
+      background:#f3eee6;
+      color:var(--text);
+      border:1px solid var(--line);
+    }
+    .muted{color:var(--muted)}
+    .legend{
+      display:flex;
+      flex-wrap:wrap;
+      gap:12px;
+      padding:24px 24px 0;
+    }
+    .legend-item{
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      color:var(--muted);
+      font-size:0.92rem;
+    }
+    .legend-swatch{
+      width:16px;
+      height:16px;
+      border-radius:6px;
+      border:1px solid var(--line);
+      background:#fff;
+    }
+    .legend-swatch.available{background:#eef6ef}
+    .legend-swatch.blocked{background:#f2d9d5}
+    .legend-swatch.past{background:#f2efe9}
+    .month-grid{
+      display:grid;
+      grid-template-columns:repeat(2,minmax(0,1fr));
+      gap:18px;
+      padding:24px;
+    }
+    .month-card{
+      background:#fff;
+      border:1px solid var(--line);
+      border-radius:20px;
+      padding:18px;
+    }
+    .month-title{
+      margin:0 0 14px;
+      font-size:1.1rem;
+    }
+    .weekday-row,
+    .day-grid{
+      display:grid;
+      grid-template-columns:repeat(7,minmax(0,1fr));
+      gap:6px;
+    }
+    .weekday{
+      text-align:center;
+      color:var(--muted);
+      font-size:0.78rem;
+      font-weight:700;
+      padding-bottom:6px;
+      text-transform:uppercase;
+      letter-spacing:0.03em;
+    }
+    .day-cell{
+      min-height:40px;
+      border-radius:12px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      font-size:0.92rem;
+      border:1px solid var(--line);
+      background:#fff;
+    }
+    .day-cell.is-empty{
+      border-color:transparent;
+      background:transparent;
+    }
+    .day-cell.available{background:#eef6ef}
+    .day-cell.blocked{
+      background:#f2d9d5;
+      color:#7d2d1f;
+      font-weight:700;
+    }
+    .day-cell.past{
+      background:#f2efe9;
+      color:#a19382;
+    }
+    .day-cell.today{
+      outline:2px solid var(--accent);
+      outline-offset:1px;
+    }
+    .platform-grid{
+      display:grid;
+      grid-template-columns:repeat(3,minmax(0,1fr));
+      gap:18px;
+      margin-top:18px;
+    }
+    .platform-card{
+      display:flex;
+      flex-direction:column;
+    }
+    .platform-card p{color:var(--muted);flex:1}
+    footer{
+      padding:20px 0 40px;
+      color:var(--muted);
+      font-size:0.95rem;
+    }
+    @media (max-width:980px){
+      .grid,
+      .platform-grid{
+        grid-template-columns:1fr;
+      }
+      .nav{
+        flex-direction:column;
+        align-items:flex-start;
+      }
+      .nav-links{
+        justify-content:flex-start;
+      }
+    }
+    @media (max-width:640px){
+      .hero-card,
+      .card,
+      .platform-card{
+        padding:22px;
+      }
+      .calendar-shell,
+      .calendar-state{
+        min-height:520px;
+      }
+      .legend,
+      .month-grid{
+        padding-left:18px;
+        padding-right:18px;
+      }
+      .month-grid{
+        grid-template-columns:1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="container nav">
+      <a href="index.html" class="brand">SierraMar</a>
+      <nav class="nav-links">
+        <a href="index.html">Home</a>
+        <a href="activities.html">Activities</a>
+        <a href="book-direct.html">Book direct</a>
+        <a href="house-info.html">House info</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="container">
+        <div class="hero-card">
+          <div class="eyebrow">Shared availability page</div>
+          <h1>Check SierraMar availability in one place</h1>
+          <p>This page is the shared availability hub for every language version of the site. You can review the calendar here and then choose Airbnb, Booking.com, or direct contact.</p>
+          <div class="badge-row">
+            <span class="badge">Single booking page</span>
+            <span class="badge">Private feed sync</span>
+            <span class="badge">WhatsApp support</span>
+          </div>
+          <div class="button-row">
+            <a href="#calendar" class="btn btn-primary">Open calendar</a>
+            <a href="#platforms" class="btn btn-secondary">See booking options</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="calendar">
+      <div class="container grid">
+        <div class="card">
+          <h2>Availability calendar</h2>
+          <p class="muted">This calendar is built from the Airbnb and Booking.com feeds by GitHub Actions, without exposing the private feed links on the public site.</p>
+          <div class="calendar-meta" id="calendarMeta">Loading current availability...</div>
+          <div class="calendar-shell" id="calendarShell">
+            <div class="calendar-state">
+              <h3>Calendar data is not ready yet</h3>
+              <p>The page is waiting for the generated availability data file. Once the workflow runs, this section will switch to a monthly calendar automatically.</p>
+              <div class="notice">
+                If you have just uploaded the files, the first scheduled update may take a few hours unless you run the workflow manually in GitHub.
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="stack">
+          <div class="card">
+            <h2>How this page works</h2>
+            <ul>
+              <li>All availability buttons on the homepage versions now point here.</li>
+              <li>The workflow reads both private feeds server-side and writes a public availability snapshot.</li>
+              <li>The official Airbnb and Booking.com pages remain the final booking checkout pages.</li>
+            </ul>
+          </div>
+          <div class="card">
+            <h2>Need a quick answer?</h2>
+            <p class="muted">If you want to confirm dates manually, WhatsApp is still the fastest option.</p>
+            <div class="button-row">
+              <a href="https://wa.me/36317881744" target="_blank" rel="noopener noreferrer" class="btn btn-primary">Message on WhatsApp</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="platforms">
+      <div class="container">
+        <h2>Booking options</h2>
+        <p class="muted">Use the platform you prefer for exact live dates and reservation checkout.</p>
+        <div class="platform-grid">
+          <div class="platform-card">
+            <h3>Airbnb</h3>
+            <p>Check live dates and complete your stay securely on Airbnb.</p>
+            <div class="button-row">
+              <a href="https://www.airbnb.com/rooms/1548799735197050171" target="_blank" rel="noopener noreferrer" class="btn btn-primary">Open Airbnb</a>
+            </div>
+          </div>
+          <div class="platform-card">
+            <h3>Booking.com</h3>
+            <p>Use Booking.com to review current dates and reserve through that platform.</p>
+            <div class="button-row">
+              <a href="https://www.booking.com/hotel/es/casa-miramar-salobrena-salobrena.en-gb.html" target="_blank" rel="noopener noreferrer" class="btn btn-primary">Open Booking.com</a>
+            </div>
+          </div>
+          <div class="platform-card">
+            <h3>Direct support</h3>
+            <p>If you want to ask about dates before booking, send a message directly on WhatsApp.</p>
+            <div class="button-row">
+              <a href="https://wa.me/36317881744" target="_blank" rel="noopener noreferrer" class="btn btn-primary">Open WhatsApp</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container">SierraMar Salobrena · Availability page</div>
+  </footer>
+
+  <script>
+    (function () {
+      const calendarShell = document.getElementById('calendarShell');
+      const calendarMeta = document.getElementById('calendarMeta');
+      const monthFormatter = new Intl.DateTimeFormat('en-US', { month: 'long', year: 'numeric' });
+      const dateFormatter = new Intl.DateTimeFormat('en-GB', { day: '2-digit', month: 'short', year: 'numeric' });
+      const weekDays = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
+      const monthsToShow = 6;
+
+      function formatDateKey(date) {
+        return date.toISOString().slice(0, 10);
+      }
+
+      function firstDayOffset(date) {
+        return (date.getDay() + 6) % 7;
+      }
+
+      function createDayCell(text, className) {
+        return '<div class="day-cell ' + className + '">' + text + '</div>';
+      }
+
+      function renderMonth(monthDate, blockedSet, todayKey) {
+        const year = monthDate.getFullYear();
+        const month = monthDate.getMonth();
+        const firstDate = new Date(year, month, 1);
+        const lastDate = new Date(year, month + 1, 0);
+        const totalDays = lastDate.getDate();
+        const offset = firstDayOffset(firstDate);
+
+        let weekdayMarkup = '';
+        for (const label of weekDays) {
+          weekdayMarkup += '<div class="weekday">' + label + '</div>';
+        }
+
+        let dayMarkup = '';
+        for (let index = 0; index < offset; index += 1) {
+          dayMarkup += createDayCell('', 'is-empty');
+        }
+
+        for (let day = 1; day <= totalDays; day += 1) {
+          const currentDate = new Date(year, month, day);
+          const key = formatDateKey(currentDate);
+          let state = 'available';
+
+          if (key < todayKey) {
+            state = 'past';
+          } else if (blockedSet.has(key)) {
+            state = 'blocked';
+          }
+
+          const isToday = key === todayKey ? ' today' : '';
+          dayMarkup += createDayCell(day, state + isToday);
+        }
+
+        return '' +
+          '<div class="month-card">' +
+            '<h3 class="month-title">' + monthFormatter.format(firstDate) + '</h3>' +
+            '<div class="weekday-row">' + weekdayMarkup + '</div>' +
+            '<div class="day-grid">' + dayMarkup + '</div>' +
+          '</div>';
+      }
+
+      function renderCalendar(data) {
+        const blockedSet = new Set(Array.isArray(data.blockedDates) ? data.blockedDates : []);
+        const today = new Date();
+        const todayKey = formatDateKey(new Date(today.getFullYear(), today.getMonth(), today.getDate()));
+        const startMonth = new Date(today.getFullYear(), today.getMonth(), 1);
+
+        let monthMarkup = '';
+        for (let index = 0; index < monthsToShow; index += 1) {
+          const monthDate = new Date(startMonth.getFullYear(), startMonth.getMonth() + index, 1);
+          monthMarkup += renderMonth(monthDate, blockedSet, todayKey);
+        }
+
+        calendarShell.innerHTML =
+          '<div class="legend">' +
+            '<span class="legend-item"><span class="legend-swatch available"></span>Available</span>' +
+            '<span class="legend-item"><span class="legend-swatch blocked"></span>Booked</span>' +
+            '<span class="legend-item"><span class="legend-swatch past"></span>Past</span>' +
+          '</div>' +
+          '<div class="month-grid">' + monthMarkup + '</div>';
+
+        if (data.generatedAt) {
+          const generatedAt = new Date(data.generatedAt);
+          calendarMeta.textContent = 'Last updated: ' + dateFormatter.format(generatedAt) + ' · Sources: Airbnb and Booking.com';
+        } else {
+          calendarMeta.textContent = 'Availability loaded.';
+        }
+      }
+
+      function renderError(message) {
+        calendarMeta.textContent = message;
+        calendarShell.innerHTML =
+          '<div class="calendar-state">' +
+            '<h3>Availability could not be loaded</h3>' +
+            '<p>' + message + '</p>' +
+            '<div class="notice">Use Airbnb or Booking.com below for the latest live dates until the data file is available.</div>' +
+          '</div>';
+      }
+
+      async function loadAvailability() {
+        try {
+          const response = await fetch('availability-data.json', { cache: 'no-store' });
+          if (!response.ok) {
+            throw new Error('The availability data file is not available yet.');
+          }
+
+          const data = await response.json();
+          if (!Array.isArray(data.blockedDates)) {
+            throw new Error('The availability data file is invalid.');
+          }
+
+          renderCalendar(data);
+        } catch (error) {
+          renderError(error.message || 'The availability calendar could not be loaded.');
+        }
+      }
+
+      loadAvailability();
+    })();
+  </script>
+</body>
+</html>

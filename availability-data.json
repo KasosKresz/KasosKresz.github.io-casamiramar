@@ -1,0 +1,10 @@
+{
+  "generatedAt": null,
+  "rangeStart": null,
+  "rangeEnd": null,
+  "blockedDates": [],
+  "sources": [
+    "airbnb",
+    "booking"
+  ]
+}
