@@ -465,7 +465,7 @@
       const bookingRequestLink = document.getElementById('bookingRequestLink');
       const quickWhatsAppLink = document.getElementById('quickWhatsAppLink');
       const clearSelectionButton = document.getElementById('clearSelectionButton');
-      const monthFormatter = new Intl.DateTimeFormat('en-US', { month: 'long', year: 'numeric' });
+      const monthNames = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
       const prettyDateFormatter = new Intl.DateTimeFormat('en-GB', { day: '2-digit', month: 'short', year: 'numeric' });
       const metaDateFormatter = new Intl.DateTimeFormat('en-GB', { day: '2-digit', month: 'short', year: 'numeric', hour: '2-digit', minute: '2-digit' });
       const weekDays = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
@@ -478,17 +478,26 @@
         data: null
       };
 
+      function pad(value) {
+        return String(value).padStart(2, '0');
+      }
+
       function formatDateKey(date) {
-        return date.toISOString().slice(0, 10);
+        return date.getUTCFullYear() + '-' + pad(date.getUTCMonth() + 1) + '-' + pad(date.getUTCDate());
+      }
+
+      function formatLocalDateKey(date) {
+        return date.getFullYear() + '-' + pad(date.getMonth() + 1) + '-' + pad(date.getDate());
       }
 
       function parseDateKey(value) {
-        return new Date(value + 'T00:00:00');
+        const parts = value.split('-').map(Number);
+        return new Date(Date.UTC(parts[0], parts[1] - 1, parts[2]));
       }
 
       function addDays(dateKey, days) {
         const date = parseDateKey(dateKey);
-        date.setDate(date.getDate() + days);
+        date.setUTCDate(date.getUTCDate() + days);
         return formatDateKey(date);
       }
 
@@ -499,7 +508,7 @@
       }
 
       function firstDayOffset(date) {
-        return (date.getDay() + 6) % 7;
+        return (date.getUTCDay() + 6) % 7;
       }
 
       function isPast(dateKey) {
@@ -590,11 +599,11 @@
       }
 
       function renderMonth(monthDate) {
-        const year = monthDate.getFullYear();
-        const month = monthDate.getMonth();
-        const firstDate = new Date(year, month, 1);
-        const lastDate = new Date(year, month + 1, 0);
-        const totalDays = lastDate.getDate();
+        const year = monthDate.getUTCFullYear();
+        const month = monthDate.getUTCMonth();
+        const firstDate = new Date(Date.UTC(year, month, 1));
+        const lastDate = new Date(Date.UTC(year, month + 1, 0));
+        const totalDays = lastDate.getUTCDate();
         const offset = firstDayOffset(firstDate);
 
         let weekdayMarkup = '';
@@ -608,7 +617,7 @@
         }
 
         for (let day = 1; day <= totalDays; day += 1) {
-          const currentDate = new Date(year, month, day);
+          const currentDate = new Date(Date.UTC(year, month, day));
           const key = formatDateKey(currentDate);
           const isTodayClass = key === state.todayKey ? ' today' : '';
 
@@ -641,7 +650,7 @@
 
         return '' +
           '<div class="month-card">' +
-            '<h3 class="month-title">' + monthFormatter.format(firstDate) + '</h3>' +
+            '<h3 class="month-title">' + monthNames[month] + ' ' + year + '</h3>' +
             '<div class="weekday-row">' + weekdayMarkup + '</div>' +
             '<div class="day-grid">' + dayMarkup + '</div>' +
           '</div>';
@@ -682,11 +691,11 @@
 
       function renderCalendar() {
         const today = new Date();
-        state.todayKey = formatDateKey(new Date(today.getFullYear(), today.getMonth(), today.getDate()));
+        state.todayKey = formatLocalDateKey(today);
 
         let monthMarkup = '';
         for (let index = 0; index < monthsToShow; index += 1) {
-          const monthDate = new Date(today.getFullYear(), today.getMonth() + index, 1);
+          const monthDate = new Date(Date.UTC(today.getFullYear(), today.getMonth() + index, 1));
           monthMarkup += renderMonth(monthDate);
         }
 
