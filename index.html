@@ -983,7 +983,7 @@
       });
 
       try {
-        const url = 'https://api.open-meteo.com/v1/forecast?latitude=36.7437&longitude=-3.5872&current=temperature_2m,weather_code,is_day&timezone=Europe%2FMadrid&forecast_days=1';
+        const url = 'https://api.open-meteo.com/v1/forecast?latitude=36.7437&longitude=-3.5872&current=time,temperature_2m,weather_code&daily=sunrise,sunset&timezone=Europe%2FMadrid&forecast_days=1';
         const res = await fetch(url);
         if (!res.ok) throw new Error('Weather request failed');
         const data = await res.json();
@@ -992,7 +992,10 @@
 
         const temp = Math.round(current.temperature_2m);
         const code = Number(current.weather_code);
-        const isDay = Number(current.is_day) === 1;
+        const sunrise = data && data.daily && Array.isArray(data.daily.sunrise) ? data.daily.sunrise[0] : null;
+        const sunset = data && data.daily && Array.isArray(data.daily.sunset) ? data.daily.sunset[0] : null;
+        const currentTime = typeof current.time === 'string' ? current.time : null;
+        const isDay = Boolean(currentTime && sunrise && sunset && currentTime >= sunrise && currentTime < sunset);
         const labels = weatherCodeMap[code] || ['Current weather', 'Weather', 'Weather'];
         const label = isDay ? labels[1] : labels[2];
 
