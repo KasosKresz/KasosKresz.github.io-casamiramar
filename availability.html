@@ -3,17 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
-<!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-DMTB56PDW2"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'G-DMTB56PDW2');
-</script>
-  <title>Availability Calendar | SierraMar Salobrena</title>
+<title>Availability Calendar | SierraMar Salobrena</title>
   <meta name="description" content="View the SierraMar availability calendar, highlight your stay dates, and continue to a booking request with the selected dates already filled in." />
   <meta name="robots" content="index,follow" />
   <link rel="canonical" href="https://salobrena.eu/availability.html" />
@@ -370,6 +360,8 @@
       }
     }
   </style>
+  <link rel="stylesheet" href="assets/site-consent.css" />
+  <script defer src="assets/site-consent.js" data-ga-id="G-DMTB56PDW2" data-privacy-url="privacy-policy.html" data-cookies-url="cookie-policy.html" data-legal-url="legal-notice.html"></script>
 </head>
 <body>
   <header>
@@ -454,6 +446,12 @@
 
   <footer>
     <div class="container">SierraMar Salobrena - Availability page</div>
+      <div class="site-legal-links">
+      <a href="privacy-policy.html">Privacy Policy</a>
+      <a href="cookie-policy.html">Cookie Policy</a>
+      <a href="legal-notice.html">Legal Notice</a>
+      <button type="button" onclick="window.SierraMarConsent && window.SierraMarConsent.open()">Cookie settings</button>
+    </div>
   </footer>
 
   <script>

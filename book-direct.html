@@ -3,16 +3,6 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  
-<!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-DMTB56PDW2"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'G-DMTB56PDW2');
-</script>
 <title>Book Direct | SierraMar Salobrena</title>
   <meta name="description" content="Request a direct booking at SierraMar Salobrena. Send your dates and guest details, then receive manual confirmation and a Stripe payment link or invoice." />
   <meta name="robots" content="index,follow" />
@@ -304,6 +294,8 @@
       }
     }
   </style>
+  <link rel="stylesheet" href="assets/site-consent.css" />
+  <script defer src="assets/site-consent.js" data-ga-id="G-DMTB56PDW2" data-privacy-url="privacy-policy.html" data-cookies-url="cookie-policy.html" data-legal-url="legal-notice.html"></script>
 </head>
 <body>
   <header>
@@ -491,6 +483,12 @@
 
   <footer>
     <div class="container">SierraMar Salobrena &middot; Direct booking requests</div>
+      <div class="site-legal-links">
+      <a href="privacy-policy.html">Privacy Policy</a>
+      <a href="cookie-policy.html">Cookie Policy</a>
+      <a href="legal-notice.html">Legal Notice</a>
+      <button type="button" onclick="window.SierraMarConsent && window.SierraMarConsent.open()">Cookie settings</button>
+    </div>
   </footer>
 
   <script>
