@@ -915,6 +915,10 @@
       const icon = document.getElementById('weatherIcon');
       const text = document.getElementById('weatherText');
 
+      if (!badge || !icon || !text) {
+        return;
+      }
+
       const weatherCodeMap = {
         0: ['Clear', 'Sunny', 'Clear'],
         1: ['Mainly clear', 'Mainly sunny', 'Mainly clear'],
@@ -946,7 +950,7 @@
         99: ['Thunderstorm with hail', 'Storm', 'Storm']
       };
 
-      const getIcon = (code, isDay) => {
+      function getIcon(code, isDay) {
         if ([0, 1].includes(code)) return isDay ? '\u2600\uFE0F' : '\uD83C\uDF19';
         if ([2, 3].includes(code)) return isDay ? '\u26C5' : '\u2601\uFE0F';
         if ([45, 48].includes(code)) return '\uD83C\uDF2B\uFE0F';
@@ -955,17 +959,16 @@
         if ([71, 73, 75, 77, 85, 86].includes(code)) return '\u2744\uFE0F';
         if ([95, 96, 99].includes(code)) return '\u26C8\uFE0F';
         return isDay ? '\u2600\uFE0F' : '\uD83C\uDF19';
-      };
+      }
 
-      await new Promise((resolve) => {
-        const queueWeatherLoad = () => {
+      await new Promise(function (resolve) {
+        function queueWeatherLoad() {
           if ('requestIdleCallback' in window) {
             window.requestIdleCallback(resolve, { timeout: 2000 });
             return;
           }
-
           window.setTimeout(resolve, 1200);
-        };
+        }
 
         if (document.readyState === 'complete') {
           queueWeatherLoad();
@@ -976,8 +979,9 @@
 
       try {
         const url = 'https://api.open-meteo.com/v1/forecast?latitude=36.7437&longitude=-3.5872&current=time,temperature_2m,weather_code&daily=sunrise,sunset&timezone=Europe%2FMadrid&forecast_days=1';
-        const res = await fetch(url);
+        const res = await fetch(url, { cache: 'no-store' });
         if (!res.ok) throw new Error('Weather request failed');
+
         const data = await res.json();
         const current = data && data.current ? data.current : null;
         if (!current) throw new Error('No current weather data');
@@ -997,6 +1001,7 @@
         badge.classList.add('ready');
         badge.title = 'Live weather for Salobre\u00F1a';
       } catch (error) {
+        console.error('Weather load failed', error);
         icon.textContent = '\uD83C\uDF24\uFE0F';
         text.textContent = 'Salobre\u00F1a weather unavailable';
         badge.classList.remove('loading');
