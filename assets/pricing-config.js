@@ -1,6 +1,6 @@
 window.SierraMarPricing = {
   currency: 'EUR',
-  cleaningFee: 70,
+  cleaningFee:,
   defaultMinStay: 2,
   oneNightMultiplier: 2,
 
@@ -36,33 +36,33 @@ window.SierraMarPricing = {
       name: 'Low season',
       start: '2026-01-01',
       end: '2026-03-31',
-      nightlyRates: { '2': 150, '4': 140 },
-      weeklyRate: 900,
-      monthlyRate: 3000
+      nightlyRates: { '2': 60, '4': 55 },
+      weeklyRate: 350,
+      monthlyRate: 1200
     },
     {
       name: 'Mid season',
       start: '2026-04-01',
-      end: '2026-06-15',
-      nightlyRates: { '2': 185, '4': 170 },
-      weeklyRate: 1150,
-      monthlyRate: 3900
+      end: '2026-05-31',
+      nightlyRates: { '2': 80, '4': 75 },
+      weeklyRate: 490,
+      monthlyRate: 1700
     },
     {
       name: 'High season',
-      start: '2026-06-16',
-      end: '2026-09-15',
-      nightlyRates: { '2': 250, '4': 230 },
-      weeklyRate: 1600,
-      monthlyRate: 5600
+      start: '2026-06-01',
+      end: '2026-08-31',
+      nightlyRates: { '2': 160, '4': 150 },
+      weeklyRate: 1200,
+      monthlyRate: 4000
     },
     {
       name: 'Autumn season',
-      start: '2026-09-16',
+      start: '2026-09-01',
       end: '2026-12-31',
-      nightlyRates: { '2': 165, '4': 150 },
-      weeklyRate: 980,
-      monthlyRate: 3300
+      nightlyRates: { '2': 100, '4': 90 },
+      weeklyRate: 650,
+      monthlyRate: 1800
     }
   ]
 };
