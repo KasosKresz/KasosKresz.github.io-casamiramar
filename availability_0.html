@@ -1,0 +1,761 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Availability Calendar | SierraMar Salobrena</title>
+  <meta name="description" content="View the SierraMar availability calendar, highlight your stay dates, and continue to a booking request with the selected dates already filled in." />
+  <meta name="robots" content="index,follow" />
+  <link rel="canonical" href="https://salobrena.eu/availability.html" />
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Availability Calendar | SierraMar Salobrena" />
+  <meta property="og:description" content="Browse the full SierraMar calendar and continue with a booking request using your selected dates." />
+  <meta property="og:url" content="https://salobrena.eu/availability.html" />
+  <meta property="og:image" content="https://salobrena.eu/hero_view-1600.jpg" />
+  <meta property="og:image:alt" content="SierraMar in Salobrena with sea and mountain views" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Availability Calendar | SierraMar Salobrena" />
+  <meta name="twitter:description" content="Highlight your dates on the SierraMar calendar and continue with a booking request." />
+  <meta name="twitter:image" content="https://salobrena.eu/hero_view-1600.jpg" />
+  <meta name="theme-color" content="#f7f4ef" />
+  <style>
+    :root{
+      --bg:#f7f4ef;
+      --card:#ffffff;
+      --text:#24343d;
+      --muted:#667780;
+      --accent:#b77743;
+      --accent-dark:#955b2d;
+      --line:rgba(36,52,61,0.08);
+      --shadow:0 14px 35px rgba(0,0,0,0.08);
+      --radius:24px;
+      --max:1280px;
+      --available:#eef6ef;
+      --available-border:#d7e7d8;
+      --blocked:#f2d9d5;
+      --blocked-text:#7d2d1f;
+      --past:#f2efe9;
+      --past-text:#a19382;
+      --selected:#d8e8f2;
+      --selected-strong:#6f94b0;
+      --selected-text:#1d435d;
+    }
+
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{
+      margin:0;
+      font-family:Arial, Helvetica, sans-serif;
+      background:
+        linear-gradient(180deg, rgba(244,237,228,0.92), rgba(247,244,239,0.98) 260px),
+        var(--bg);
+      color:var(--text);
+      line-height:1.6;
+    }
+    a{color:inherit;text-decoration:none}
+    .container{width:min(calc(100% - 32px),var(--max));margin:0 auto}
+    header{
+      position:sticky;
+      top:0;
+      z-index:20;
+      background:rgba(247,244,239,0.92);
+      backdrop-filter:blur(10px);
+      border-bottom:1px solid var(--line);
+    }
+    .nav{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:20px;
+      padding:14px 0;
+    }
+    .brand{font-size:1.1rem;font-weight:700;white-space:nowrap}
+    .nav-links{
+      display:flex;
+      flex-wrap:wrap;
+      gap:18px;
+      color:var(--muted);
+      font-size:0.96rem;
+      justify-content:flex-end;
+      align-items:center;
+    }
+    .hero{padding:30px 0 18px}
+    .hero-card,
+    .card{
+      background:var(--card);
+      border-radius:32px;
+      box-shadow:var(--shadow);
+      padding:32px;
+    }
+    .eyebrow{
+      display:inline-block;
+      margin-bottom:14px;
+      padding:7px 12px;
+      border-radius:999px;
+      background:#f1e7db;
+      color:#7a542f;
+      font-size:0.9rem;
+      font-weight:700;
+    }
+    h1,h2,h3{
+      line-height:1.15;
+      margin:0 0 14px;
+    }
+    h1{font-size:clamp(2rem,4vw,4rem)}
+    h2{font-size:clamp(1.45rem,2.4vw,2.2rem)}
+    h3{font-size:1.08rem}
+    p{margin:0 0 14px}
+    .muted{color:var(--muted)}
+    .section{padding:18px 0 36px}
+    .layout{
+      display:grid;
+      grid-template-columns:minmax(0,1.7fr) minmax(320px,0.8fr);
+      gap:24px;
+      align-items:start;
+    }
+    .calendar-meta{
+      margin:0 0 16px;
+      color:var(--muted);
+      font-size:0.95rem;
+    }
+    .calendar-shell{
+      border-radius:24px;
+      border:1px solid var(--line);
+      background:#f9f6f1;
+      overflow:hidden;
+      min-height:620px;
+    }
+    .calendar-state{
+      min-height:620px;
+      padding:28px;
+      display:flex;
+      flex-direction:column;
+      justify-content:center;
+    }
+    .legend{
+      display:flex;
+      flex-wrap:wrap;
+      gap:12px;
+      padding:24px 24px 0;
+    }
+    .legend-item{
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      color:var(--muted);
+      font-size:0.92rem;
+    }
+    .legend-swatch{
+      width:16px;
+      height:16px;
+      border-radius:6px;
+      border:1px solid var(--line);
+      background:#fff;
+    }
+    .legend-swatch.available{background:var(--available)}
+    .legend-swatch.blocked{background:var(--blocked)}
+    .legend-swatch.selected{background:var(--selected)}
+    .legend-swatch.past{background:var(--past)}
+    .month-grid{
+      display:grid;
+      grid-template-columns:repeat(3,minmax(0,1fr));
+      gap:18px;
+      padding:24px;
+    }
+    .month-card{
+      background:#fff;
+      border:1px solid var(--line);
+      border-radius:20px;
+      padding:18px;
+    }
+    .month-title{
+      margin:0 0 14px;
+      font-size:1.08rem;
+    }
+    .weekday-row,
+    .day-grid{
+      display:grid;
+      grid-template-columns:repeat(7,minmax(0,1fr));
+      gap:6px;
+    }
+    .weekday{
+      text-align:center;
+      color:var(--muted);
+      font-size:0.74rem;
+      font-weight:700;
+      padding-bottom:6px;
+      text-transform:uppercase;
+      letter-spacing:0.03em;
+    }
+    .day-cell{
+      min-height:40px;
+      border-radius:12px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      font-size:0.92rem;
+      border:1px solid var(--line);
+      background:#fff;
+    }
+    .day-cell.is-empty{
+      border-color:transparent;
+      background:transparent;
+    }
+    .day-button{
+      width:100%;
+      min-height:40px;
+      border-radius:12px;
+      border:1px solid var(--line);
+      background:#fff;
+      color:var(--text);
+      font:inherit;
+      cursor:pointer;
+      transition:0.16s ease;
+    }
+    .day-button:hover{
+      border-color:var(--accent);
+      transform:translateY(-1px);
+    }
+    .day-button.available{
+      background:var(--available);
+      border-color:var(--available-border);
+    }
+    .day-button.selected,
+    .day-button.in-range{
+      background:var(--selected);
+      border-color:var(--selected-strong);
+      color:var(--selected-text);
+    }
+    .day-button.range-start,
+    .day-button.range-end{
+      background:var(--selected-strong);
+      border-color:var(--selected-strong);
+      color:#fff;
+      font-weight:700;
+    }
+    .day-cell.blocked{
+      background:var(--blocked);
+      color:var(--blocked-text);
+      font-weight:700;
+    }
+    .day-cell.past{
+      background:var(--past);
+      color:var(--past-text);
+    }
+    .day-button.today,
+    .day-cell.today{
+      outline:2px solid var(--accent);
+      outline-offset:1px;
+    }
+    .side-panel{
+      position:sticky;
+      top:88px;
+      display:grid;
+      gap:18px;
+    }
+    .selection-card{
+      padding:28px;
+    }
+    .selection-summary{
+      padding:16px 18px;
+      border-radius:18px;
+      background:#f3eee6;
+      color:var(--text);
+      border:1px solid var(--line);
+      margin:16px 0 0;
+    }
+    .selection-note{
+      min-height:24px;
+      color:var(--muted);
+      margin-top:12px;
+      font-size:0.95rem;
+    }
+    .selection-list{
+      margin:16px 0 0;
+      padding-left:18px;
+    }
+    .selection-list li{margin-bottom:8px}
+    .button-row{
+      display:flex;
+      flex-wrap:wrap;
+      gap:12px;
+      margin-top:18px;
+    }
+    .btn{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      padding:12px 18px;
+      border-radius:999px;
+      font-weight:700;
+      transition:0.2s ease;
+      border:none;
+      cursor:pointer;
+    }
+    .btn-primary{background:var(--accent);color:#fff}
+    .btn-primary:hover{background:var(--accent-dark)}
+    .btn-secondary{
+      background:#f7f1e8;
+      color:var(--text);
+      border:1px solid rgba(36,52,61,0.08);
+    }
+    .btn-link-disabled{
+      opacity:0.5;
+      pointer-events:none;
+    }
+    .platform-links{
+      display:grid;
+      gap:12px;
+      margin-top:18px;
+    }
+    .platform-link{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:12px;
+      padding:14px 16px;
+      border-radius:18px;
+      border:1px solid var(--line);
+      background:#fff;
+    }
+    footer{
+      padding:20px 0 40px;
+      color:var(--muted);
+      font-size:0.95rem;
+    }
+    @media (max-width:1220px){
+      .month-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+    }
+    @media (max-width:980px){
+      .layout{
+        grid-template-columns:1fr;
+      }
+      .nav{
+        flex-direction:column;
+        align-items:flex-start;
+      }
+      .nav-links{
+        justify-content:flex-start;
+      }
+      .side-panel{
+        position:static;
+      }
+    }
+    @media (max-width:680px){
+      .hero-card,
+      .card{
+        padding:22px;
+      }
+      .calendar-shell,
+      .calendar-state{
+        min-height:520px;
+      }
+      .legend,
+      .month-grid{
+        padding-left:18px;
+        padding-right:18px;
+      }
+      .month-grid{
+        grid-template-columns:1fr;
+      }
+    }
+  </style>
+  <link rel="stylesheet" href="assets/site-consent.css" />
+  <script defer src="assets/site-consent.js" data-ga-id="G-DMTB56PDW2" data-privacy-url="privacy-policy.html" data-cookies-url="cookie-policy.html" data-legal-url="legal-notice.html"></script>
+</head>
+<body>
+  <header>
+    <div class="container nav">
+      <a href="index.html" class="brand">SierraMar</a>
+      <nav class="nav-links">
+        <a href="index.html">Home</a>
+        <a href="activities.html">Activities</a>
+        <a href="book-direct.html">Book direct</a>
+        <a href="house-info.html">House info</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="container">
+        <div class="hero-card">
+          <div class="eyebrow">Availability calendar</div>
+          <h1>Select your dates and continue with a booking request</h1>
+          <p>Choose your stay on the calendar below. Available days can be highlighted, booked days are blocked, and your selected dates can be sent directly into the booking request page.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="calendar">
+      <div class="container layout">
+        <div class="card">
+          <h2>Full year calendar</h2>
+          <p class="calendar-meta" id="calendarMeta">Loading current availability...</p>
+          <div class="calendar-shell" id="calendarShell">
+            <div class="calendar-state">
+              <h3>Calendar data is not ready yet</h3>
+              <p>The page is waiting for the generated availability data file. Once the workflow runs, this section will switch to a full year calendar automatically.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="side-panel">
+          <div class="card selection-card">
+            <h2>Your selected stay</h2>
+            <p class="muted">Click one available day for a one-night stay, or click a start day and then a later end day to extend the selection.</p>
+            <div class="selection-summary" id="selectionSummary">
+              Select your dates on the calendar to prepare a booking request.
+            </div>
+            <div class="selection-note" id="selectionNote"></div>
+            <div class="button-row">
+              <a href="book-direct.html" class="btn btn-primary btn-link-disabled" id="bookingRequestLink">Continue to booking request</a>
+              <a href="https://wa.me/36317881744" target="_blank" rel="noopener noreferrer" class="btn btn-secondary btn-link-disabled" id="quickWhatsAppLink">Quick WhatsApp request</a>
+            </div>
+            <div class="button-row">
+              <button type="button" class="btn btn-secondary" id="clearSelectionButton">Clear selection</button>
+            </div>
+            <ul class="selection-list">
+              <li>Green days are available.</li>
+              <li>Pink days are already booked.</li>
+              <li>Blue days are your selected stay.</li>
+            </ul>
+          </div>
+
+          <div class="card">
+            <h3>Other booking options</h3>
+            <div class="platform-links">
+              <a class="platform-link" href="https://www.airbnb.com/rooms/1548799735197050171" target="_blank" rel="noopener noreferrer">
+                <span>Airbnb</span>
+                <span>Open</span>
+              </a>
+              <a class="platform-link" href="https://www.booking.com/hotel/es/casa-miramar-salobrena-salobrena.en-gb.html" target="_blank" rel="noopener noreferrer">
+                <span>Booking.com</span>
+                <span>Open</span>
+              </a>
+              <a class="platform-link" href="https://wa.me/36317881744" target="_blank" rel="noopener noreferrer">
+                <span>WhatsApp</span>
+                <span>Message</span>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container">SierraMar Salobrena - Availability page</div>
+      <div class="site-legal-links">
+      <a href="privacy-policy.html">Privacy Policy</a>
+      <a href="cookie-policy.html">Cookie Policy</a>
+      <a href="legal-notice.html">Legal Notice</a>
+      <button type="button" onclick="window.SierraMarConsent && window.SierraMarConsent.open()">Cookie settings</button>
+    </div>
+  </footer>
+
+  <script>
+    (function () {
+      const calendarShell = document.getElementById('calendarShell');
+      const calendarMeta = document.getElementById('calendarMeta');
+      const selectionSummary = document.getElementById('selectionSummary');
+      const selectionNote = document.getElementById('selectionNote');
+      const bookingRequestLink = document.getElementById('bookingRequestLink');
+      const quickWhatsAppLink = document.getElementById('quickWhatsAppLink');
+      const clearSelectionButton = document.getElementById('clearSelectionButton');
+      const monthNames = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+      const prettyDateFormatter = new Intl.DateTimeFormat('en-GB', { day: '2-digit', month: 'short', year: 'numeric' });
+      const metaDateFormatter = new Intl.DateTimeFormat('en-GB', { day: '2-digit', month: 'short', year: 'numeric', hour: '2-digit', minute: '2-digit' });
+      const weekDays = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
+      const monthsToShow = 12;
+      const state = {
+        blockedDates: new Set(),
+        selectionStart: null,
+        selectionEnd: null,
+        todayKey: null,
+        data: null
+      };
+
+      function pad(value) {
+        return String(value).padStart(2, '0');
+      }
+
+      function formatDateKey(date) {
+        return date.getUTCFullYear() + '-' + pad(date.getUTCMonth() + 1) + '-' + pad(date.getUTCDate());
+      }
+
+      function formatLocalDateKey(date) {
+        return date.getFullYear() + '-' + pad(date.getMonth() + 1) + '-' + pad(date.getDate());
+      }
+
+      function parseDateKey(value) {
+        const parts = value.split('-').map(Number);
+        return new Date(Date.UTC(parts[0], parts[1] - 1, parts[2]));
+      }
+
+      function addDays(dateKey, days) {
+        const date = parseDateKey(dateKey);
+        date.setUTCDate(date.getUTCDate() + days);
+        return formatDateKey(date);
+      }
+
+      function nightsBetween(startKey, endKeyExclusive) {
+        const start = parseDateKey(startKey);
+        const end = parseDateKey(endKeyExclusive);
+        return Math.round((end.getTime() - start.getTime()) / 86400000);
+      }
+
+      function firstDayOffset(date) {
+        return (date.getUTCDay() + 6) % 7;
+      }
+
+      function isPast(dateKey) {
+        return dateKey < state.todayKey;
+      }
+
+      function isSelectable(dateKey) {
+        return !isPast(dateKey) && !state.blockedDates.has(dateKey);
+      }
+
+      function dateInSelection(dateKey) {
+        if (!state.selectionStart || !state.selectionEnd) return false;
+        return dateKey >= state.selectionStart && dateKey <= state.selectionEnd;
+      }
+
+      function selectionHasBlockedDates(startKey, endKey) {
+        for (let cursor = startKey; cursor <= endKey; cursor = addDays(cursor, 1)) {
+          if (state.blockedDates.has(cursor)) {
+            return true;
+          }
+        }
+        return false;
+      }
+
+      function updateActionLinks() {
+        if (!state.selectionStart || !state.selectionEnd) {
+          bookingRequestLink.href = 'book-direct.html';
+          quickWhatsAppLink.href = 'https://wa.me/36317881744';
+          bookingRequestLink.classList.add('btn-link-disabled');
+          quickWhatsAppLink.classList.add('btn-link-disabled');
+          return;
+        }
+
+        const checkIn = state.selectionStart;
+        const checkOut = addDays(state.selectionEnd, 1);
+        const nights = nightsBetween(checkIn, checkOut);
+        const requestUrl = 'book-direct.html?checkIn=' + encodeURIComponent(checkIn) + '&checkOut=' + encodeURIComponent(checkOut) + '#request-form';
+        const message = [
+          'Hello SierraMar, I would like to request these dates.',
+          '',
+          'Check-in: ' + checkIn,
+          'Check-out: ' + checkOut,
+          'Nights: ' + nights,
+          '',
+          'Please confirm availability.'
+        ].join('\n');
+
+        bookingRequestLink.href = requestUrl;
+        quickWhatsAppLink.href = 'https://wa.me/36317881744?text=' + encodeURIComponent(message);
+        bookingRequestLink.classList.remove('btn-link-disabled');
+        quickWhatsAppLink.classList.remove('btn-link-disabled');
+      }
+
+      function updateSelectionPanel(noteText) {
+        if (!state.selectionStart || !state.selectionEnd) {
+          selectionSummary.textContent = 'Select your dates on the calendar to prepare a booking request.';
+          selectionNote.textContent = noteText || '';
+          updateActionLinks();
+          return;
+        }
+
+        const checkIn = state.selectionStart;
+        const checkOut = addDays(state.selectionEnd, 1);
+        const nights = nightsBetween(checkIn, checkOut);
+
+        selectionSummary.textContent =
+          'Check-in: ' + prettyDateFormatter.format(parseDateKey(checkIn)) +
+          ' | Check-out: ' + prettyDateFormatter.format(parseDateKey(checkOut)) +
+          ' | Nights: ' + nights;
+        selectionNote.textContent = noteText || 'Selected dates are ready for a booking request.';
+        updateActionLinks();
+      }
+
+      function createEmptyCell() {
+        return '<div class="day-cell is-empty"></div>';
+      }
+
+      function createBlockedCell(day, isTodayClass) {
+        return '<div class="day-cell blocked' + isTodayClass + '">' + day + '</div>';
+      }
+
+      function createPastCell(day, isTodayClass) {
+        return '<div class="day-cell past' + isTodayClass + '">' + day + '</div>';
+      }
+
+      function createAvailableButton(day, dateKey, classes) {
+        return '<button type="button" class="day-button ' + classes + '" data-date="' + dateKey + '">' + day + '</button>';
+      }
+
+      function renderMonth(monthDate) {
+        const year = monthDate.getUTCFullYear();
+        const month = monthDate.getUTCMonth();
+        const firstDate = new Date(Date.UTC(year, month, 1));
+        const lastDate = new Date(Date.UTC(year, month + 1, 0));
+        const totalDays = lastDate.getUTCDate();
+        const offset = firstDayOffset(firstDate);
+
+        let weekdayMarkup = '';
+        for (const label of weekDays) {
+          weekdayMarkup += '<div class="weekday">' + label + '</div>';
+        }
+
+        let dayMarkup = '';
+        for (let index = 0; index < offset; index += 1) {
+          dayMarkup += createEmptyCell();
+        }
+
+        for (let day = 1; day <= totalDays; day += 1) {
+          const currentDate = new Date(Date.UTC(year, month, day));
+          const key = formatDateKey(currentDate);
+          const isTodayClass = key === state.todayKey ? ' today' : '';
+
+          if (isPast(key)) {
+            dayMarkup += createPastCell(day, isTodayClass);
+            continue;
+          }
+
+          if (state.blockedDates.has(key)) {
+            dayMarkup += createBlockedCell(day, isTodayClass);
+            continue;
+          }
+
+          let classes = 'available' + isTodayClass;
+          if (dateInSelection(key)) {
+            classes += ' in-range';
+          }
+          if (key === state.selectionStart) {
+            classes += ' selected range-start';
+          }
+          if (key === state.selectionEnd) {
+            classes += ' selected range-end';
+          }
+          if (state.selectionStart === key && state.selectionEnd === key) {
+            classes += ' selected';
+          }
+
+          dayMarkup += createAvailableButton(day, key, classes);
+        }
+
+        return '' +
+          '<div class="month-card">' +
+            '<h3 class="month-title">' + monthNames[month] + ' ' + year + '</h3>' +
+            '<div class="weekday-row">' + weekdayMarkup + '</div>' +
+            '<div class="day-grid">' + dayMarkup + '</div>' +
+          '</div>';
+      }
+
+      function bindDayButtons() {
+        calendarShell.querySelectorAll('[data-date]').forEach(function (button) {
+          button.addEventListener('click', function () {
+            const selectedDate = button.getAttribute('data-date');
+
+            if (!state.selectionStart || !state.selectionEnd || state.selectionStart === state.selectionEnd) {
+              if (!state.selectionStart) {
+                state.selectionStart = selectedDate;
+                state.selectionEnd = selectedDate;
+                updateSelectionPanel('One-night stay selected. Click a later date if you want to extend it.');
+              } else if (selectedDate < state.selectionStart) {
+                state.selectionStart = selectedDate;
+                state.selectionEnd = selectedDate;
+                updateSelectionPanel('Selection restarted from the earlier date.');
+              } else if (selectionHasBlockedDates(state.selectionStart, selectedDate)) {
+                state.selectionStart = selectedDate;
+                state.selectionEnd = selectedDate;
+                updateSelectionPanel('That range crossed booked dates, so the selection was restarted.');
+              } else {
+                state.selectionEnd = selectedDate;
+                updateSelectionPanel('Selected dates are ready for a booking request.');
+              }
+            } else {
+              state.selectionStart = selectedDate;
+              state.selectionEnd = selectedDate;
+              updateSelectionPanel('Selection restarted. Click a later date if you want to extend it.');
+            }
+
+            renderCalendar();
+          });
+        });
+      }
+
+      function renderCalendar() {
+        const today = new Date();
+        state.todayKey = formatLocalDateKey(today);
+
+        let monthMarkup = '';
+        for (let index = 0; index < monthsToShow; index += 1) {
+          const monthDate = new Date(Date.UTC(today.getFullYear(), today.getMonth() + index, 1));
+          monthMarkup += renderMonth(monthDate);
+        }
+
+        calendarShell.innerHTML =
+          '<div class="legend">' +
+            '<span class="legend-item"><span class="legend-swatch available"></span>Available</span>' +
+            '<span class="legend-item"><span class="legend-swatch blocked"></span>Booked</span>' +
+            '<span class="legend-item"><span class="legend-swatch selected"></span>Selected</span>' +
+            '<span class="legend-item"><span class="legend-swatch past"></span>Past</span>' +
+          '</div>' +
+          '<div class="month-grid">' + monthMarkup + '</div>';
+
+        bindDayButtons();
+
+        if (state.data && state.data.generatedAt) {
+          const generatedAt = new Date(state.data.generatedAt);
+          calendarMeta.textContent = 'Last updated: ' + metaDateFormatter.format(generatedAt) + ' - Sources: Airbnb and Booking.com';
+        } else {
+          calendarMeta.textContent = 'Availability loaded.';
+        }
+      }
+
+      function renderError(message) {
+        calendarMeta.textContent = message;
+        calendarShell.innerHTML =
+          '<div class="calendar-state">' +
+            '<h3>Availability could not be loaded</h3>' +
+            '<p>' + message + '</p>' +
+          '</div>';
+      }
+
+      async function loadAvailability() {
+        try {
+          const response = await fetch('availability-data.json', { cache: 'no-store' });
+          if (!response.ok) {
+            throw new Error('The availability data file is not available yet.');
+          }
+
+          const data = await response.json();
+          if (!Array.isArray(data.blockedDates)) {
+            throw new Error('The availability data file is invalid.');
+          }
+
+          state.data = data;
+          state.blockedDates = new Set(data.blockedDates);
+          renderCalendar();
+          updateSelectionPanel('');
+        } catch (error) {
+          renderError(error.message || 'The availability calendar could not be loaded.');
+          updateSelectionPanel('Use Airbnb or Booking.com if the calendar data is not available yet.');
+        }
+      }
+
+      clearSelectionButton.addEventListener('click', function () {
+        state.selectionStart = null;
+        state.selectionEnd = null;
+        updateSelectionPanel('Selection cleared.');
+        renderCalendar();
+      });
+
+      loadAvailability();
+    })();
+  </script>
+</body>
+</html>
