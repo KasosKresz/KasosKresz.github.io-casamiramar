@@ -1,6 +1,6 @@
 window.SierraMarPricing = {
   currency: 'EUR',
-  cleaningFee: 70,
+  cleaningFee: 20,
   defaultMinStay: 2,
   oneNightMultiplier: 2,
 
