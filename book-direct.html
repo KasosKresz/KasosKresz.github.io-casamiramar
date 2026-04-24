@@ -1,0 +1,799 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Book Direct | SierraMar Salobrena</title>
+  <meta name="description" content="Request a direct booking at SierraMar Salobrena. Send your dates and guest details, then receive manual confirmation and a Stripe payment link or invoice." />
+  <meta name="robots" content="index,follow" />
+  <link rel="canonical" href="https://salobrena.eu/book-direct.html" />
+  <meta name="theme-color" content="#f7f4ef" />
+  <style>
+    :root {
+      --bg: #f7f4ef;
+      --card: #ffffff;
+      --text: #24343d;
+      --muted: #667780;
+      --accent: #b77743;
+      --accent-dark: #955b2d;
+      --line: rgba(36, 52, 61, 0.08);
+      --shadow: 0 14px 35px rgba(0, 0, 0, 0.08);
+      --radius: 24px;
+      --max: 1180px;
+      --ok: #2f6f4f;
+      --ok-bg: #eef7f1;
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      margin: 0;
+      font-family: Arial, Helvetica, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .container {
+      width: min(calc(100% - 32px), var(--max));
+      margin: 0 auto;
+    }
+
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      background: rgba(247, 244, 239, 0.92);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid var(--line);
+    }
+
+    .nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+      padding: 14px 0;
+    }
+
+    .brand {
+      font-size: 1.1rem;
+      font-weight: 700;
+      letter-spacing: 0.2px;
+      white-space: nowrap;
+    }
+
+    .nav-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 18px;
+      color: var(--muted);
+      font-size: 0.96rem;
+    }
+
+    .hero {
+      padding: 34px 0 20px;
+    }
+
+    .hero-card,
+    .card {
+      background: var(--card);
+      border-radius: 28px;
+      box-shadow: var(--shadow);
+    }
+
+    .hero-card {
+      padding: 34px;
+      background: linear-gradient(135deg, rgba(183, 119, 67, 0.12), rgba(255, 255, 255, 0.9));
+      border: 1px solid rgba(183, 119, 67, 0.14);
+    }
+
+    .eyebrow {
+      display: inline-block;
+      margin-bottom: 12px;
+      padding: 7px 12px;
+      border-radius: 999px;
+      background: #fff;
+      border: 1px solid var(--line);
+      color: var(--muted);
+      font-size: 0.9rem;
+    }
+
+    h1, h2, h3 {
+      line-height: 1.15;
+      margin: 0 0 14px;
+    }
+
+    h1 { font-size: clamp(2.2rem, 4vw, 4rem); }
+    h2 { font-size: clamp(1.45rem, 2.5vw, 2rem); }
+    p { margin: 0 0 14px; }
+
+    .section {
+      padding: 18px 0;
+    }
+
+    .grid-3 {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 20px;
+    }
+
+    .grid-2 {
+      display: grid;
+      grid-template-columns: 1.35fr 0.85fr;
+      gap: 22px;
+    }
+
+    .card {
+      padding: 28px;
+    }
+
+    .card ul {
+      margin: 0;
+      padding-left: 18px;
+    }
+
+    .card li {
+      margin-bottom: 8px;
+    }
+
+    .badge {
+      display: inline-block;
+      margin: 0 8px 10px 0;
+      padding: 8px 12px;
+      border-radius: 999px;
+      background: #f3eee6;
+      color: #5c4a35;
+      font-size: 0.92rem;
+    }
+
+    .muted { color: var(--muted); }
+
+    .notice {
+      padding: 14px 16px;
+      border-radius: 18px;
+      background: var(--ok-bg);
+      border: 1px solid rgba(47, 111, 79, 0.16);
+      color: var(--ok);
+    }
+
+    .button-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 18px;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 12px 18px;
+      border-radius: 999px;
+      font-weight: 700;
+      border: none;
+      cursor: pointer;
+      font: inherit;
+    }
+
+    .btn-primary {
+      background: var(--accent);
+      color: #fff;
+    }
+
+    .btn-primary:hover {
+      background: var(--accent-dark);
+    }
+
+    .btn-secondary {
+      background: #fff;
+      color: var(--text);
+      border: 1px solid var(--line);
+    }
+
+    form {
+      display: grid;
+      gap: 16px;
+    }
+
+    .form-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 16px;
+    }
+
+    label {
+      display: grid;
+      gap: 7px;
+      font-weight: 700;
+      font-size: 0.96rem;
+    }
+
+    input,
+    select,
+    textarea {
+      width: 100%;
+      padding: 12px 14px;
+      border-radius: 16px;
+      border: 1px solid rgba(36, 52, 61, 0.12);
+      background: #fff;
+      color: var(--text);
+      font: inherit;
+    }
+
+    textarea {
+      min-height: 120px;
+      resize: vertical;
+    }
+
+    .check {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      font-weight: 400;
+      color: var(--muted);
+    }
+
+    .check input {
+      width: 18px;
+      height: 18px;
+      margin-top: 2px;
+      padding: 0;
+    }
+
+    .summary {
+      margin-top: 8px;
+      padding: 14px 16px;
+      border-radius: 18px;
+      background: #f8f3ec;
+      color: var(--muted);
+    }
+
+    .status {
+      min-height: 24px;
+      color: var(--muted);
+      font-size: 0.95rem;
+    }
+
+    .alt-links {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 18px;
+    }
+
+    footer {
+      padding: 24px 0 40px;
+      color: var(--muted);
+      font-size: 0.95rem;
+    }
+
+    @media (max-width: 950px) {
+      .grid-3,
+      .grid-2,
+      .alt-links,
+      .form-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .nav {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+    }
+
+    @media (max-width: 640px) {
+      .hero-card,
+      .card {
+        padding: 22px;
+      }
+    }
+  </style>
+  <link rel="stylesheet" href="assets/site-consent.css" />
+  <script defer src="assets/site-consent.js" data-ga-id="G-DMTB56PDW2" data-privacy-url="privacy-policy.html" data-cookies-url="cookie-policy.html" data-legal-url="legal-notice.html"></script>
+  <script defer src="assets/pricing-config.js"></script>
+</head>
+<body>
+  <header>
+    <div class="container nav">
+      <a href="index.html" class="brand">SierraMar</a>
+      <nav class="nav-links">
+        <a href="index.html">Home</a>
+        <a href="activities.html">Activities</a>
+        <a href="house-info.html">House info</a>
+        <a href="book-direct.html">Book direct</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="container">
+        <div class="hero-card">
+          <div class="eyebrow">Direct booking request</div>
+          <h1>Request A Direct Stay At SierraMar</h1>
+          <p>Send your dates and guest details through the form below. Availability is checked manually against current bookings, and once your stay is confirmed you will receive a Stripe payment link or invoice.</p>
+          <div>
+            <span class="badge">Manual confirmation</span>
+            <span class="badge">Stripe payment link or invoice</span>
+            <span class="badge">Direct support on WhatsApp</span>
+          </div>
+          <div class="button-row">
+            <a href="#request-form" class="btn btn-primary">Open booking request form</a>
+            <a href="https://wa.me/36317881744" target="_blank" rel="noopener noreferrer" class="btn btn-secondary">Message on WhatsApp</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container grid-3">
+        <div class="card">
+          <h2>1. Send your request</h2>
+          <p>Enter your travel dates, guest count, and contact details. You can also include a coupon code or any special request.</p>
+        </div>
+        <div class="card">
+          <h2>2. Availability is confirmed</h2>
+          <p>Your requested stay is checked manually before payment is requested. If the dates are not available, alternative dates can be discussed.</p>
+        </div>
+        <div class="card">
+          <h2>3. Pay by Stripe</h2>
+          <p>After confirmation, a Stripe payment link or Stripe invoice is sent manually. Your booking is confirmed once payment is received.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="request-form">
+      <div class="container grid-2">
+        <div class="card">
+          <h2>Booking request form</h2>
+          <p class="muted">This form does not take payment. It prepares your booking request and shows an estimated stay total before you send it for manual confirmation.</p>
+
+          <form id="bookingRequestForm" novalidate>
+            <div class="form-grid">
+              <label>
+                Full name
+                <input type="text" id="guestName" name="guestName" autocomplete="name" required />
+              </label>
+              <label>
+                Email
+                <input type="email" id="guestEmail" name="guestEmail" autocomplete="email" required />
+              </label>
+            </div>
+
+            <div class="form-grid">
+              <label>
+                Phone or WhatsApp
+                <input type="tel" id="guestPhone" name="guestPhone" autocomplete="tel" required />
+              </label>
+              <label>
+                Coupon code
+                <input type="text" id="couponCode" name="couponCode" placeholder="Optional" />
+              </label>
+            </div>
+
+            <div class="form-grid">
+              <label>
+                Check-in
+                <input type="date" id="checkIn" name="checkIn" required />
+              </label>
+              <label>
+                Check-out
+                <input type="date" id="checkOut" name="checkOut" required />
+              </label>
+            </div>
+
+            <div class="form-grid">
+              <label>
+                Adults
+                <select id="adults" name="adults" required>
+                  <option value="1">1</option>
+                  <option value="2" selected>2</option>
+                  <option value="3">3</option>
+                  <option value="4">4</option>
+                  <option value="5">5</option>
+                  <option value="6">6</option>
+                  <option value="7">7</option>
+                  <option value="8">8</option>
+                </select>
+              </label>
+              <label>
+                Children
+                <select id="children" name="children">
+                  <option value="0" selected>0</option>
+                  <option value="1">1</option>
+                  <option value="2">2</option>
+                  <option value="3">3</option>
+                  <option value="4">4</option>
+                  <option value="5">5</option>
+                  <option value="6">6</option>
+                </select>
+              </label>
+            </div>
+
+            <label>
+              Special requests or questions
+              <textarea id="guestMessage" name="guestMessage" placeholder="Optional"></textarea>
+            </label>
+
+            <label class="check">
+              <input type="checkbox" id="requestOnly" name="requestOnly" required />
+              <span>I understand this is a booking request only and not an instant booking confirmation.</span>
+            </label>
+
+            <div class="summary" id="requestSummary">Requested stay: please enter your dates.</div>
+            <div class="status" id="requestStatus"></div>
+
+            <div class="button-row">
+              <button type="submit" class="btn btn-primary">Send request on WhatsApp</button>
+              <button type="button" class="btn btn-secondary" id="copyRequestButton">Copy request text</button>
+            </div>
+          </form>
+        </div>
+
+        <div class="card">
+          <h2>Booking terms for this form</h2>
+          <div class="notice">
+            No payment is taken on this page. Payment is only requested after availability has been confirmed manually.
+          </div>
+          <ul>
+            <li>Direct requests are reviewed before dates are confirmed.</li>
+            <li>Payment is sent manually by Stripe payment link or Stripe invoice.</li>
+            <li>A request is not confirmed until payment has been received.</li>
+            <li>If the dates do not work, alternative dates can be suggested.</li>
+            <li>For urgent questions, WhatsApp is still the fastest contact method.</li>
+          </ul>
+          <div class="button-row">
+            <a href="https://wa.me/36317881744" target="_blank" rel="noopener noreferrer" class="btn btn-primary">Open WhatsApp</a>
+            <a href="house-info.html" class="btn btn-secondary">View house info</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container">
+        <div class="card">
+          <h2>Prefer to book on a platform?</h2>
+          <p class="muted">Airbnb and Booking.com remain available if you prefer to book through a marketplace instead of requesting a direct stay.</p>
+          <div class="alt-links">
+            <div>
+              <h3>Airbnb</h3>
+              <p>Check live dates and complete your stay through Airbnb.</p>
+              <div class="button-row">
+                <a href="https://www.airbnb.com/rooms/1548799735197050171" target="_blank" rel="noopener noreferrer" class="btn btn-secondary">Open Airbnb</a>
+              </div>
+            </div>
+            <div>
+              <h3>Booking.com</h3>
+              <p>Use Booking.com to view current dates and reserve through that platform.</p>
+              <div class="button-row">
+        <a href="https://www.booking.com/hotel/es/casa-miramar-salobrena-salobrena.en-gb.html" target="_blank" rel="noopener noreferrer" class="btn btn-secondary">Open Booking.com</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container">SierraMar Salobrena &middot; Direct booking requests</div>
+      <div class="site-legal-links">
+      <a href="privacy-policy.html">Privacy Policy</a>
+      <a href="cookie-policy.html">Cookie Policy</a>
+      <a href="legal-notice.html">Legal Notice</a>
+      <button type="button" onclick="window.SierraMarConsent && window.SierraMarConsent.open()">Cookie settings</button>
+    </div>
+  </footer>
+
+  <script>
+    (function () {
+      const pricingConfig = window.SierraMarPricing || {
+        currency: 'EUR',
+        cleaningFee: 0,
+        defaultMinStay: 2,
+        oneNightMultiplier: 2,
+        monthlyMinimumStay: {},
+        seasons: []
+      };
+      const form = document.getElementById('bookingRequestForm');
+      const copyButton = document.getElementById('copyRequestButton');
+      const summary = document.getElementById('requestSummary');
+      const status = document.getElementById('requestStatus');
+      const checkIn = document.getElementById('checkIn');
+      const checkOut = document.getElementById('checkOut');
+      const adults = document.getElementById('adults');
+      const children = document.getElementById('children');
+
+      const setMinCheckIn = () => {
+        const today = new Date();
+        const offset = today.getTimezoneOffset();
+        const localToday = new Date(today.getTime() - offset * 60000).toISOString().split('T')[0];
+        checkIn.min = localToday;
+      };
+
+      const parseDate = (value) => new Date(value + 'T00:00:00');
+      const toDateKey = (value) => {
+        const year = value.getFullYear();
+        const month = String(value.getMonth() + 1).padStart(2, '0');
+        const day = String(value.getDate()).padStart(2, '0');
+        return year + '-' + month + '-' + day;
+      };
+      const addDays = (value, days) => {
+        const date = new Date(value.getTime());
+        date.setDate(date.getDate() + days);
+        return date;
+      };
+      const formatMoney = (amount) =>
+        new Intl.NumberFormat('en-GB', {
+          style: 'currency',
+          currency: pricingConfig.currency || 'EUR',
+          maximumFractionDigits: 0
+        }).format(amount);
+
+      const getSeasonForDate = (date) => {
+        const key = toDateKey(date);
+        return pricingConfig.seasons.find((season) => key >= season.start && key <= season.end) || null;
+      };
+
+      const getMinimumStayForRange = (startDate, nights) => {
+        if (nights === 1) {
+          return 1;
+        }
+
+        let minimum = Number(pricingConfig.defaultMinStay || 1);
+
+        for (let index = 0; index < nights; index += 1) {
+          const currentDate = addDays(startDate, index);
+          const monthKey = String(currentDate.getMonth() + 1).padStart(2, '0');
+          const override = Number(pricingConfig.monthlyMinimumStay?.[monthKey] || 0);
+          if (override > minimum) {
+            minimum = override;
+          }
+        }
+
+        return minimum;
+      };
+
+      const getNightlyRate = (season, nights) => {
+        if (!season || !season.nightlyRates) return null;
+        if (nights === 1) {
+          const regularRate = Number(season.nightlyRates['2'] || season.nightlyRates['4'] || 0);
+          const multiplier = Number(pricingConfig.oneNightMultiplier || 2);
+          return regularRate ? regularRate * multiplier : null;
+        }
+        if (nights >= 4 && season.nightlyRates['4']) return Number(season.nightlyRates['4']);
+        if (nights >= 2 && season.nightlyRates['2']) return Number(season.nightlyRates['2']);
+        return Number(season.nightlyRates['2'] || season.nightlyRates['4'] || 0);
+      };
+
+      const calculateEstimate = () => {
+        const nights = getNights();
+        if (!checkIn.value || !checkOut.value || nights <= 0) {
+          return null;
+        }
+
+        const startDate = parseDate(checkIn.value);
+        const minimumStay = getMinimumStayForRange(startDate, nights);
+        const season = getSeasonForDate(startDate);
+        const nightlyRate = getNightlyRate(season, nights);
+
+        let remainingNights = nights;
+        let accommodationTotal = 0;
+        const breakdown = [];
+
+        if (season && season.monthlyRate && remainingNights >= 28) {
+          const monthlyBlocks = Math.floor(remainingNights / 28);
+          if (monthlyBlocks > 0) {
+            const monthlyTotal = monthlyBlocks * Number(season.monthlyRate);
+            accommodationTotal += monthlyTotal;
+            remainingNights -= monthlyBlocks * 28;
+            breakdown.push(monthlyBlocks + ' x 28-night block: ' + formatMoney(monthlyTotal));
+          }
+        }
+
+        if (season && season.weeklyRate && remainingNights >= 7) {
+          const weeklyBlocks = Math.floor(remainingNights / 7);
+          if (weeklyBlocks > 0) {
+            const weeklyTotal = weeklyBlocks * Number(season.weeklyRate);
+            accommodationTotal += weeklyTotal;
+            remainingNights -= weeklyBlocks * 7;
+            breakdown.push(weeklyBlocks + ' x 7-night block: ' + formatMoney(weeklyTotal));
+          }
+        }
+
+        if (remainingNights > 0 && nightlyRate) {
+          const nightlyTotal = remainingNights * nightlyRate;
+          accommodationTotal += nightlyTotal;
+          breakdown.push(remainingNights + ' x nightly rate (' + formatMoney(nightlyRate) + '): ' + formatMoney(nightlyTotal));
+        }
+
+        const cleaningFee = Number(pricingConfig.cleaningFee || 0);
+        const total = accommodationTotal + cleaningFee;
+
+        return {
+          nights,
+          minimumStay,
+          seasonName: season ? season.name : 'Custom dates',
+          nightlyRate,
+          accommodationTotal,
+          cleaningFee,
+          total,
+          breakdown
+        };
+      };
+
+      const applyDatesFromQuery = () => {
+        const params = new URLSearchParams(window.location.search);
+        const queryCheckIn = params.get('checkIn');
+        const queryCheckOut = params.get('checkOut');
+        const datePattern = /^\d{4}-\d{2}-\d{2}$/;
+
+        if (queryCheckIn && datePattern.test(queryCheckIn)) {
+          checkIn.value = queryCheckIn;
+        }
+
+        if (queryCheckOut && datePattern.test(queryCheckOut)) {
+          checkOut.value = queryCheckOut;
+        }
+
+        if (queryCheckIn || queryCheckOut) {
+          status.textContent = 'Selected dates were copied from the availability calendar.';
+        }
+      };
+
+      const getNights = () => {
+        if (!checkIn.value || !checkOut.value) return 0;
+        const start = parseDate(checkIn.value);
+        const end = parseDate(checkOut.value);
+        const diff = end.getTime() - start.getTime();
+        return Math.round(diff / 86400000);
+      };
+
+      const updateSummary = () => {
+        if (checkIn.value) {
+          checkOut.min = checkIn.value;
+        }
+
+        const nights = getNights();
+        if (!checkIn.value || !checkOut.value) {
+          summary.textContent = 'Requested stay: please enter your dates.';
+          return;
+        }
+
+        if (nights <= 0) {
+          summary.textContent = 'Requested stay: check-out must be after check-in.';
+          return;
+        }
+
+        const guestTotal = Number(adults.value) + Number(children.value);
+        const estimate = calculateEstimate();
+
+        if (!estimate) {
+          summary.textContent = 'Requested stay: ' + checkIn.value + ' to ' + checkOut.value + ' (' + nights + ' nights), ' + guestTotal + ' guest(s).';
+          return;
+        }
+
+        const minimumMessage = estimate.nights < estimate.minimumStay
+          ? ' Minimum stay for these dates is ' + estimate.minimumStay + ' nights.'
+          : '';
+
+        summary.innerHTML =
+          'Requested stay: ' + checkIn.value + ' to ' + checkOut.value + ' (' + nights + ' nights), ' + guestTotal + ' guest(s).' +
+          '<br>Season: ' + estimate.seasonName +
+          '<br>Estimate: ' + formatMoney(estimate.total) + ' total' +
+          (estimate.cleaningFee ? ' including ' + formatMoney(estimate.cleaningFee) + ' cleaning' : '') +
+          '<br>' + estimate.breakdown.join(' | ') +
+          (estimate.nights === 1 ? ' | One-night stays use a premium nightly rate.' : '') +
+          minimumMessage;
+      };
+
+      const buildMessage = () => {
+        const guestName = document.getElementById('guestName').value.trim();
+        const guestEmail = document.getElementById('guestEmail').value.trim();
+        const guestPhone = document.getElementById('guestPhone').value.trim();
+        const couponCode = document.getElementById('couponCode').value.trim();
+        const guestMessage = document.getElementById('guestMessage').value.trim();
+        const nights = getNights();
+        const guestTotal = Number(adults.value) + Number(children.value);
+        const estimate = calculateEstimate();
+
+        const lines = [
+          'Hello SierraMar, I would like to request a direct booking.',
+          '',
+          'Name: ' + guestName,
+          'Email: ' + guestEmail,
+          'Phone / WhatsApp: ' + guestPhone,
+          'Check-in: ' + checkIn.value,
+          'Check-out: ' + checkOut.value,
+          'Nights: ' + nights,
+          'Adults: ' + adults.value,
+          'Children: ' + children.value,
+          'Total guests: ' + guestTotal
+        ];
+
+        if (estimate) {
+          lines.push('Season: ' + estimate.seasonName);
+          lines.push('Estimated total: ' + formatMoney(estimate.total));
+          if (estimate.cleaningFee) {
+            lines.push('Cleaning fee: ' + formatMoney(estimate.cleaningFee));
+          }
+        }
+
+        if (couponCode) {
+          lines.push('Coupon code: ' + couponCode);
+        }
+
+        if (guestMessage) {
+          lines.push('Notes: ' + guestMessage);
+        }
+
+        lines.push('');
+        lines.push('Please confirm availability and send a Stripe payment link or invoice if the stay can be accepted.');
+
+        return lines.join('\n');
+      };
+
+      const validateForm = () => {
+        status.textContent = '';
+        if (!form.reportValidity()) {
+          return false;
+        }
+
+        const nights = getNights();
+        if (nights <= 0) {
+          status.textContent = 'Check-out must be after check-in.';
+          return false;
+        }
+
+        const estimate = calculateEstimate();
+        if (estimate && nights < estimate.minimumStay) {
+          status.textContent = 'Minimum stay for these dates is ' + estimate.minimumStay + ' nights.';
+          return false;
+        }
+
+        return true;
+      };
+
+      form.addEventListener('submit', function (event) {
+        event.preventDefault();
+        if (!validateForm()) {
+          return;
+        }
+
+        const message = buildMessage();
+        const url = 'https://wa.me/36317881744?text=' + encodeURIComponent(message);
+        status.textContent = 'Opening WhatsApp with your booking request.';
+        window.open(url, '_blank', 'noopener');
+      });
+
+      copyButton.addEventListener('click', async function () {
+        if (!validateForm()) {
+          return;
+        }
+
+        try {
+          await navigator.clipboard.writeText(buildMessage());
+          status.textContent = 'Booking request copied. You can paste it into WhatsApp if needed.';
+        } catch (error) {
+          status.textContent = 'Copy failed on this device. Please use WhatsApp submission instead.';
+        }
+      });
+
+      setMinCheckIn();
+      applyDatesFromQuery();
+      checkIn.addEventListener('change', updateSummary);
+      checkOut.addEventListener('change', updateSummary);
+      adults.addEventListener('change', updateSummary);
+      children.addEventListener('change', updateSummary);
+      updateSummary();
+    })();
+  </script>
+</body>
+</html>
