@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Salobrena.eu | Holiday stays and property care in Salobre&ntilde;a and the Costa Tropical</title>
+  <meta name="description" content="Choose a holiday property in Salobre&ntilde;a or explore local property management services for holiday rental owners on the Costa Tropical." />
+  <meta name="robots" content="index,follow" />
+  <link rel="canonical" href="https://salobrena.eu/" />
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Salobrena.eu | Holiday stays and property care in Salobre&ntilde;a and the Costa Tropical" />
+  <meta property="og:description" content="Choose a holiday property in Salobre&ntilde;a or explore local property management services for holiday rental owners on the Costa Tropical." />
+  <meta property="og:url" content="https://salobrena.eu/" />
+  <meta property="og:image" content="https://salobrena.eu/assets/salobrena-landing.png" />
+  <meta property="og:image:alt" content="Sea and mountain view in Salobre&ntilde;a" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Salobrena.eu | Holiday stays and property care in Salobre&ntilde;a and the Costa Tropical" />
+  <meta name="twitter:description" content="Choose a holiday property in Salobre&ntilde;a or explore local property management services for holiday rental owners on the Costa Tropical." />
+  <meta name="twitter:image" content="https://salobrena.eu/assets/salobrena-landing.png" />
+  <meta name="theme-color" content="#f7f4ef" />
+  <link rel="preload" as="image" href="assets/salobrena-landing.png" />
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebSite",
+      "name": "Salobrena.eu",
+      "url": "https://salobrena.eu/",
+      "description": "Holiday stays and property care in Salobre\u00f1a and the Costa Tropical."
+    }
+  </script>
+  <style>
+    :root {
+      --bg: #f7f4ef;
+      --card: #ffffff;
+      --text: #24343d;
+      --muted: #667780;
+      --accent: #b77743;
+      --accent-dark: #955b2d;
+      --line: rgba(36,52,61,0.1);
+      --shadow: 0 14px 35px rgba(0,0,0,0.08);
+      --max: 1120px;
+    }
+
+    * { box-sizing: border-box; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      margin: 0;
+      font-family: Arial, Helvetica, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .container {
+      width: min(calc(100% - 32px), var(--max));
+      margin: 0 auto;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 42px;
+      padding: 10px 16px;
+      border-radius: 8px;
+      font-weight: 700;
+      border: 1px solid transparent;
+      transition: background 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+    }
+
+    .hero {
+      min-height: 66vh;
+      position: relative;
+      display: flex;
+      align-items: flex-end;
+      overflow: hidden;
+      background: #d9d2c8;
+    }
+
+    .hero img {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .hero::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top, rgba(16,26,32,0.74), rgba(16,26,32,0.16));
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 1;
+      color: #ffffff;
+      max-width: 760px;
+      padding: 72px 0 54px;
+    }
+
+    .eyebrow {
+      display: inline-block;
+      margin-bottom: 14px;
+      font-weight: 700;
+      font-size: 0.94rem;
+      color: rgba(255,255,255,0.86);
+    }
+
+    h1, h2, h3, p {
+      margin-top: 0;
+    }
+
+    h1 {
+      margin-bottom: 16px;
+      font-size: clamp(2.3rem, 5vw, 4.7rem);
+      line-height: 1.05;
+      letter-spacing: 0;
+    }
+
+    .hero p {
+      max-width: 660px;
+      margin-bottom: 0;
+      font-size: 1.12rem;
+      color: rgba(255,255,255,0.9);
+    }
+
+    .section {
+      padding: 36px 0 48px;
+    }
+
+    .section-head {
+      max-width: 780px;
+      margin-bottom: 22px;
+    }
+
+    .section-head h2 {
+      margin-bottom: 8px;
+      font-size: clamp(1.7rem, 3vw, 2.5rem);
+      line-height: 1.15;
+      letter-spacing: 0;
+    }
+
+    .section-head p {
+      margin-bottom: 0;
+      color: var(--muted);
+    }
+
+    .path-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 18px;
+    }
+
+    .path-card {
+      min-height: 300px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      padding: 26px;
+      border-radius: 8px;
+      background: var(--card);
+      border: 1px solid var(--line);
+      box-shadow: var(--shadow);
+    }
+
+    .path-card h3 {
+      margin-bottom: 10px;
+      font-size: 1.45rem;
+      line-height: 1.2;
+      letter-spacing: 0;
+    }
+
+    .path-card p {
+      color: var(--muted);
+      margin-bottom: 18px;
+    }
+
+    .card-meta {
+      margin-bottom: 20px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .tag {
+      display: inline-flex;
+      align-items: center;
+      min-height: 30px;
+      padding: 5px 9px;
+      border-radius: 8px;
+      background: #f3eee6;
+      color: var(--text);
+      font-size: 0.9rem;
+      font-weight: 700;
+    }
+
+    .property-dropdown {
+      position: relative;
+      width: 100%;
+    }
+
+    .property-toggle {
+      list-style: none;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      min-height: 46px;
+      width: 100%;
+      padding: 12px 16px;
+      border-radius: 8px;
+      background: var(--accent);
+      color: #ffffff;
+      font-weight: 700;
+      cursor: pointer;
+    }
+
+    .property-toggle::-webkit-details-marker {
+      display: none;
+    }
+
+    .property-toggle::after {
+      content: " \25BE";
+      font-weight: 400;
+    }
+
+    .property-dropdown[open] .property-toggle::after {
+      content: " \25B4";
+    }
+
+    .property-list {
+      position: absolute;
+      top: calc(100% - 1px);
+      left: 0;
+      right: 0;
+      z-index: 10;
+      display: grid;
+      gap: 4px;
+      padding: 8px;
+      border-radius: 8px;
+      background: var(--card);
+      border: 1px solid var(--line);
+      box-shadow: var(--shadow);
+    }
+
+    .property-list a {
+      padding: 11px 12px;
+      border-radius: 6px;
+      font-weight: 700;
+    }
+
+    .property-list a:hover {
+      background: #f3eee6;
+    }
+
+    .btn-primary {
+      background: var(--accent);
+      color: #ffffff;
+    }
+
+    .btn-primary:hover {
+      background: var(--accent-dark);
+    }
+
+    .btn-secondary {
+      background: #ffffff;
+      color: var(--text);
+      border-color: var(--line);
+    }
+
+    .btn-secondary:hover {
+      border-color: rgba(36,52,61,0.26);
+    }
+
+    footer {
+      padding: 24px 0 38px;
+      color: var(--muted);
+      border-top: 1px solid var(--line);
+    }
+
+    .footer-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px;
+      font-size: 0.94rem;
+    }
+
+    .footer-links a:hover {
+      color: var(--text);
+    }
+
+    @media (max-width: 760px) {
+      .hero {
+        min-height: 58vh;
+      }
+
+      .hero-content {
+        padding: 58px 0 42px;
+      }
+
+      .path-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .path-card {
+        min-height: auto;
+      }
+    }
+  </style>
+  <link rel="stylesheet" href="assets/site-consent.css" />
+  <script defer src="assets/site-consent.js" data-ga-id="G-DMTB56PDW2" data-privacy-url="privacy-policy.html" data-cookies-url="cookie-policy.html" data-legal-url="legal-notice.html"></script>
+  <script defer src="assets/nav-dropdowns.js"></script>
+</head>
+<body>
+  <main>
+    <section class="hero">
+      <img src="assets/salobrena-landing.png" alt="" width="1536" height="1024" decoding="async" fetchpriority="high" />
+      <div class="container hero-content">
+        <div class="eyebrow">Salobre&ntilde;a, Costa Tropical</div>
+        <h1>Holiday stays and property care in Salobre&ntilde;a and the Costa Tropical</h1>
+      </div>
+    </section>
+
+    <section class="section" aria-labelledby="choose-path">
+      <div class="container">
+        <div class="section-head">
+          <h2 id="choose-path">What are you looking for?</h2>
+          <p>Select a property for your stay or explore local support for holiday rental owners.</p>
+        </div>
+
+        <div class="path-grid">
+          <article class="path-card">
+            <div>
+              <div class="card-meta">
+                <span class="tag">Guests</span>
+                <span class="tag">Properties</span>
+              </div>
+              <h3>Choose Property</h3>
+              <p>Select an available holiday property in Salobre&ntilde;a. More properties can be added here later.</p>
+            </div>
+            <details class="property-dropdown">
+              <summary class="property-toggle">Choose property</summary>
+              <div class="property-list">
+                <a href="sierramar.html">SierraMar</a>
+              </div>
+            </details>
+          </article>
+
+          <article class="path-card">
+            <div>
+              <div class="card-meta">
+                <span class="tag">Owners</span>
+                <span class="tag">Local support</span>
+              </div>
+              <h3>Property Management</h3>
+              <p>Local, hands-on help for holiday rental owners in Salobre&ntilde;a and Costa Tropical, including guest communication, cleaning coordination, maintenance, setup, and reporting support.</p>
+            </div>
+            <a href="property-management.html" class="btn btn-primary">Explore Services</a>
+          </article>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container footer-links">
+      <a href="privacy-policy.html">Privacy policy</a>
+      <a href="cookie-policy.html">Cookie policy</a>
+      <a href="legal-notice.html">Legal notice</a>
+    </div>
+  </footer>
+</body>
+</html>

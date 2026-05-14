@@ -1,0 +1,567 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Property Management Salobre&ntilde;a | Holiday Rental Support Costa Tropical</title>
+  <meta name="description" content="Local support for holiday rental owners in Salobre&ntilde;a and Costa Tropical including guest communication, check-in coordination, booking platform management and cleaning support." />
+  <meta name="robots" content="index,follow" />
+  <link rel="canonical" href="https://salobrena.eu/property-management.html" />
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Property Management Salobre&ntilde;a | Holiday Rental Support Costa Tropical" />
+  <meta property="og:description" content="Local support for holiday rental owners in Salobre&ntilde;a and Costa Tropical including guest communication, check-in coordination, booking platform management and cleaning support." />
+  <meta property="og:url" content="https://salobrena.eu/property-management.html" />
+  <meta property="og:image" content="https://salobrena.eu/optimized/bedroom1-960.jpg" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Property Management Salobre&ntilde;a | Holiday Rental Support Costa Tropical" />
+  <meta name="twitter:description" content="Local support for holiday rental owners in Salobre&ntilde;a and Costa Tropical including guest communication, check-in coordination, booking platform management and cleaning support." />
+  <meta name="theme-color" content="#f7f4ef" />
+  <style>
+    :root {
+      --bg: #f7f4ef;
+      --card: #ffffff;
+      --text: #24343d;
+      --muted: #667780;
+      --accent: #b77743;
+      --accent-dark: #955b2d;
+      --sage: #517568;
+      --sage-soft: #e8f0ec;
+      --line: rgba(36,52,61,0.09);
+      --shadow: 0 14px 35px rgba(0,0,0,0.08);
+      --radius: 24px;
+      --max: 1120px;
+    }
+
+    * { box-sizing: border-box; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      margin: 0;
+      font-family: Arial, Helvetica, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+    }
+
+    a { color: inherit; text-decoration: none; }
+
+    .container {
+      width: min(calc(100% - 32px), var(--max));
+      margin: 0 auto;
+    }
+
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      background: rgba(247,244,239,0.92);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid var(--line);
+    }
+
+    .nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+      padding: 14px 0;
+    }
+
+    .brand {
+      font-size: 1.1rem;
+      font-weight: 700;
+      white-space: nowrap;
+    }
+
+    .nav-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 18px;
+      color: var(--muted);
+      font-size: 0.96rem;
+      justify-content: flex-end;
+      align-items: center;
+    }
+
+    .nav-links a[aria-current="page"] {
+      color: var(--text);
+      font-weight: 700;
+    }
+
+    .hero {
+      min-height: 560px;
+      display: flex;
+      align-items: flex-end;
+      position: relative;
+      overflow: hidden;
+      isolation: isolate;
+      background: #d9d2c7;
+    }
+
+    .hero::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background:
+        linear-gradient(to top, rgba(15,23,29,0.72), rgba(15,23,29,0.18)),
+        url("optimized/bedroom1-960.jpg") center/cover;
+      z-index: -2;
+    }
+
+    .hero::after {
+      content: "";
+      position: absolute;
+      inset: auto 0 0;
+      height: 18%;
+      background: linear-gradient(to bottom, rgba(247,244,239,0), var(--bg));
+      z-index: -1;
+    }
+
+    .hero-content {
+      color: #ffffff;
+      max-width: 760px;
+      padding: 80px 0 90px;
+    }
+
+    .top-return {
+      position: absolute;
+      top: 18px;
+      right: 18px;
+      z-index: 30;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 10px 15px;
+      border-radius: 999px;
+      background: rgba(255,255,255,0.94);
+      color: var(--text);
+      border: 1px solid rgba(255,255,255,0.42);
+      box-shadow: 0 10px 24px rgba(0,0,0,0.16);
+      font-weight: 700;
+      font-size: 0.94rem;
+    }
+
+    .eyebrow {
+      display: inline-block;
+      margin-bottom: 14px;
+      padding: 7px 12px;
+      border-radius: 999px;
+      background: rgba(255,255,255,0.16);
+      border: 1px solid rgba(255,255,255,0.24);
+      font-size: 0.9rem;
+    }
+
+    h1, h2, h3 {
+      line-height: 1.15;
+      margin: 0 0 14px;
+    }
+
+    h1 { font-size: clamp(2.4rem, 5vw, 4.8rem); }
+    h2 { font-size: clamp(1.7rem, 2.8vw, 2.6rem); }
+    h3 { font-size: 1.12rem; }
+
+    p { margin: 0 0 14px; }
+
+    .button-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 20px;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 12px 18px;
+      border-radius: 999px;
+      font-weight: 700;
+      transition: 0.2s ease;
+    }
+
+    .btn-primary {
+      background: var(--accent);
+      color: #ffffff;
+    }
+
+    .btn-primary:hover { background: var(--accent-dark); }
+
+    .btn-secondary {
+      background: rgba(255,255,255,0.94);
+      color: var(--text);
+      border: 1px solid rgba(255,255,255,0.26);
+    }
+
+    .section { padding: 42px 0; }
+
+    .intro-grid,
+    .contact-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
+    }
+
+    .card,
+    .service-card,
+    .step-card {
+      background: var(--card);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      padding: 28px;
+    }
+
+    .card.lead {
+      background: linear-gradient(135deg, #ffffff, var(--sage-soft));
+      border: 1px solid rgba(81,117,104,0.16);
+    }
+
+    .muted { color: var(--muted); }
+
+    .service-grid {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 18px;
+      margin-top: 18px;
+    }
+
+    .service-card {
+      min-height: 260px;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .service-card .tag {
+      display: inline-flex;
+      width: fit-content;
+      margin-bottom: 14px;
+      padding: 6px 10px;
+      border-radius: 999px;
+      background: var(--sage-soft);
+      color: var(--sage);
+      font-size: 0.84rem;
+      font-weight: 700;
+    }
+
+    .service-card p {
+      color: var(--muted);
+      flex: 1;
+    }
+
+    .fee-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 18px;
+      margin-top: 18px;
+    }
+
+    .fee-card {
+      background: var(--card);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      padding: 28px;
+      border-top: 4px solid var(--sage);
+    }
+
+    .fee-card strong {
+      display: block;
+      margin-bottom: 8px;
+      font-size: 1.5rem;
+      color: var(--text);
+    }
+
+    .steps {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 18px;
+      margin-top: 18px;
+      counter-reset: step;
+    }
+
+    .step-card {
+      counter-increment: step;
+      position: relative;
+      padding-top: 62px;
+    }
+
+    .step-card::before {
+      content: counter(step);
+      position: absolute;
+      top: 24px;
+      left: 28px;
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      background: var(--accent);
+      color: #ffffff;
+      font-weight: 700;
+    }
+
+    .area-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 16px;
+    }
+
+    .area-list span {
+      padding: 8px 12px;
+      border-radius: 999px;
+      background: #f3eee6;
+      color: #5c4a35;
+      font-size: 0.92rem;
+    }
+
+    .contact-card {
+      background: var(--text);
+      color: #ffffff;
+      border-radius: 32px;
+      padding: 34px;
+      box-shadow: var(--shadow);
+    }
+
+    .contact-card p { color: rgba(255,255,255,0.78); }
+
+    .contact-card .btn-secondary {
+      background: transparent;
+      color: #ffffff;
+      border: 1px solid rgba(255,255,255,0.3);
+    }
+
+    .floating-whatsapp {
+      position: fixed;
+      right: 18px;
+      bottom: 18px;
+      z-index: 40;
+      background: #25D366;
+      color: #ffffff;
+      padding: 14px 18px;
+      border-radius: 999px;
+      box-shadow: 0 12px 24px rgba(0,0,0,0.18);
+      font-weight: 700;
+    }
+
+    footer {
+      padding: 24px 0 40px;
+      color: var(--muted);
+      font-size: 0.95rem;
+    }
+
+    @media (max-width: 950px) {
+      .nav {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .nav-links {
+        justify-content: flex-start;
+      }
+
+      .intro-grid,
+      .contact-grid,
+      .service-grid,
+      .fee-grid,
+      .steps {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 640px) {
+      .hero {
+        min-height: 520px;
+      }
+
+      .hero-content {
+        padding: 64px 0 76px;
+      }
+
+      .card,
+      .service-card,
+      .fee-card,
+      .step-card,
+      .contact-card {
+        padding: 22px;
+      }
+    }
+  </style>
+  <link rel="stylesheet" href="assets/site-consent.css" />
+  <script defer src="assets/site-consent.js" data-ga-id="G-DMTB56PDW2" data-privacy-url="privacy-policy.html" data-cookies-url="cookie-policy.html" data-legal-url="legal-notice.html"></script>
+</head>
+<body>
+  <main>
+    <section class="hero">
+      <div class="container">
+        <div class="hero-content">
+          <div class="eyebrow">Property management in Salobre&ntilde;a</div>
+          <h1>Year-round short-term rental management with local care</h1>
+          <p>We operate holiday rentals throughout the year and look after the practical work locally: rental listing setup, guest-ready preparation, cleaning, maintenance coordination, permits, required reporting, and clear owner updates.</p>
+          <div class="button-row">
+            <a href="#services" class="btn btn-primary">View services</a>
+            <a href="#contact" class="btn btn-secondary">Discuss your property</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container intro-grid">
+        <div class="card lead">
+          <h2>For owners who need full local support</h2>
+          <p>Managing a property from another city or country is difficult when guests, permits, cleaners, trades, and reporting all need attention. This service is designed for owners who want their home operated professionally while still being cared for by people close to the property.</p>
+          <p>The focus is simple: keep the home clean, functional, compliant, welcoming, and ready for paid guest stays all year round.</p>
+        </div>
+
+        <div class="card">
+          <h2>Why work with a local manager</h2>
+          <p>We support the local and hyper-local economy. Cleaning, maintenance, plumbing, electrical work, supplies, and services are sourced from Salobre&ntilde;a and the surrounding area whenever possible.</p>
+          <p>That means local people are hired for cleaning and maintenance, local shops and suppliers are preferred for purchases, and urgent problems can be handled by trades who know the area.</p>
+          <div class="area-list" aria-label="Local sourcing">
+            <span>Local cleaners</span>
+            <span>Local maintenance</span>
+            <span>Local trades</span>
+            <span>Local supplies</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="services">
+      <div class="container">
+        <h2>Property management services</h2>
+
+        <div class="service-grid">
+          <article class="service-card">
+            <span class="tag">Setup</span>
+            <h3>Rental listing setup</h3>
+            <p>Help preparing the property for short-term rental, including listing details, house information, photo organization, pricing basics, and guest-ready presentation.</p>
+          </article>
+
+          <article class="service-card">
+            <span class="tag">Guests</span>
+            <h3>Guest communication</h3>
+            <p>Clear guest messaging before and during the stay, including arrival details, practical house information, local tips, and fast support when questions come up.</p>
+          </article>
+
+          <article class="service-card">
+            <span class="tag">Arrival</span>
+            <h3>Check-in support</h3>
+            <p>Coordination of check-in details, access instructions, keys or lockbox information, arrival timing, and practical support so guests can settle in smoothly.</p>
+          </article>
+
+          <article class="service-card">
+            <span class="tag">Turnover</span>
+            <h3>Cleaning coordination</h3>
+            <p>Local cleaners prepare the home between stays, with cleaning charged separately according to the property and turnover needs.</p>
+          </article>
+
+          <article class="service-card">
+            <span class="tag">Platforms</span>
+            <h3>Booking platform management</h3>
+            <p>Support with booking calendars, listing updates, guest flow, platform messages, and practical coordination across the rental season.</p>
+          </article>
+
+          <article class="service-card">
+            <span class="tag">Compliance</span>
+            <h3>Permits and guest registration</h3>
+            <p>Support with rental registration steps, permits, guest registration processes, and reporting to the relevant authorities where required.</p>
+          </article>
+
+          <article class="service-card">
+            <span class="tag">Maintenance</span>
+            <h3>Maintenance coordination</h3>
+            <p>Local plumbers, electricians, and maintenance contacts are coordinated whenever repairs, small fixes, or specialist help are needed.</p>
+          </article>
+
+          <article class="service-card">
+            <span class="tag">Direct bookings</span>
+            <h3>Direct booking support</h3>
+            <p>Help with direct booking enquiries, owner-approved communication, booking details, payment-link coordination, and guest questions outside the main platforms.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="pricing">
+      <div class="container">
+        <h2>Simple management pricing</h2>
+        <p class="muted">Fees are designed so the management charge is taken only after the owner has received the rental payout.</p>
+
+        <div class="fee-grid">
+          <article class="fee-card">
+            <strong>15%</strong>
+            <h3>Management fee</h3>
+            <p>The management fee is 15% of the rental payout and is billed after the owner receives the payout from the platform or guest booking.</p>
+          </article>
+
+          <article class="fee-card">
+            <strong>Cleaning</strong>
+            <h3>Charged separately</h3>
+            <p>Cleaning is charged separately, based on the property and turnover needs. The aim is to pay local cleaners fairly for the work required.</p>
+          </article>
+
+          <article class="fee-card">
+            <strong>Local costs</strong>
+            <h3>Approved work only</h3>
+            <p>Maintenance, plumbing, electrical work, supplies, and other third-party services are coordinated locally and handled transparently with owner approval where needed.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container">
+        <h2>How it works</h2>
+        <div class="steps">
+          <article class="step-card">
+            <h3>Property review</h3>
+            <p>A first review clarifies the property condition, access, owner goals, rental readiness, regulatory needs, and the support level required.</p>
+          </article>
+          <article class="step-card">
+            <h3>Setup and launch</h3>
+            <p>We help prepare the listing, guest information, cleaning workflow, local contacts, permit steps, and reporting process before bookings begin.</p>
+          </article>
+          <article class="step-card">
+            <h3>Operate and report</h3>
+            <p>The property is managed through bookings, cleanings, guest communication, maintenance needs, owner updates, and required authority reporting.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="contact">
+      <div class="container contact-grid">
+        <div class="contact-card">
+          <h2>Discuss property management</h2>
+          <p>Share the property type, location, whether it is already listed, and whether you need setup, permits, reporting, cleaning, maintenance, or full year-round rental operation. A short WhatsApp message is the fastest way to start.</p>
+          <div class="button-row">
+            <a href="https://wa.me/36317881744?text=Hello%20SierraMar%2C%20I%20would%20like%20to%20ask%20about%20property%20management." target="_blank" rel="noopener noreferrer" class="btn btn-primary">Message on WhatsApp</a>
+            <a href="index.html" class="btn btn-secondary">Back to home</a>
+          </div>
+        </div>
+
+        <div class="card">
+          <h2>Useful details to send</h2>
+          <p><strong>Location:</strong> town or area</p>
+          <p><strong>Property type:</strong> apartment, townhouse, villa, or second home</p>
+          <p><strong>Rental status:</strong> already listed, not listed yet, or needs rental listing setup</p>
+          <p><strong>Regulatory status:</strong> registered, partly prepared, or not started yet</p>
+          <p><strong>Needs:</strong> permits, authority reporting, cleaning, guest preparation, maintenance, or full rental operation</p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <a class="floating-whatsapp" href="https://wa.me/36317881744?text=Hello%20SierraMar%2C%20I%20would%20like%20to%20ask%20about%20property%20management." target="_blank" rel="noopener noreferrer">WhatsApp</a>
+
+  <footer>
+    <div class="site-legal-links">
+      <a href="privacy-policy.html">Privacy Policy</a>
+      <a href="cookie-policy.html">Cookie Policy</a>
+      <a href="legal-notice.html">Legal Notice</a>
+      <button type="button" onclick="window.SierraMarConsent && window.SierraMarConsent.open()">Cookie settings</button>
+    </div>
+  </footer>
+</body>
+</html>
