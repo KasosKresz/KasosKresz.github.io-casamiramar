@@ -11,11 +11,11 @@
   <meta property="og:title" content="Property Management Salobre&ntilde;a | Holiday Rental Support Costa Tropical" />
   <meta property="og:description" content="Local support for holiday rental owners in Salobre&ntilde;a and Costa Tropical including guest communication, check-in coordination, booking platform management and cleaning support." />
   <meta property="og:url" content="https://salobrena.eu/property-management.html" />
-  <meta property="og:image" content="https://salobrena.eu/assets/property-management-care.png" />
+  <meta property="og:image" content="https://salobrena.eu/optimized/property-management-care-1600.jpg" />
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="Property Management Salobre&ntilde;a | Holiday Rental Support Costa Tropical" />
   <meta name="twitter:description" content="Local support for holiday rental owners in Salobre&ntilde;a and Costa Tropical including guest communication, check-in coordination, booking platform management and cleaning support." />
-  <meta name="twitter:image" content="https://salobrena.eu/assets/property-management-care.png" />
+  <meta name="twitter:image" content="https://salobrena.eu/optimized/property-management-care-1600.jpg" />
   <meta name="theme-color" content="#f7f4ef" />
   <style>
     :root {
@@ -91,39 +91,33 @@
     }
 
     .hero {
-      min-height: 560px;
-      display: flex;
-      align-items: flex-end;
-      position: relative;
+      padding: 34px 0 28px;
+    }
+
+    .hero-split {
+      display: grid;
+      grid-template-columns: minmax(0, 1.12fr) minmax(340px, 0.88fr);
+      gap: 24px;
+      align-items: stretch;
+    }
+
+    .hero-image {
+      min-height: 520px;
+      border-radius: var(--radius);
       overflow: hidden;
-      isolation: isolate;
       background: #d9d2c7;
+      box-shadow: var(--shadow);
     }
 
-    .hero::before {
-      content: "";
-      position: absolute;
-      inset: 0;
-      background:
-        linear-gradient(to top, rgba(15,23,29,0.72), rgba(15,23,29,0.18)),
-        url("assets/property-management-care.png") center/cover;
-      z-index: -2;
+    .hero-image img {
+      width: 100%;
+      height: 100%;
+      display: block;
+      object-fit: contain;
+      background: #f4efe8;
     }
 
-    .hero::after {
-      content: "";
-      position: absolute;
-      inset: auto 0 0;
-      height: 18%;
-      background: linear-gradient(to bottom, rgba(247,244,239,0), var(--bg));
-      z-index: -1;
-    }
-
-    .hero-content {
-      color: #ffffff;
-      max-width: 760px;
-      padding: 80px 0 90px;
-    }
+    .hero-content { max-width: 880px; }
 
     .top-return {
       position: absolute;
@@ -148,9 +142,11 @@
       margin-bottom: 14px;
       padding: 7px 12px;
       border-radius: 999px;
-      background: rgba(255,255,255,0.16);
-      border: 1px solid rgba(255,255,255,0.24);
+      background: var(--sage-soft);
+      border: 1px solid rgba(81,117,104,0.18);
+      color: var(--sage);
       font-size: 0.9rem;
+      font-weight: 700;
     }
 
     h1, h2, h3 {
@@ -158,11 +154,22 @@
       margin: 0 0 14px;
     }
 
-    h1 { font-size: clamp(2.4rem, 5vw, 4.8rem); }
+    h1 {
+      font-size: clamp(2rem, 3.7vw, 3.45rem);
+      line-height: 1.08;
+      max-width: 620px;
+    }
     h2 { font-size: clamp(1.7rem, 2.8vw, 2.6rem); }
     h3 { font-size: 1.12rem; }
 
     p { margin: 0 0 14px; }
+
+    .hero-content p {
+      max-width: 660px;
+      color: var(--muted);
+      font-size: 1rem;
+      line-height: 1.55;
+    }
 
     .button-row {
       display: flex;
@@ -364,18 +371,19 @@
       .contact-grid,
       .service-grid,
       .fee-grid,
-      .steps {
+      .steps,
+      .hero-split {
         grid-template-columns: 1fr;
+      }
+
+      .hero-image {
+        min-height: auto;
       }
     }
 
     @media (max-width: 640px) {
       .hero {
-        min-height: 520px;
-      }
-
-      .hero-content {
-        padding: 64px 0 76px;
+        padding-top: 20px;
       }
 
       .card,
@@ -393,8 +401,11 @@
 <body>
   <main>
     <section class="hero">
-      <div class="container">
-        <div class="hero-content">
+      <div class="container hero-split">
+        <div class="hero-image">
+          <img src="optimized/property-management-care-1600.jpg" alt="Property management care in Salobre&ntilde;a" width="1536" height="1024" decoding="async" fetchpriority="high" />
+        </div>
+        <div class="card hero-content">
           <div class="eyebrow">Property management in Salobre&ntilde;a</div>
           <h1>Year-round short-term rental management with local care</h1>
           <p>We operate holiday rentals throughout the year and look after the practical work locally: rental listing setup, guest-ready preparation, cleaning, maintenance coordination, permits, required reporting, and clear owner updates.</p>
