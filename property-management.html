@@ -99,7 +99,7 @@
       display: grid;
       grid-template-columns: minmax(0, 1.05fr) minmax(360px, 0.95fr);
       gap: 24px;
-      align-items: center;
+      align-items: stretch;
     }
 
     .hero-image {
@@ -230,6 +230,9 @@
     }
 
     .card.hero-content {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
       padding: 26px 28px;
     }
 
