@@ -1,0 +1,445 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Nützlicher Aufenthaltsguide | SierraMar</title>
+  <meta name="description" content="Privater Gästeguide für SierraMar mit Hausinformationen, Gerätehinweisen und praktischen Details für den Aufenthalt." />
+  <meta name="robots" content="noindex,nofollow,noarchive" />
+  <link rel="canonical" href="https://salobrena.eu/de/house-info.html" />
+  <meta name="theme-color" content="#f7f4ef" />
+  <style>
+    :root{
+      --bg:#f7f4ef;
+      --card:#ffffff;
+      --text:#24343d;
+      --muted:#667780;
+      --accent:#b77743;
+      --accent-dark:#955b2d;
+      --line:rgba(36,52,61,0.08);
+      --shadow:0 14px 35px rgba(0,0,0,0.08);
+      --radius:24px;
+      --max:1120px;
+    }
+
+    *{box-sizing:border-box}
+    body{
+      margin:0;
+      font-family:Arial, Helvetica, sans-serif;
+      background:var(--bg);
+      color:var(--text);
+      line-height:1.6;
+    }
+
+    a{
+      color:inherit;
+      text-decoration:none;
+    }
+
+    header{
+      position:sticky;
+      top:0;
+      z-index:20;
+      background:rgba(247,244,239,0.92);
+      backdrop-filter:blur(10px);
+      border-bottom:1px solid var(--line);
+    }
+
+    .container{
+      width:min(calc(100% - 32px), var(--max));
+      margin:0 auto;
+    }
+
+    .nav{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:20px;
+      padding:14px 0;
+    }
+
+    .brand{
+      font-size:1.1rem;
+      font-weight:700;
+      letter-spacing:0.2px;
+    }
+
+    .nav-links{
+      display:flex;
+      flex-wrap:wrap;
+      gap:18px;
+      color:var(--muted);
+      font-size:0.96rem;
+    }
+
+    .hero{
+      padding:34px 0 20px;
+    }
+
+    .hero-card{
+      background:linear-gradient(135deg, rgba(183,119,67,0.12), rgba(255,255,255,0.8));
+      border:1px solid rgba(183,119,67,0.14);
+      border-radius:32px;
+      box-shadow:var(--shadow);
+      padding:34px;
+    }
+
+    .eyebrow{
+      display:inline-block;
+      margin-bottom:12px;
+      padding:7px 12px;
+      border-radius:999px;
+      background:#fff;
+      border:1px solid var(--line);
+      color:var(--muted);
+      font-size:0.9rem;
+    }
+
+    h1,h2,h3{
+      line-height:1.15;
+      margin:0 0 14px;
+    }
+
+    h1{
+      font-size:clamp(2.2rem, 4vw, 4rem);
+    }
+
+    h2{
+      font-size:clamp(1.45rem, 2.5vw, 2rem);
+    }
+
+    p{
+      margin:0 0 14px;
+    }
+
+    .section{
+      padding:18px 0;
+    }
+
+    .grid{
+      display:grid;
+      grid-template-columns:repeat(2, minmax(0, 1fr));
+      gap:22px;
+    }
+
+    .card{
+      background:var(--card);
+      border-radius:var(--radius);
+      box-shadow:var(--shadow);
+      padding:26px;
+    }
+
+    .card ul{
+      margin:0;
+      padding-left:18px;
+    }
+
+    .card li{
+      margin-bottom:8px;
+    }
+
+    .badge{
+      display:inline-block;
+      margin:0 6px 8px 0;
+      padding:8px 12px;
+      border-radius:999px;
+      background:#f3eee6;
+      color:#5c4a35;
+      font-size:0.92rem;
+    }
+
+    .highlight{
+      background:#fcf7ef;
+      border:1px solid rgba(183,119,67,0.18);
+    }
+
+    .steps{
+      counter-reset:step;
+      list-style:none;
+      padding:0;
+      margin:0;
+    }
+
+    .steps li{
+      counter-increment:step;
+      position:relative;
+      padding-left:44px;
+      margin-bottom:12px;
+    }
+
+    .steps li::before{
+      content:counter(step);
+      position:absolute;
+      left:0;
+      top:0;
+      width:28px;
+      height:28px;
+      border-radius:50%;
+      background:var(--accent);
+      color:#fff;
+      display:grid;
+      place-items:center;
+      font-weight:700;
+      font-size:0.9rem;
+    }
+
+    .muted{
+      color:var(--muted);
+    }
+
+    .warning{
+      padding:14px 16px;
+      border-radius:18px;
+      background:#fff7ea;
+      border:1px solid rgba(183,119,67,0.2);
+      color:#6a4b2f;
+    }
+
+    .button-row{
+      display:flex;
+      flex-wrap:wrap;
+      gap:12px;
+      margin-top:18px;
+    }
+
+    .btn{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      padding:12px 18px;
+      border-radius:999px;
+      font-weight:700;
+      border:none;
+      cursor:pointer;
+    }
+
+    .btn-primary{
+      background:var(--accent);
+      color:#fff;
+    }
+
+    .btn-secondary{
+      background:#fff;
+      color:var(--text);
+      border:1px solid var(--line);
+    }
+
+    footer{
+      padding:24px 0 40px;
+      color:var(--muted);
+      font-size:0.95rem;
+    }
+
+    @media (max-width:850px){
+      .grid{
+        grid-template-columns:1fr;
+      }
+
+      .nav{
+        flex-direction:column;
+        align-items:flex-start;
+      }
+    }
+
+    @media (max-width:640px){
+      .hero-card,
+      .card{
+        padding:22px;
+      }
+    }
+  </style>
+  <link rel="stylesheet" href="../assets/site-consent.css" />
+  <script defer src="../assets/site-consent.js" data-ga-id="G-DMTB56PDW2" data-privacy-url="../privacy-policy.html" data-cookies-url="../cookie-policy.html" data-legal-url="../legal-notice.html"></script>
+</head>
+<body>
+  <header>
+    <div class="container nav">
+      <a href="index.html" class="brand">SierraMar</a>
+      <nav class="nav-links">
+        <a href="index.html">Startseite</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="container">
+        <div class="hero-card">
+          <div class="eyebrow">Gästeinformationen</div>
+          <h1>Nützliche Informationen Für Ihren Aufenthalt</h1>
+          <p>Alles, was Gäste meistens brauchen, an einem Ort: Verbindungsdaten, Hinweise für Musik und Projektor, Hausinformationen, Check-in-Erinnerungen und praktische Tipps für einen angenehmen Aufenthalt im SierraMar.</p>
+          <div class="button-row">
+            <a href="#wifi" class="btn btn-primary">WLAN</a>
+            <a href="#devices" class="btn btn-secondary">Geräte</a>
+            <a href="#house-rules" class="btn btn-secondary">Hausregeln</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="quick-info">
+      <div class="container grid">
+        <div class="card highlight">
+          <h2>Wichtige Infos</h2>
+          <div class="badge">Check-in: nach 15:00 Uhr</div>
+          <div class="badge">Check-out: vor 11:00 Uhr</div>
+          <div class="badge">Bis zu 8 Gäste</div>
+          <div class="badge">3 Schlafzimmer</div>
+          <div class="badge">2 Badezimmer</div>
+          <div class="badge">Klimaanlage</div>
+          <div class="badge">Kostenloses WLAN</div>
+          <div class="badge">Voll ausgestattete Küche</div>
+        </div>
+
+        <div class="card">
+          <h2>Gut Zu Wissen</h2>
+          <div class="warning">
+            Bitte ändern Sie die Einstellungen des Warmwasserspeichers nicht. Er ist bereits auf eine sparsame und angenehme Temperatur eingestellt.
+          </div>
+          <p>Die Schlüssel befinden sich in der Schlüsselbox. Gäste erhalten den Code vor der Anreise.</p>
+          <p>Der Magcubic-Projektor befindet sich im Wohnzimmer, auf dem kleinen Schrank neben dem Router. Die Fernbedienung liegt ebenfalls dort, und ein Verlängerungskabel befindet sich in der Schublade des Schranks.</p>
+          <p class="muted">Wenn etwas unklar ist, schreiben Sie am einfachsten direkt per WhatsApp.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="wifi">
+      <div class="container grid">
+        <div class="card">
+          <h2>WLAN</h2>
+          <p>Aus Sicherheitsgründen werden die WLAN-Daten vor der Anreise privat geteilt und sind außerdem im Haus verfügbar.</p>
+          <p class="muted">Wenn Sie die Daten während Ihres Aufenthalts nicht finden, schreiben Sie bitte direkt per WhatsApp.</p>
+        </div>
+
+        <div class="card">
+          <h2>Kontakt Für Das Haus</h2>
+          <p><strong>WhatsApp:</strong> +36 31 788 1744</p>
+          <p><strong>Property license:</strong> VUT/GR/14136</p>
+          <p>Wenn etwas unklar ist, schreiben Sie am einfachsten direkt per WhatsApp.</p>
+          <div class="button-row">
+            <a href="https://wa.me/36317881744" target="_blank" rel="noopener noreferrer" class="btn btn-primary">Auf WhatsApp schreiben</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="devices">
+      <div class="container grid">
+        <div class="card">
+          <h2>Musik Über Die Hauslautsprecher Abspielen</h2>
+          <ol class="steps">
+            <li>Schalten Sie das Logitech-Bluetooth-Gerät ein.</li>
+            <li>Öffnen Sie die Bluetooth-Einstellungen auf Ihrem Telefon, Tablet oder Laptop.</li>
+            <li>Verbinden Sie sich mit dem Logitech-Gerät.</li>
+            <li>Sobald die Verbindung hergestellt ist, wird Ihre Musik über die Hauslautsprecher abgespielt.</li>
+            <li>Nutzen Sie bei Bedarf die Lautstärkeregelung auf Ihrem Gerät und an den Lautsprechern.</li>
+          </ol>
+          <p class="muted">Wenn die Verbindung nicht sofort klappt, schalten Sie Bluetooth aus und wieder ein und versuchen Sie es erneut.</p>
+        </div>
+
+        <div class="card">
+          <h2>So Verwenden Sie Den Magcubic-Projektor</h2>
+          <ol class="steps">
+            <li>Der Magcubic-Projektor befindet sich im Wohnzimmer, auf dem kleinen Schrank neben dem Router.</li>
+            <li>Schalten Sie ihn mit der Fernbedienung neben dem Projektor oder mit der Einschalttaste ein.</li>
+            <li>Wenn Sie mehr Reichweite benötigen, nutzen Sie das Verlängerungskabel in der Schublade des Schranks.</li>
+            <li>Sie können ein Telefon auf den Projektor spiegeln oder ein anderes Gerät über die verfügbaren Eingänge anschließen.</li>
+            <li>Für besseren Ton verbinden Sie den Projektor per Bluetooth mit den Hauslautsprechern und stellen die Lautstärke am Projektor, an den Lautsprechern oder auf Ihrem Gerät ein.</li>
+            <li>Bitte schalten Sie ihn nach der Nutzung aus und lassen Sie Projektor, Fernbedienung und Verlängerungskabel dort, wo Sie sie gefunden haben.</li>
+          </ol>
+          <p><strong>Gut zu wissen:</strong> Der Magcubic-Projektor unterstützt Telefonspiegelung und Bluetooth-Audio, ideal für einen entspannten Filmabend mit den Hauslautsprechern.</p>
+          <p class="muted">Wenn etwas unklar ist, schreiben Sie direkt per WhatsApp und wir helfen.</p>
+        </div>
+
+        <div class="card">
+          <h2>So Verwenden Sie Die Klimaanlage</h2>
+          <ol class="steps">
+            <li>Benutzen Sie die an der Wand befestigte Fernbedienung der Klimaanlage.</li>
+            <li>Mit der Einschalttaste können Sie das Gerät ein- oder ausschalten.</li>
+            <li>Wählen Sie den Kühl- oder Heizmodus und stellen Sie dann die gewünschte Temperatur ein.</li>
+            <li>Eine angenehme Einstellung liegt normalerweise bei etwa 22 bis 24&deg;C.</li>
+            <li>Bitte schalten Sie die Klimaanlage aus, wenn Sie das Haus verlassen, und halten Sie Türen und Fenster während des Betriebs geschlossen.</li>
+          </ol>
+          <p class="muted">Wenn das Gerät nicht sofort reagiert, richten Sie die Fernbedienung auf das Innengerät und versuchen Sie es erneut.</p>
+        </div>
+
+        <div class="card">
+          <h2>Einfache Hinweise Für Ofen, Mikrowelle Und Kühlschrank</h2>
+          <ul>
+            <li><strong>Mikrowelle:</strong> Geben Sie das Essen in ein mikrowellengeeignetes Gefäß, schließen Sie die Tür, wählen Sie die Zeit und drücken Sie Start.</li>
+            <li><strong>Bitte kein Metall</strong> in der Mikrowelle verwenden.</li>
+            <li><strong>Ofen:</strong> Wählen Sie die Funktion, stellen Sie die Temperatur ein und lassen Sie ihn vor dem Kochen einige Minuten vorheizen.</li>
+            <li><strong>LG Side-by-Side-Kühlschrank:</strong> Eine Seite ist der Kühlschrank, die andere der Gefrierschrank. Bitte achten Sie darauf, dass beide Türen nach der Nutzung vollständig geschlossen sind.</li>
+            <li><strong>Spender:</strong> Die zweite Taste von rechts wechselt den Spender von Wasser zu Eis.</li>
+            <li><strong>Trinkwasser:</strong> Der Kühlschrank gibt gefiltertes Wasser aus, das zum Trinken empfohlen wird.</li>
+            <li>Bitte ändern Sie die Temperatur von Kühlschrank oder Gefrierschrank nicht. Sie ist bereits passend eingestellt.</li>
+            <li>Wenn Sie fertig sind, schalten Sie Ofen und Mikrowelle aus.</li>
+          </ul>
+          <p class="muted">Wenn etwas ungewöhnlich erscheint, stoppen Sie bitte und senden Sie eine WhatsApp-Nachricht für Hilfe.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="house-rules">
+      <div class="container">
+        <div class="card">
+          <h2>Wichtige Hinweise Zum Haus</h2>
+          <ul>
+            <li>Bitte ändern Sie die Einstellungen des Warmwasserspeichers nicht.</li>
+            <li>Das Warmwasser ist bereits auf eine sparsame und angenehme Temperatur eingestellt.</li>
+            <li>Das Logitech-Gerät verbindet Ihr Telefon oder Ihren Laptop mit den Hauslautsprechern.</li>
+            <li>Der Magcubic-Projektor steht auf dem kleinen Schrank neben dem Router. Er kann ein Telefon spiegeln und per Bluetooth mit den Hauslautsprechern verbunden werden.</li>
+            <li>Die Müllcontainer befinden sich am Ende der Straße.</li>
+            <li>Recyclingcontainer befinden sich etwas weiter unten in der Stadt.</li>
+            <li>Der Bierzapfhahn kann nur nach vorheriger Absprache genutzt werden, damit er vor der Nutzung richtig gereinigt und vorbereitet werden kann.</li>
+            <li>Wenn dies nicht vorher vereinbart wurde, berühren Sie den Bierzapfhahn oder seine Teile bitte nicht.</li>
+            <li>Bier für den Zapfhahn muss direkt beim Anbieter bezahlt werden.</li>
+            <li>Wenn der Strom ausfällt, prüfen Sie den Sicherungskasten neben der Eingangstür.</li>
+            <li>Bitte lassen Sie Kabel und Fernbedienungen nach der Nutzung dort, wo Sie sie gefunden haben.</li>
+            <li>Wenn etwas nicht funktioniert, schreiben Sie bitte per WhatsApp.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="checkout">
+      <div class="container grid">
+        <div class="card">
+          <h2>Einfache Check-Out-Erinnerung</h2>
+          <ol class="steps">
+            <li>Bitte legen Sie die Schlüssel zurück in die Schlüsselbox.</li>
+            <li>Schalten Sie Licht, Klimaanlage und kleine Geräte aus.</li>
+            <li>Schließen Sie die Fenster und verriegeln Sie die Tür.</li>
+            <li>Senden Sie bei Bedarf eine kurze WhatsApp-Nachricht, wenn Sie abreisen.</li>
+          </ol>
+        </div>
+
+        <div class="card">
+          <h2>Weitere Nützliche Hinweise</h2>
+          <ul>
+            <li>Bitte lassen Sie den Magcubic-Projektor und die Fernbedienung auf dem kleinen Schrank neben dem Router.</li>
+            <li>Das Verlängerungskabel des Projektors gehört nach der Nutzung zurück in die Schublade des Schranks.</li>
+            <li>Das Logitech-Gerät verbindet Ihre Musik mit den Hauslautsprechern.</li>
+            <li>Wenn Sie den Bierzapfhahn nutzen möchten, geben Sie bitte vorher Bescheid. Wenn dies nicht vorher vereinbart wurde, berühren Sie ihn bitte nicht.</li>
+            <li>Wenn der Strom ausfällt, prüfen Sie den Sicherungskasten neben der Eingangstür.</li>
+            <li>Bitte ändern Sie den Warmwasserspeicher nicht.</li>
+            <li>Wenn Sie Hilfe brauchen, ist WhatsApp die schnellste Möglichkeit.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container">
+      SierraMar
+    </div>
+      <div class="site-legal-links">
+      <a href="../privacy-policy.html">Privacy Policy</a>
+      <a href="../cookie-policy.html">Cookie Policy</a>
+      <a href="../legal-notice.html">Legal Notice</a>
+      <button type="button" onclick="window.SierraMarConsent && window.SierraMarConsent.open()">Cookie settings</button>
+    </div>
+  </footer>
+</body>
+</html>
